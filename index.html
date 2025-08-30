@@ -1,733 +1,735 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Byggfirma Mal - Profesjonell Byggfirma</title>
-    <meta name="description" content="Byggfirma Mal er en profesjonell byggfirma som leverer kvalitetsprosjekter innen bolig- og næringsbygg. Kontakt oss for et tilbud.">
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome for ikoner -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SeBil AS – Kvalitetsbiler i Drammen</title>
+  <meta name="description" content="SeBil AS i Drammen tilbyr kvalitetsbrukte biler fra 2015 og nyere. Alle biler har lav km-stand og dokumentert servicehistorikk. Kontakt oss i dag!">
+  <link rel="canonical" href="https://dittdomene.no/">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="SeBil AS – Kvalitetsbiler i Drammen">
+  <meta property="og:description" content="Brukte biler fra 2015+ med lav km og dokumentert historikk.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dittdomene.no/">
+  <meta property="og:image" content="https://dittdomene.no/assets/images/og-cover.jpg">
+  <meta property="og:locale" content="nb_NO">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SeBil AS – Kvalitetsbiler i Drammen">
+  <meta name="twitter:description" content="Brukte biler fra 2015+ med lav km og dokumentert historikk.">
+  <meta name="twitter:image" content="https://dittdomene.no/assets/images/og-cover.jpg">
+
+  <!-- PWA / Icons -->
+  <link rel="icon" href="/favicon.ico">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Preconnects -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome for ikoner -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Header -->
-    <header class="header" id="header">
-        <nav class="nav container">
-            <div class="nav__logo">
-                <i class="fas fa-hammer"></i>
-                <span>Byggfirma Mal</span>
-            </div>
-            
-            <div class="nav__menu" id="nav-menu">
-                <ul class="nav__list">
-                    <li class="nav__item">
-                        <a href="#hjem" class="nav__link active-link">Hjem</a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="#om-oss" class="nav__link">Om oss</a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="#tjenester" class="nav__link">Tjenester</a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="#prosjekter" class="nav__link">Prosjekter</a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="#anbefalinger" class="nav__link">Anbefalinger</a>
-                    </li>
-                    <li class="nav__item">
-                        <a href="#kontakt" class="nav__link">Kontakt</a>
-                    </li>
-                </ul>
-                
-                <div class="nav__close" id="nav-close">
-                    <i class="fas fa-times"></i>
-                </div>
-            </div>
-            
-            <div class="nav__actions">
-                <a href="#kontakt" class="btn btn--primary">Få tilbud</a>
-                <div class="nav__toggle" id="nav-toggle">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </div>
-        </nav>
-    </header>
+  <!-- Skip to content -->
+  <a class="skip-to-content" href="#hjem" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
+    Hopp til innhold
+  </a>
 
-    <!-- Main -->
-    <main class="main">
-        <!-- Hero Section -->
-        <section class="hero section" id="hjem">
-            <div class="hero__container container">
-                <div class="hero__content">
-                    <h1 class="hero__title">
-                        Bygger fremtidens 
-                        <span class="hero__title-accent">Norge</span>
-                    </h1>
-                    <p class="hero__description">
-                        Med over 20 års erfaring leverer vi kvalitetsprosjekter innen bolig- og næringsbygg. 
-                        Fra drøm til virkelighet - vi bygger med presisjon, kvalitet og stolthet.
-                    </p>
-                    <div class="hero__actions">
-                        <a href="#kontakt" class="btn btn--primary btn--large">
-                            <i class="fas fa-phone"></i>
-                            Kontakt oss
-                        </a>
-                        <a href="#prosjekter" class="btn btn--secondary btn--large">
-                            <i class="fas fa-eye"></i>
-                            Se våre prosjekter
-                        </a>
-                    </div>
-                    
-                    <div class="hero__stats">
-                        <div class="hero__stat">
-                            <span class="hero__stat-number">500+</span>
-                            <span class="hero__stat-text">Fullførte prosjekter</span>
-                        </div>
-                        <div class="hero__stat">
-                            <span class="hero__stat-number">20+</span>
-                            <span class="hero__stat-text">År med erfaring</span>
-                        </div>
-                        <div class="hero__stat">
-                            <span class="hero__stat-number">100%</span>
-                            <span class="hero__stat-text">Fornøyde kunder</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="hero__image">
-                    <img src="assets/images/hero/hero-1.jpg" alt="Moderne byggeprosjekt" class="hero__img">
-                    <div class="hero__image-overlay">
-                        <div class="hero__badge">
-                            <i class="fas fa-award"></i>
-                            <span>Sertifisert byggfirma</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <!-- Header -->
+  <header class="header" id="header">
+    <nav class="nav container" aria-label="Hovedmeny">
+      <div class="nav__logo">
+        <i class="fas fa-car" aria-hidden="true"></i>
+        <span>SeBil AS</span>
+      </div>
 
-        <!-- Om oss Section -->
-        <section class="about section" id="om-oss">
-            <div class="container">
-                <div class="section__header">
-                    <span class="section__subtitle">Om Byggfirma Mal</span>
-                    <h2 class="section__title">
-                        Din pålitelige partner for 
-                        <span class="section__title-accent">kvalitetsbygg</span>
-                    </h2>
-                </div>
-                
-                <div class="about__container">
-                    <div class="about__content">
-                        <div class="about__text">
-                            <p class="about__description">
-                                Byggfirma Mal har siden 2003 vært en ledende aktør innen byggbransjen i Norge. 
-                                Vi spesialiserer oss på både bolig- og næringsprosjekter, og vårt team av erfarne 
-                                håndverkere og prosjektledere sikrer at hvert prosjekt leveres med høyeste kvalitet.
-                            </p>
-                            
-                            <p class="about__description">
-                                Vår filosofi er enkel: kvalitet, pålitelighet og kundetilfredshet står i sentrum 
-                                for alt vi gjør. Vi bruker kun de beste materialene og mest moderne byggemetoder 
-                                for å sikre at våre byggeprosjekter holder i generasjoner.
-                            </p>
-                        </div>
-                        
-                        <div class="about__features">
-                            <div class="about__feature">
-                                <div class="about__feature-icon">
-                                    <i class="fas fa-shield-alt"></i>
-                                </div>
-                                <div class="about__feature-content">
-                                    <h3 class="about__feature-title">Kvalitetsgaranti</h3>
-                                    <p class="about__feature-description">
-                                        Vi gir 10 års garanti på alle våre byggeprosjekter
-                                    </p>
-                                </div>
-                            </div>
-                            
-                            <div class="about__feature">
-                                <div class="about__feature-icon">
-                                    <i class="fas fa-clock"></i>
-                                </div>
-                                <div class="about__feature-content">
-                                    <h3 class="about__feature-title">Punktlig levering</h3>
-                                    <p class="about__feature-description">
-                                        Vi holder alltid avtalt tidsplan og budsjett
-                                    </p>
-                                </div>
-                            </div>
-                            
-                            <div class="about__feature">
-                                <div class="about__feature-icon">
-                                    <i class="fas fa-leaf"></i>
-                                </div>
-                                <div class="about__feature-content">
-                                    <h3 class="about__feature-title">Miljøvennlig</h3>
-                                    <p class="about__feature-description">
-                                        Bærekraftige løsninger og miljøvennlige materialer
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="about__image">
-                        <img src="assets/images/team/team-2.jpg" alt="Byggfirma Mal team" class="about__img">
-                        <div class="about__experience">
-                            <span class="about__experience-number">20+</span>
-                            <span class="about__experience-text">År med erfaring</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <div class="nav__menu" id="nav-menu" role="dialog" aria-modal="true" aria-label="Navigasjon">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="#hjem" class="nav__link active-link">Hjem</a></li>
+          <li class="nav__item"><a href="#om-oss" class="nav__link">Om oss</a></li>
+          <li class="nav__item"><a href="#tjenester" class="nav__link">Tjenester</a></li>
+          <li class="nav__item"><a href="bilutvalg.html" class="nav__link">Bilutvalg</a></li>
+          <li class="nav__item"><a href="#anbefalinger" class="nav__link">Anbefalinger</a></li>
+          <li class="nav__item"><a href="#kontakt" class="nav__link">Kontakt</a></li>
+        </ul>
 
-        <!-- Tjenester Section -->
-        <section class="services section" id="tjenester">
-            <div class="container">
-                <div class="section__header">
-                    <span class="section__subtitle">Våre tjenester</span>
-                    <h2 class="section__title">
-                        Komplett løsninger for 
-                        <span class="section__title-accent">alle byggebehov</span>
-                    </h2>
-                    <p class="section__description">
-                        Fra planlegging til ferdigstillelse tilbyr vi alle tjenester du trenger 
-                        for ditt byggeprosjekt. Vårt erfarne team håndterer alt fra små renoveringer 
-                        til store næringsbygg.
-                    </p>
-                </div>
-                
-                <div class="services__container">
-                    <div class="service__card">
-                        <div class="service__icon">
-                            <i class="fas fa-home"></i>
-                        </div>
-                        <h3 class="service__title">Boligbygg</h3>
-                        <p class="service__description">
-                            Nye boliger, tilbygg, renoveringer og moderniseringer. 
-                            Vi skaper drømmehjem tilpasset dine behov og ønsker.
-                        </p>
-                        <ul class="service__features">
-                            <li><i class="fas fa-check"></i> Eneboliger og rekkehus</li>
-                            <li><i class="fas fa-check"></i> Tilbygg og påbygg</li>
-                            <li><i class="fas fa-check"></i> Totalrenoveringer</li>
-                            <li><i class="fas fa-check"></i> Kjøkken og bad</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="service__card service__card--featured">
-                        <div class="service__badge">Mest populær</div>
-                        <div class="service__icon">
-                            <i class="fas fa-building"></i>
-                        </div>
-                        <h3 class="service__title">Næringsbygg</h3>
-                        <p class="service__description">
-                            Kontorbygg, lager, verksteder og andre næringseiendommer. 
-                            Funksjonelle løsninger som støtter din virksomhet.
-                        </p>
-                        <ul class="service__features">
-                            <li><i class="fas fa-check"></i> Kontorbygg</li>
-                            <li><i class="fas fa-check"></i> Industribygg</li>
-                            <li><i class="fas fa-check"></i> Lager og logistikk</li>
-                            <li><i class="fas fa-check"></i> Spesialbygg</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="service__card">
-                        <div class="service__icon">
-                            <i class="fas fa-tools"></i>
-                        </div>
-                        <h3 class="service__title">Prosjektledelse</h3>
-                        <p class="service__description">
-                            Komplett prosjektledelse fra idé til ferdig bygg. 
-                            Vi koordinerer alle fag og sikrer smidig gjennomføring.
-                        </p>
-                        <ul class="service__features">
-                            <li><i class="fas fa-check"></i> Planlegging og design</li>
-                            <li><i class="fas fa-check"></i> Byggesøknader</li>
-                            <li><i class="fas fa-check"></i> Koordinering av fag</li>
-                            <li><i class="fas fa-check"></i> Kvalitetskontroll</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <button class="nav__close" id="nav-close" aria-label="Lukk meny">
+          <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
 
-        <!-- Prosjekter Section -->
-        <section class="projects section" id="prosjekter">
-            <div class="container">
-                <div class="section__header">
-                    <span class="section__subtitle">Våre prosjekter</span>
-                    <h2 class="section__title">
-                        Utvalgte prosjekter som viser 
-                        <span class="section__title-accent">vår ekspertise</span>
-                    </h2>
-                    <p class="section__description">
-                        Se noen av våre mest vellykkede prosjekter og la deg inspirere 
-                        av kvaliteten og oppmerksomheten på detaljer som kjennetegner vårt arbeid.
-                    </p>
-                </div>
-                
-                <div class="projects__filter">
-                    <button class="filter__btn filter__btn--active" data-filter="all">Alle</button>
-                    <button class="filter__btn" data-filter="residential">Bolig</button>
-                    <button class="filter__btn" data-filter="commercial">Næring</button>
-                </div>
-                
-                <div class="projects__container">
-                    <div class="project__card" data-category="residential">
-                        <div class="project__image">
-                            <img src="assets/images/projects/residential-1.jpg" alt="Moderne enebolig" class="project__img">
-                            <div class="project__overlay">
-                                <div class="project__actions">
-                                    <button class="project__btn" data-modal="project-1">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="project__btn">
-                                        <i class="fas fa-external-link-alt"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project__content">
-                            <span class="project__category">Boligbygg</span>
-                            <h3 class="project__title">Moderne enebolig i Bærum</h3>
-                            <p class="project__description">
-                                Eksklusiv enebolig på 280 kvm med moderne arkitektur og høy standard.
-                            </p>
-                            <div class="project__details">
-                                <span class="project__detail">
-                                    <i class="fas fa-calendar"></i>
-                                    2023
-                                </span>
-                                <span class="project__detail">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    Bærum
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="project__card" data-category="commercial">
-                        <div class="project__image">
-                            <img src="assets/images/projects/commercial-1.jpg" alt="Kontorbygg" class="project__img">
-                            <div class="project__overlay">
-                                <div class="project__actions">
-                                    <button class="project__btn" data-modal="project-2">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="project__btn">
-                                        <i class="fas fa-external-link-alt"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project__content">
-                            <span class="project__category">Næringsbygg</span>
-                            <h3 class="project__title">Kontorbygg i Oslo sentrum</h3>
-                            <p class="project__description">
-                                Moderne kontorbygg på 5 etasjer med bærekraftige løsninger.
-                            </p>
-                            <div class="project__details">
-                                <span class="project__detail">
-                                    <i class="fas fa-calendar"></i>
-                                    2023
-                                </span>
-                                <span class="project__detail">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    Oslo
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="project__card" data-category="residential">
-                        <div class="project__image">
-                            <img src="assets/images/projects/residential-2.jpg" alt="Leilighetsbygg" class="project__img">
-                            <div class="project__overlay">
-                                <div class="project__actions">
-                                    <button class="project__btn" data-modal="project-3">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="project__btn">
-                                        <i class="fas fa-external-link-alt"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project__content">
-                            <span class="project__category">Boligbygg</span>
-                            <h3 class="project__title">Leilighetsbygg i Trondheim</h3>
-                            <p class="project__description">
-                                Moderne leilighetsbygg med 24 leiligheter og høy energistandard.
-                            </p>
-                            <div class="project__details">
-                                <span class="project__detail">
-                                    <i class="fas fa-calendar"></i>
-                                    2022
-                                </span>
-                                <span class="project__detail">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    Trondheim
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="project__card" data-category="commercial">
-                        <div class="project__image">
-                            <img src="assets/images/projects/commercial-2.jpg" alt="Industribygg" class="project__img">
-                            <div class="project__overlay">
-                                <div class="project__actions">
-                                    <button class="project__btn" data-modal="project-4">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="project__btn">
-                                        <i class="fas fa-external-link-alt"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project__content">
-                            <span class="project__category">Næringsbygg</span>
-                            <h3 class="project__title">Produksjonsanlegg i Stavanger</h3>
-                            <p class="project__description">
-                                Stort produksjonsanlegg med tilhørende kontorfasiliteter.
-                            </p>
-                            <div class="project__details">
-                                <span class="project__detail">
-                                    <i class="fas fa-calendar"></i>
-                                    2022
-                                </span>
-                                <span class="project__detail">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    Stavanger
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="project__card" data-category="commercial">
-                        <div class="project__image">
-                            <img src="assets/images/projects/commercial-3.jpg" alt="Kontorbygg" class="project__img">
-                            <div class="project__overlay">
-                                <div class="project__actions">
-                                    <button class="project__btn" data-modal="project-5">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="project__btn">
-                                        <i class="fas fa-external-link-alt"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="project__content">
-                            <span class="project__category">Næringsbygg</span>
-                            <h3 class="project__title">Teknologipark i Bergen</h3>
-                            <p class="project__description">
-                                Innovativt kontorbygg for teknologiselskaper med fleksible løsninger.
-                            </p>
-                            <div class="project__details">
-                                <span class="project__detail">
-                                    <i class="fas fa-calendar"></i>
-                                    2021
-                                </span>
-                                <span class="project__detail">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    Bergen
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <div class="nav__actions">
+        <a href="#kontakt" class="btn btn--primary">Kontakt oss</a>
+        <button class="nav__toggle" id="nav-toggle" aria-label="Åpne meny">
+          <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
+      </div>
+    </nav>
+  </header>
 
-        <!-- Anbefalinger Section -->
-        <section class="testimonials section" id="anbefalinger">
-            <div class="container">
-                <div class="section__header">
-                    <span class="section__subtitle">Kundeuttalelser</span>
-                    <h2 class="section__title">
-                        Hva våre kunder 
-                        <span class="section__title-accent">sier om oss</span>
-                    </h2>
-                    <p class="section__description">
-                        Vi er stolte av tilbakemeldingene fra våre kunder. Les hva de sier 
-                        om kvaliteten på vårt arbeid og servicen vi leverer.
-                    </p>
-                </div>
-                
-                <div class="testimonials__container">
-                    <div class="testimonial__card">
-                        <div class="testimonial__rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="testimonial__text">
-                            "Byggfirma Mal leverte vårt drømmehus presist i tide og innenfor budsjett. 
-                            Kvaliteten på arbeidet er eksepsjonell, og teamet var profesjonelt og 
-                            hyggelig å jobbe med gjennom hele prosessen."
-                        </p>
-                        <div class="testimonial__author">
-                            <div class="testimonial__author-info">
-                                <h4 class="testimonial__author-name">Lars og Anne Eriksen</h4>
-                                <span class="testimonial__author-title">Huseiere, Bærum</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial__card testimonial__card--featured">
-                        <div class="testimonial__rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="testimonial__text">
-                            "Som eiendomsutvikler har jeg jobbet med mange byggfirmaer, men Byggfirma Mal 
-                            skiller seg ut med sin profesjonalitet og kvalitetsbevissthet. De er alltid 
-                            min første prioritet for nye prosjekter."
-                        </p>
-                        <div class="testimonial__author">
-                            <div class="testimonial__author-info">
-                                <h4 class="testimonial__author-name">Kari Nordahl</h4>
-                                <span class="testimonial__author-title">Eiendomsutvikler, Oslo</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testimonial__card">
-                        <div class="testimonial__rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="testimonial__text">
-                            "Vårt nye kontorbygg ble et fantastisk resultat takket være Byggfirma Mal. 
-                            De forstod våre behov og leverte en løsning som overgikk forventningene våre. 
-                            Anbefaler dem på det sterkeste!"
-                        </p>
-                        <div class="testimonial__author">
-                            <div class="testimonial__author-info">
-                                <h4 class="testimonial__author-name">Per Andersen</h4>
-                                <span class="testimonial__author-title">Daglig leder, TechCorp AS</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <!-- Main -->
+  <main class="main">
+    <!-- Hero Section -->
+    <section class="hero section" id="hjem" aria-labelledby="hero-title">
+      <div class="hero__container container">
+        <div class="hero__content">
+          <h1 class="hero__title" id="hero-title">
+            Kvalitetsbiler du kan <span class="hero__title-accent">stole på</span>
+          </h1>
+          <p class="hero__description">
+            Hos SeBil AS i Drammen finner du kun brukte biler fra 2015 og nyere som vi selv kunne tenkt oss å eie.
+            Alle våre biler har lav km-stand og dokumentert servicehistorikk.
+          </p>
+          <div class="hero__actions">
+            <a href="#kontakt" class="btn btn--primary btn--large">
+              <i class="fas fa-phone" aria-hidden="true"></i>
+              Kontakt oss
+            </a>
+            <a href="#bilutvalg" class="btn btn--secondary btn--large">
+              <i class="fas fa-car" aria-hidden="true"></i>
+              Se vårt bilutvalg
+            </a>
+          </div>
 
-        <!-- Kontakt Section -->
-        <section class="contact section" id="kontakt">
-            <div class="container">
-                <div class="section__header">
-                    <span class="section__subtitle">Kontakt oss</span>
-                    <h2 class="section__title">
-                        La oss realisere ditt 
-                        <span class="section__title-accent">byggeprosjekt</span>
-                    </h2>
-                    <p class="section__description">
-                        Ta kontakt for en uforpliktende samtale om ditt prosjekt. 
-                        Vi gir deg et gratis tilbud og veiledning.
-                    </p>
-                </div>
-                
-                <div class="contact__container">
-                    <div class="contact__info">
-                        <div class="contact__card">
-                            <div class="contact__card-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div class="contact__card-content">
-                                <h3 class="contact__card-title">Ring oss</h3>
-                                <p class="contact__card-text">+47 22 12 34 56</p>
-                                <span class="contact__card-note">Hverdager 08:00 - 16:00</span>
-                            </div>
-                        </div>
-                        
-                        <div class="contact__card">
-                            <div class="contact__card-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="contact__card-content">
-                                <h3 class="contact__card-title">Send e-post</h3>
-                                <p class="contact__card-text">post@nordicbuilder.no</p>
-                                <span class="contact__card-note">Vi svarer innen 24 timer</span>
-                            </div>
-                        </div>
-                        
-                        <div class="contact__card">
-                            <div class="contact__card-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div class="contact__card-content">
-                                <h3 class="contact__card-title">Besøk oss</h3>
-                                <p class="contact__card-text">Byggeveien 123<br>0150 Oslo</p>
-                                <span class="contact__card-note">Etter avtale</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <form class="contact__form" id="contact-form">
-                        <div class="form__group">
-                            <label for="name" class="form__label">Navn *</label>
-                            <input type="text" id="name" name="name" class="form__input" required>
-                        </div>
-                        
-                        <div class="form__group">
-                            <label for="email" class="form__label">E-post *</label>
-                            <input type="email" id="email" name="email" class="form__input" required>
-                        </div>
-                        
-                        <div class="form__group">
-                            <label for="phone" class="form__label">Telefon</label>
-                            <input type="tel" id="phone" name="phone" class="form__input">
-                        </div>
-                        
-                        <div class="form__group">
-                            <label for="project-type" class="form__label">Type prosjekt</label>
-                            <select id="project-type" name="project-type" class="form__select">
-                                <option value="">Velg prosjekttype</option>
-                                <option value="bolig">Boligbygg</option>
-                                <option value="naering">Næringsbygg</option>
-                                <option value="renovering">Renovering</option>
-                                <option value="annet">Annet</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form__group form__group--full">
-                            <label for="message" class="form__label">Melding *</label>
-                            <textarea id="message" name="message" class="form__textarea" rows="5" 
-                                placeholder="Fortell oss om ditt prosjekt..." required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn btn--primary btn--large form__submit">
-                            <i class="fas fa-paper-plane"></i>
-                            Send melding
-                        </button>
-                    </form>
-                </div>
-                
-                <div class="contact__map">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2000.0!2d10.7522!3d59.9139!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTnCsDU0JzUwLjAiTiAxMMKwNDUnMDguMCJF!5e0!3m2!1sno!2sno!4v1234567890"
-                        class="contact__map-iframe"
-                        allowfullscreen=""
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
-                </div>
-            </div>
-        </section>
-    </main>
+          <div class="hero__stats">
+  <div class="hero__stat">
+    <span class="hero__stat-number"
+          data-countup
+          data-count-to="200"
+          data-suffix="+"
+          data-duration="2500">0</span>
+    <span class="hero__stat-text">Fornøyde kunder</span>
+  </div>
+  <div class="hero__stat">
+    <span class="hero__stat-number"
+          data-countup
+          data-count-to="15"
+          data-suffix="+"
+          data-duration="5000">0</span>
+    <span class="hero__stat-text">År med erfaring</span>
+  </div>
+  <div class="hero__stat">
+    <span class="hero__stat-number"
+          data-countup
+          data-count-to="100"
+          data-suffix="%"
+          data-duration="2500">0</span>
+    <span class="hero__stat-text">Kvalitetsgaranti</span>
+  </div>
+</div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer__container">
-                <div class="footer__content">
-                    <div class="footer__section">
-                        <div class="footer__logo">
-                            <i class="fas fa-hammer"></i>
-                            <span>Byggfirma Mal</span>
-                        </div>
-                        <p class="footer__description">
-                            Din pålitelige partner for kvalitetsbygg siden 2003. 
-                            Vi bygger fremtidens Norge med presisjon, kvalitet og stolthet.
-                        </p>
-                        <div class="footer__social">
-                            <a href="#" class="footer__social-link">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" class="footer__social-link">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="#" class="footer__social-link">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="footer__section">
-                        <h3 class="footer__title">Tjenester</h3>
-                        <ul class="footer__list">
-                            <li><a href="#" class="footer__link">Boligbygg</a></li>
-                            <li><a href="#" class="footer__link">Næringsbygg</a></li>
-                            <li><a href="#" class="footer__link">Renoveringer</a></li>
-                            <li><a href="#" class="footer__link">Prosjektledelse</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer__section">
-                        <h3 class="footer__title">Selskapet</h3>
-                        <ul class="footer__list">
-                            <li><a href="#" class="footer__link">Om oss</a></li>
-                            <li><a href="#" class="footer__link">Vårt team</a></li>
-                            <li><a href="#" class="footer__link">Karriere</a></li>
-                            <li><a href="#" class="footer__link">Nyheter</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer__section">
-                        <h3 class="footer__title">Kontakt</h3>
-                        <ul class="footer__list">
-                            <li class="footer__contact">
-                                <i class="fas fa-phone"></i>
-                                <span>+47 22 12 34 56</span>
-                            </li>
-                            <li class="footer__contact">
-                                <i class="fas fa-envelope"></i>
-                                <span>post@nordicbuilder.no</span>
-                            </li>
-                            <li class="footer__contact">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Byggeveien 123, 0150 Oslo</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="footer__bottom">
-                    <div class="footer__bottom-content">
-                        <p class="footer__copyright">
-                            © 2024 Byggfirma Mal. Alle rettigheter reservert.
-                        </p>
-                        <div class="footer__legal">
-                            <a href="#" class="footer__legal-link">Personvern</a>
-                            <a href="#" class="footer__legal-link">Vilkår</a>
-                            <a href="#" class="footer__legal-link">Cookies</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
-    </footer>
 
-    <!-- Scroll to top button -->
-    <button class="scroll-top" id="scroll-top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+        <div class="hero__image">
+          <picture>
+            <source srcset="assets/images/hero/hero-1.jpg" type="image/avif">
+            <source srcset="assets/images/hero/hero-1.jpg" type="image/webp">
+            <img
+              src="assets/images/hero/hero-1.jpg"
+              alt="Moderne bilforhandler"
+              class="hero__img"
+              fetchpriority="high"
+              decoding="async"
+              sizes="(max-width: 1024px) 100vw, 50vw">
+          </picture>
+          <div class="hero__image-overlay" aria-hidden="true">
+            <div class="hero__badge">
+              <i class="fas fa-certificate" aria-hidden="true"></i>
+              <span>Autorisert bilforhandler</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <!-- JavaScript -->
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="js/script.js"></script>
+    <!-- Om oss Section -->
+    <section class="about section" id="om-oss" aria-labelledby="about-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__subtitle">Om SeBil AS</span>
+          <h2 class="section__title" id="about-title">
+            Din pålitelige partner for <span class="section__title-accent">kvalitetsbiler</span>
+          </h2>
+        </div>
+
+        <div class="about__container">
+          <div class="about__content">
+            <div class="about__text">
+              <p class="about__description">
+                SeBil AS har siden 2009 vært en pålitelig bilforhandler i Drammen.
+                Vi spesialiserer oss på brukte biler fra 2015 og nyere, og vårt team av erfarne
+                bilselgere sikrer at du finner den perfekte bilen for dine behov.
+              </p>
+
+              <p class="about__description">
+                Vår filosofi er enkel: vi selger kun biler vi selv kunne tenkt oss å eie.
+                Alle våre biler har lav km-stand og dokumentert servicehistorikk, og vi tilbyr
+                komplett service med finansiering, garanti og forsikring.
+              </p>
+            </div>
+
+            <div class="about__features">
+              <div class="about__feature">
+                <div class="about__feature-icon">
+                  <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                </div>
+                <div class="about__feature-content">
+                  <h3 class="about__feature-title">Garanti på alle biler</h3>
+                  <p class="about__feature-description">Vi gir garanti på alle våre brukte biler</p>
+                </div>
+              </div>
+
+              <div class="about__feature">
+                <div class="about__feature-icon">
+                  <i class="fas fa-handshake" aria-hidden="true"></i>
+                </div>
+                <div class="about__feature-content">
+                  <h3 class="about__feature-title">Ærlig rådgivning</h3>
+                  <p class="about__feature-description">Vi gir deg ærlig og profesjonell rådgivning</p>
+                </div>
+              </div>
+
+              <div class="about__feature">
+                <div class="about__feature-icon">
+                  <i class="fas fa-clipboard-check" aria-hidden="true"></i>
+                </div>
+                <div class="about__feature-content">
+                  <h3 class="about__feature-title">Dokumentert servicehistorikk</h3>
+                  <p class="about__feature-description">Alle biler har fullstendig og dokumentert servicehistorikk</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="about__image">
+            <picture>
+              <source srcset="assets/images/team/team-2.jpg" type="image/avif">
+              <source srcset="assets/images/team/team-2.jpg" type="image/webp">
+              <img src="assets/images/team/team-2.jpg" alt="SeBil AS team" class="about__img" loading="lazy" decoding="async">
+            </picture>
+            <div class="about__experience" aria-label="Erfaring">
+              <span class="about__experience-number">15+</span>
+              <span class="about__experience-text">År med erfaring</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tjenester Section -->
+    <section class="services section" id="tjenester" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__subtitle">Våre tjenester</span>
+          <h2 class="section__title" id="services-title">
+            Komplett løsninger for <span class="section__title-accent">alle bilbehov</span>
+          </h2>
+          <p class="section__description">
+            Fra bilsalg til finansiering tilbyr vi alle tjenester du trenger
+            for ditt bilkjøp. Vårt erfarne team håndterer alt fra innbytte
+            til forsikring og garanti.
+          </p>
+        </div>
+
+        <div class="services__container">
+          <div class="service__card">
+            <div class="service__icon">
+              <i class="fas fa-car" aria-hidden="true"></i>
+            </div>
+            <h3 class="service__title">Bilsalg</h3>
+            <p class="service__description">
+              Brukte biler fra 2015 og nyere med lav km-stand.
+              Vi selger kun biler vi selv kunne tenkt oss å eie.
+            </p>
+            <ul class="service__features">
+              <li><i class="fas fa-check" aria-hidden="true"></i> Biler fra 2015 og nyere</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Lav km-stand</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Dokumentert servicehistorikk</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Grundig gjennomgang</li>
+            </ul>
+          </div>
+
+          <div class="service__card service__card--featured">
+            <div class="service__badge">Mest populær</div>
+            <div class="service__icon">
+              <i class="fas fa-exchange-alt" aria-hidden="true"></i>
+            </div>
+            <h3 class="service__title">Innbytte & Innkjøp</h3>
+            <p class="service__description">
+              Konkurransedyktige innbyttepriser og kjøper inn kvalitetsbiler.
+              Vi tilbyr også kommisjonssalg for din bil.
+            </p>
+            <ul class="service__features">
+              <li><i class="fas fa-check" aria-hidden="true"></i> Konkurransedyktige priser</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Kjøper inn kvalitetsbiler</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Kommisjonssalg</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Rask og enkel prosess</li>
+            </ul>
+          </div>
+
+          <div class="service__card">
+            <div class="service__icon">
+              <i class="fas fa-credit-card" aria-hidden="true"></i>
+            </div>
+            <h3 class="service__title">Finansiering & Forsikring</h3>
+            <p class="service__description">
+              Fleksible finansieringsløsninger og forsikringsrådgivning.
+              Vi hjelper deg med komplett service for ditt bilkjøp.
+            </p>
+            <ul class="service__features">
+              <li><i class="fas fa-check" aria-hidden="true"></i> Fleksible finansieringsløsninger</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Konkurransedyktige renter</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Forsikringsrådgivning</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Komplett service</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bilutvalg Section -->
+    <section class="projects section" id="bilutvalg" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__subtitle">Vårt bilutvalg</span>
+          <h2 class="section__title" id="projects-title">
+            Utvalgte biler som viser <span class="section__title-accent">vår kvalitet</span>
+          </h2>
+          <p class="section__description">
+            Se noen av våre beste biler til salgs og la deg inspirere
+            av kvaliteten og standarden som kjennetegner vårt utvalg.
+          </p>
+        </div>
+
+        <div class="projects__filter" role="tablist" aria-label="Filter biler">
+          <button class="filter__btn filter__btn--active" data-filter="all" role="tab" aria-selected="true">Alle biler</button>
+          <button class="filter__btn" data-filter="sedan" role="tab" aria-selected="false">Sedan/Kombi</button>
+          <button class="filter__btn" data-filter="suv" role="tab" aria-selected="false">SUV/Crossover</button>
+        </div>
+
+        <div class="projects__container">
+          <!-- BMW -->
+          <div class="project__card" data-category="sedan">
+            <div class="project__image">
+              <picture>
+                <source srcset="assets/images/projects/bmw-320d-xdrive-2019.jpg" type="image/avif">
+                <source srcset="assets/images/projects/bmw-320d-xdrive-2019.jpg" type="image/webp">
+                <img src="assets/images/projects/bmw-320d-xdrive-2019.jpg" alt="BMW 3-serie 320d xDrive 2019" class="project__img" loading="lazy" decoding="async">
+              </picture>
+              <div class="project__overlay" aria-hidden="true">
+                <div class="project__actions">
+                  <button class="project__btn" data-modal="project-1" aria-label="Se detaljer for BMW 3-serie 320d xDrive">
+                    <i class="fas fa-eye" aria-hidden="true"></i>
+                  </button>
+                  <a class="project__btn" href="#" target="_blank" rel="noopener" aria-label="Åpne annonse i ny fane">
+                    <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="project__content">
+              <span class="project__category">Sedan</span>
+              <h3 class="project__title">BMW 3-serie 320d xDrive</h3>
+              <p class="project__description">
+                Elegant sedan med firehjulstrekk og lav km-stand. Komplett servicehistorikk.
+              </p>
+              <div class="project__details">
+                <span class="project__detail"><i class="fas fa-calendar" aria-hidden="true"></i>2019</span>
+                <span class="project__detail"><i class="fas fa-tachometer-alt" aria-hidden="true"></i>45.000 km</span>
+                <span class="project__detail"><i class="fas fa-gas-pump" aria-hidden="true"></i>Diesel</span>
+                <span class="project__detail"><i class="fas fa-cog" aria-hidden="true"></i>Automat</span>
+              </div>
+              <div class="project__price">
+                <span class="project__price-amount">kr 485.000,-</span>
+              </div>
+              <a href="tel:+4732891234" class="btn btn--secondary btn--small project__contact-btn" aria-label="Ring oss om BMW 3-serie">
+                <i class="fas fa-phone" aria-hidden="true"></i>
+                Kontakt oss
+              </a>
+            </div>
+          </div>
+
+          <!-- Audi Q5 -->
+          <div class="project__card" data-category="suv">
+            <div class="project__image">
+              <picture>
+                <source srcset="assets/images/projects/audi-q5-40tdi-2020.jpg" type="image/avif">
+                <source srcset="assets/images/projects/audi-q5-40tdi-2020.jpg" type="image/webp">
+                <img src="assets/images/projects/audi-q5-40tdi-2020.jpg" alt="Audi Q5 40 TDI quattro 2020" class="project__img" loading="lazy" decoding="async">
+              </picture>
+              <div class="project__overlay" aria-hidden="true">
+                <div class="project__actions">
+                  <button class="project__btn" data-modal="project-2" aria-label="Se detaljer for Audi Q5 40 TDI quattro">
+                    <i class="fas fa-eye" aria-hidden="true"></i>
+                  </button>
+                  <a class="project__btn" href="#" target="_blank" rel="noopener" aria-label="Åpne annonse i ny fane">
+                    <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="project__content">
+              <span class="project__category">SUV</span>
+              <h3 class="project__title">Audi Q5 40 TDI quattro</h3>
+              <p class="project__description">Praktisk SUV med firehjulstrekk og premium utstyr. Perfekt for familien.</p>
+              <div class="project__details">
+                <span class="project__detail"><i class="fas fa-calendar" aria-hidden="true"></i>2020</span>
+                <span class="project__detail"><i class="fas fa-tachometer-alt" aria-hidden="true"></i>32.000 km</span>
+                <span class="project__detail"><i class="fas fa-gas-pump" aria-hidden="true"></i>Diesel</span>
+                <span class="project__detail"><i class="fas fa-cog" aria-hidden="true"></i>Automat</span>
+              </div>
+              <div class="project__price"><span class="project__price-amount">kr 625.000,-</span></div>
+              <a href="tel:+4732891234" class="btn btn--secondary btn--small project__contact-btn" aria-label="Ring oss om Audi Q5">
+                <i class="fas fa-phone" aria-hidden="true"></i>
+                Kontakt oss
+              </a>
+            </div>
+          </div>
+
+          <!-- Mercedes C-klasse stasjonsvogn -->
+          <div class="project__card" data-category="sedan">
+            <div class="project__image">
+              <picture>
+                <source srcset="assets/images/projects/mercedes-c220d-stasjonsvogn-2018.jpg" type="image/avif">
+                <source srcset="assets/images/projects/mercedes-c220d-stasjonsvogn-2018.jpg" type="image/webp">
+                <img src="assets/images/projects/mercedes-c220d-stasjonsvogn-2018.jpg" alt="Mercedes C220d stasjonsvogn 2018" class="project__img" loading="lazy" decoding="async">
+              </picture>
+              <div class="project__overlay" aria-hidden="true">
+                <div class="project__actions">
+                  <button class="project__btn" data-modal="project-3" aria-label="Se detaljer for Mercedes C220d stasjonsvogn">
+                    <i class="fas fa-eye" aria-hidden="true"></i>
+                  </button>
+                  <a class="project__btn" href="#" target="_blank" rel="noopener" aria-label="Åpne annonse i ny fane">
+                    <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="project__content">
+              <span class="project__category">Kombi</span>
+              <h3 class="project__title">Mercedes C220d stasjonsvogn</h3>
+              <p class="project__description">Romslig stasjonsvogn med premium komfort og lavt drivstofforbruk.</p>
+              <div class="project__details">
+                <span class="project__detail"><i class="fas fa-calendar" aria-hidden="true"></i>2018</span>
+                <span class="project__detail"><i class="fas fa-tachometer-alt" aria-hidden="true"></i>58.000 km</span>
+                <span class="project__detail"><i class="fas fa-gas-pump" aria-hidden="true"></i>Diesel</span>
+                <span class="project__detail"><i class="fas fa-cog" aria-hidden="true"></i>Automat</span>
+              </div>
+              <div class="project__price"><span class="project__price-amount">kr 395.000,-</span></div>
+              <a href="tel:+4732891234" class="btn btn--secondary btn--small project__contact-btn" aria-label="Ring oss om Mercedes C220d">
+                <i class="fas fa-phone" aria-hidden="true"></i>
+                Kontakt oss
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Anbefalinger Section -->
+    <section class="testimonials section" id="anbefalinger" aria-labelledby="testimonials-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__subtitle">Kundeuttalelser</span>
+          <h2 class="section__title" id="testimonials-title">Hva våre kunder <span class="section__title-accent">sier om oss</span></h2>
+          <p class="section__description">
+            Vi er stolte av tilbakemeldingene fra våre kunder. Les hva de sier
+            om kvaliteten på våre biler og servicen vi leverer.
+          </p>
+        </div>
+
+        <div class="testimonials__container">
+          <div class="testimonial__card" aria-label="Kundeuttalelse">
+            <div class="testimonial__rating" aria-label="Vurdering 5 av 5">
+              <i class="fas fa-star" aria-hidden="true"></i>
+              <i class="fas fa-star" aria-hidden="true"></i>
+              <i class="fas fa-star" aria-hidden="true"></i>
+              <i class="fas fa-star" aria-hidden="true"></i>
+              <i class="fas fa-star" aria-hidden="true"></i>
+            </div>
+            <p class="testimonial__text">
+              "Kjøpte en BMW 3-serie hos SeBil AS og kunne ikke vært mer fornøyd.
+              Bilen var akkurat som beskrevet, og servicen var førsteklasses. Anbefaler
+              virkelig dette bilsenteret!"
+            </p>
+            <div class="testimonial__author">
+              <div class="testimonial__author-info">
+                <h4 class="testimonial__author-name">Erik Johansen</h4>
+                <span class="testimonial__author-title">Privatkunde, Drammen</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial__card testimonial__card--featured" aria-label="Kundeuttalelse">
+            <div class="testimonial__rating" aria-label="Vurdering 5 av 5">
+              <i class="fas fa-star" aria-hidden="true"></i>
+              <i class="fas fa-star" aria-hidden="true"></i>
+              <i class="fas fa-star" aria-hidden="true"></i>
+              <i class="fas fa-star" aria-hidden="true"></i>
+              <i class="fas fa-star" aria-hidden="true"></i>
+            </div>
+            <p class="testimonial__text">
+              "Har kjøpt flere biler hos SeBil AS gjennom årene. De har alltid
+              kvalitetsbiler med lav km-stand og ærlig rådgivning. Kan ikke tenke meg
+              å handle andre steder!"
+            </p>
+            <div class="testimonial__author">
+              <div class="testimonial__author-info">
+                <h4 class="testimonial__author-name">Maria Hansen</h4>
+                <span class="testimonial__author-title">Stamkunde, Lier</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial__card" aria-label="Kundeuttalelse">
+            <div class="testimonial__rating" aria-label="Vurdering 5 av 5">
+              <i class="fas fa-star" aria-hidden="true"></i>
+              <i class="fas fa-star" aria-hidden="true"></i>
+              <i class="fas fa-star" aria-hidden="true"></i>
+              <i class="fas fa-star" aria-hidden="true"></i>
+              <i class="fas fa-star" aria-hidden="true"></i>
+            </div>
+            <p class="testimonial__text">
+              "Solgte min gamle bil og kjøpte en Audi Q5 hos SeBil AS.
+              Fikk god pris for innbyttet og fantastisk service. Hele familien
+              er fornøyd med den nye bilen!"
+            </p>
+            <div class="testimonial__author">
+              <div class="testimonial__author-info">
+                <h4 class="testimonial__author-name">Thomas Olsen</h4>
+                <span class="testimonial__author-title">Familiefar, Kongsberg</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kontakt Section -->
+    <section class="contact section" id="kontakt" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__subtitle">Kontakt oss</span>
+          <h2 class="section__title" id="contact-title">
+            La oss hjelpe deg med <span class="section__title-accent">ditt bilkjøp</span>
+          </h2>
+          <p class="section__description">
+            Ta kontakt for en uforpliktende samtale om dine bilbehov.
+            Vi gir deg ærlig rådgivning og konkurransedyktige priser.
+          </p>
+        </div>
+
+        <div class="contact__container">
+          <div class="contact__info">
+            <div class="contact__card">
+              <div class="contact__card-icon"><i class="fas fa-phone" aria-hidden="true"></i></div>
+              <div class="contact__card-content">
+                <h3 class="contact__card-title">Ring oss</h3>
+                <p class="contact__card-text"><a href="tel:+4732891234">+47 32 89 12 34</a></p>
+                <span class="contact__card-note">Hverdager 09:00 - 17:00</span>
+              </div>
+            </div>
+
+            <div class="contact__card">
+              <div class="contact__card-icon"><i class="fas fa-envelope" aria-hidden="true"></i></div>
+              <div class="contact__card-content">
+                <h3 class="contact__card-title">Send e‑post</h3>
+                <p class="contact__card-text"><a href="mailto:post@sebil.no">post@sebil.no</a></p>
+                <span class="contact__card-note">Vi svarer innen 24 timer</span>
+              </div>
+            </div>
+
+            <div class="contact__card">
+              <div class="contact__card-icon"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></div>
+              <div class="contact__card-content">
+                <h3 class="contact__card-title">Besøk oss</h3>
+                <p class="contact__card-text">
+                  <a href="https://maps.google.com/?q=Bilveien+45,+3045+Drammen" target="_blank" rel="noopener">
+                    Bilveien 45<br>3045 Drammen
+                  </a>
+                </p>
+                <span class="contact__card-note">Velkommen innom</span>
+              </div>
+            </div>
+          </div>
+
+          <form class="contact__form" id="contact-form" novalidate>
+            <div class="form__group">
+              <label for="name" class="form__label">Navn *</label>
+              <input type="text" id="name" name="name" class="form__input" required autocomplete="name">
+            </div>
+
+            <div class="form__group">
+              <label for="email" class="form__label">E‑post *</label>
+              <input type="email" id="email" name="email" class="form__input" required autocomplete="email" inputmode="email">
+            </div>
+
+            <div class="form__group">
+              <label for="phone" class="form__label">Telefon</label>
+              <input type="tel" id="phone" name="phone" class="form__input" autocomplete="tel" inputmode="tel" pattern="^[0-9 +()\\-]{5,}$">
+            </div>
+
+            <div class="form__group">
+              <label for="project-type" class="form__label">Type henvendelse</label>
+              <select id="project-type" name="project-type" class="form__select">
+                <option value="">Velg type henvendelse</option>
+                <option value="bilkjop">Bilkjøp</option>
+                <option value="innbytte">Innbytte</option>
+                <option value="finansiering">Finansiering</option>
+                <option value="annet">Annet</option>
+              </select>
+            </div>
+
+            <div class="form__group form__group--full">
+              <label for="message" class="form__label">Melding *</label>
+              <textarea id="message" name="message" class="form__textarea" rows="5" placeholder="Fortell oss om dine bilbehov..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--large form__submit" aria-label="Send melding">
+              <i class="fas fa-paper-plane" aria-hidden="true"></i>
+              Send melding
+            </button>
+          </form>
+        </div>
+
+        <div class="contact__map" aria-label="Kart">
+          <!-- Oppdatert, peker på adressen vha. query -->
+          <iframe
+            src="https://www.google.com/maps?q=Bilveien+45,+3045+Drammen&output=embed"
+            class="contact__map-iframe"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__container">
+        <div class="footer__content">
+          <div class="footer__section">
+            <div class="footer__logo">
+              <i class="fas fa-car" aria-hidden="true"></i>
+              <span>SeBil AS</span>
+            </div>
+            <p class="footer__description">
+              Din pålitelige partner for kvalitetsbiler siden 2009.
+              Vi selger kun biler vi selv kunne tenkt oss å eie.
+            </p>
+            <div class="footer__social">
+              <a href="#" class="footer__social-link" aria-label="Facebook (åpner i ny fane)" target="_blank" rel="noopener nofollow">
+                <i class="fab fa-facebook-f" aria-hidden="true"></i>
+              </a>
+              <a href="#" class="footer__social-link" aria-label="Instagram (åpner i ny fane)" target="_blank" rel="noopener nofollow">
+                <i class="fab fa-instagram" aria-hidden="true"></i>
+              </a>
+              <a href="#" class="footer__social-link" aria-label="LinkedIn (åpner i ny fane)" target="_blank" rel="noopener nofollow">
+                <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="footer__section">
+            <h3 class="footer__title">Tjenester</h3>
+            <ul class="footer__list">
+              <li><a href="#tjenester" class="footer__link">Bilsalg</a></li>
+              <li><a href="#tjenester" class="footer__link">Innbytte</a></li>
+              <li><a href="#tjenester" class="footer__link">Finansiering</a></li>
+              <li><a href="#tjenester" class="footer__link">Forsikring</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__section">
+            <h3 class="footer__title">Selskapet</h3>
+            <ul class="footer__list">
+              <li><a href="#om-oss" class="footer__link">Om oss</a></li>
+              <li><a href="#om-oss" class="footer__link">Vårt team</a></li>
+              <li><a href="#" class="footer__link">Karriere</a></li>
+              <li><a href="#" class="footer__link">Nyheter</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__section">
+            <h3 class="footer__title">Kontakt</h3>
+            <ul class="footer__list">
+              <li class="footer__contact">
+                <i class="fas fa-phone" aria-hidden="true"></i>
+                <a href="tel:+4732891234" class="footer__link">+47 32 89 12 34</a>
+              </li>
+              <li class="footer__contact">
+                <i class="fas fa-envelope" aria-hidden="true"></i>
+                <a href="mailto:post@sebil.no" class="footer__link">post@sebil.no</a>
+              </li>
+              <li class="footer__contact">
+                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                <a href="https://maps.google.com/?q=Bilveien+45,+3045+Drammen" target="_blank" rel="noopener" class="footer__link">Bilveien 45, 3045 Drammen</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer__bottom">
+          <div class="footer__bottom-content">
+            <p class="footer__copyright">
+              © 2024 SeBil AS. Alle rettigheter reservert.
+            </p>
+            <div class="footer__legal">
+              <a href="#" class="footer__legal-link">Personvern</a>
+              <a href="#" class="footer__legal-link">Vilkår</a>
+              <a href="#" class="footer__legal-link">Cookies</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to top button -->
+  <button class="scroll-top" id="scroll-top" aria-label="Til toppen">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <!-- Schema.org (AutoDealer) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"AutoDealer",
+    "name":"SeBil AS",
+    "url":"https://dittdomene.no",
+    "email":"post@sebil.no",
+    "telephone":"+47 32891234",
+    "image":"https://dittdomene.no/assets/images/hero/hero-1.jpg",
+    "address":{
+      "@type":"PostalAddress",
+      "streetAddress":"Bilveien 45",
+      "postalCode":"3045",
+      "addressLocality":"Drammen",
+      "addressCountry":"NO"
+    },
+    "openingHoursSpecification":[{
+      "@type":"OpeningHoursSpecification",
+      "dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens":"09:00","closes":"17:00"
+    }],
+    "priceRange":"krkr"
+  }
+  </script>
+
+  <!-- JavaScript -->
+  <script src="https://unpkg.com/scrollreveal" defer></script>
+  <script src="js/script.js" defer></script>
+
+  <noscript>For best mulig opplevelse, aktiver JavaScript (animasjoner og filtrering krever JS).</noscript>
 </body>
 </html>
-
