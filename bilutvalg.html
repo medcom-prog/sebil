@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Bilutvalg – SeBil AS</title>
+  <title>Bilutvalg – SEBIL AS</title>
   <meta name="description" content="Se hele bilutvalget vårt: søk, filtrer og sorter brukte kvalitetsbiler." />
   <link rel="canonical" href="https://dittdomene.no/bilutvalg.html" />
+  <meta name="theme-color" content="#1a2332" />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Bilutvalg – SeBil AS">
+  <meta property="og:title" content="Bilutvalg – SEBIL AS">
   <meta property="og:description" content="Søk og filtrer blant våre brukte kvalitetsbiler.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dittdomene.no/bilutvalg.html">
@@ -31,6 +32,133 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Page-scoped mobile optimizations -->
+  <style>
+    /* Sticky verktøylinje på mobil */
+    @media (max-width: 768px) {
+      .listing-toolbar {
+        position: sticky;
+        top: calc(var(--header-height) + 0.5rem);
+        z-index: var(--z-fixed);
+        background: rgba(255,255,255,0.98);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        border-radius: 12px;
+        padding: 0.75rem;
+        margin-bottom: 0.75rem;
+      }
+      .chips-scroll {
+        display: flex;
+        gap: 0.5rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x proximity;
+        padding-bottom: 0.25rem;
+        margin-bottom: 0.5rem;
+      }
+      .chips-scroll .filter__btn {
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+        padding: 0.5rem 0.875rem;
+        border-radius: 999px;
+      }
+      .toolbar-row {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        gap: 0.5rem;
+        align-items: end;
+      }
+      .toolbar-row .form__input,
+      .toolbar-row .form__select {
+        height: 42px;
+      }
+      .btn--filters {
+        display: inline-flex;
+        align-items: center;
+        gap: .5rem;
+        padding: 0.5rem 0.875rem;
+        border-radius: 999px;
+        border: 1px solid #eaeaea;
+        box-shadow: var(--shadow-light);
+        white-space: nowrap;
+      }
+      /* Grid én kolonne på mobil */
+      #cars-grid.projects__container {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+      }
+      /* Paginering full bredde */
+      .pagination-mobile-full .btn {
+        flex: 1 1 auto;
+        width: 100%;
+      }
+    }
+
+    /* Desktop: behold sidefeltet, skjul mobil-drawer-knapp */
+    @media (min-width: 769px) {
+      .btn--filters { display: none; }
+      .filters-drawer,
+      .filters-backdrop { display: none !important; }
+    }
+
+    /* Bottom sheet filters (mobil) */
+    .filters-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.4);
+      opacity: 0; visibility: hidden;
+      transition: opacity var(--transition-fast);
+      z-index: var(--z-modal);
+    }
+    .filters-backdrop.show {
+      opacity: 1; visibility: visible;
+    }
+    .filters-drawer {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      background: #fff;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+      box-shadow: 0 -12px 30px rgba(0,0,0,.15);
+      transform: translateY(100%);
+      transition: transform var(--transition-medium);
+      z-index: calc(var(--z-modal) + 1);
+      max-height: 85vh;
+      overflow: auto;
+      padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+    }
+    .filters-drawer.show {
+      transform: translateY(0);
+    }
+    .filters-drawer__header {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #eee;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .filters-drawer__title {
+      font-family: var(--font-heading);
+      font-size: 1.125rem;
+      font-weight: var(--font-semi-bold);
+    }
+    .filters-drawer__close {
+      background: transparent;
+      font-size: 1.25rem;
+      line-height: 1;
+      padding: 0.25rem 0.5rem;
+    }
+
+    /* Desktop layout: behold 280px sidebar */
+    @media (min-width: 769px) {
+      .listing-layout {
+        display:grid;
+        grid-template-columns: 280px 1fr;
+        gap:2rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- Skip to content -->
@@ -41,7 +169,7 @@
     <nav class="nav container" aria-label="Hovedmeny">
       <div class="nav__logo">
         <i class="fas fa-car" aria-hidden="true"></i>
-        <span>SeBil AS</span>
+        <span>SEBIL AS</span>
       </div>
 
       <div class="nav__menu" id="nav-menu" role="dialog" aria-modal="true" aria-label="Navigasjon">
@@ -67,7 +195,7 @@
     </nav>
   </header>
 
-  <main id="content" class="main" role="main">
+  <main id="content" class="main">
     <!-- Page hero / intro -->
     <section class="section" style="padding-top: calc(var(--header-height) + 2rem);" aria-labelledby="list-title">
       <div class="container">
@@ -77,22 +205,24 @@
           <p class="section__description">Søk, filtrer og sorter utvalget. Alle biler har lav km‑stand og dokumentert servicehistorikk.</p>
         </div>
 
-        <!-- Top controls -->
-        <div class="projects__filter" role="tablist" aria-label="Hurtigfilter karosseri">
-          <button class="filter__btn filter__btn--active" data-filter="all" role="tab" aria-selected="true">Alle</button>
-          <button class="filter__btn" data-filter="sedan" role="tab" aria-selected="false">Sedan/Kombi</button>
-          <button class="filter__btn" data-filter="suv" role="tab" aria-selected="false">SUV/Crossover</button>
-        </div>
+        <!-- Sticky verktøylinje (mobil) -->
+        <div class="listing-toolbar">
+          <!-- Top chips (scroll på mobil) -->
+          <div class="projects__filter chips-scroll" role="tablist" aria-label="Hurtigfilter karosseri">
+            <button class="filter__btn filter__btn--active" data-filter="all" role="tab" aria-selected="true">Alle</button>
+            <button class="filter__btn" data-filter="sedan" role="tab" aria-selected="false">Sedan/Kombi</button>
+            <button class="filter__btn" data-filter="suv" role="tab" aria-selected="false">SUV/Crossover</button>
+          </div>
 
-        <!-- Search + sort row -->
-        <div class="container" style="display:grid; grid-template-columns: 1fr; gap:1rem; margin: 0 0 1rem 0;">
-          <div style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
-            <div style="flex:1; min-width:240px;">
-              <label for="search" class="form__label">Søk</label>
-              <input id="search" type="search" class="form__input" placeholder="Søk etter modell, drivstoff, gir …" aria-label="Søk i biler" />
+          <!-- Search + sort + filters button -->
+          <div class="toolbar-row">
+            <div>
+              <label for="search" class="form__label" style="display:none;">Søk</label>
+              <input id="search" type="search" class="form__input" placeholder="Søk modell, drivstoff, gir …" aria-label="Søk i biler" />
             </div>
-            <div style="width: min(280px, 100%);">
-              <label for="sort" class="form__label">Sorter</label>
+
+            <div>
+              <label for="sort" class="form__label" style="display:none;">Sorter</label>
               <select id="sort" class="form__select" aria-label="Sorter resultater">
                 <option value="relevance">Relevans</option>
                 <option value="price-asc">Pris (lav → høy)</option>
@@ -101,13 +231,19 @@
                 <option value="km-asc">Lavest km</option>
               </select>
             </div>
+
+            <div>
+              <button type="button" class="btn--filters" id="open-filters" aria-haspopup="dialog" aria-controls="filters-drawer">
+                <i class="fas fa-sliders"></i> Filtre
+              </button>
+            </div>
           </div>
         </div>
 
-        <!-- Layout: filters sidebar + grid -->
-        <div class="container" style="display:grid; grid-template-columns: 280px 1fr; gap:2rem;">
-          <!-- Sidebar filters -->
-          <aside aria-label="Filtre">
+        <!-- Desktop layout: sidebar + grid -->
+        <div class="listing-layout" style="margin-top:1rem;">
+          <!-- Sidebar filters (vises kun ≥ 769px) -->
+          <aside aria-label="Filtre" class="filters-desktop" style="display:none;">
             <form id="filters-form" class="contact__form" style="grid-template-columns:1fr;">
               <h2 class="h3" style="font-family:var(--font-heading);font-size:var(--h3-font-size);margin-bottom:0.5rem;">Filtre</h2>
 
@@ -172,11 +308,11 @@
             </div>
 
             <!-- Pagination -->
-            <nav aria-label="Paginering" style="margin-top:1.5rem; display:flex; justify-content:center; gap:0.75rem; align-items:center;">
+            <nav aria-label="Paginering" class="pagination-mobile-full" style="margin-top:1.5rem; display:flex; gap:0.75rem; align-items:center;">
               <button id="prev-page" class="btn btn--secondary btn--small" aria-label="Forrige side">
                 <i class="fas fa-chevron-left" aria-hidden="true"></i> Forrige
               </button>
-              <span id="page-indicator" class="section__description" aria-live="polite">Side 1 / 1</span>
+              <span id="page-indicator" class="section__description" aria-live="polite" style="min-width:110px; text-align:center;">Side 1 / 1</span>
               <button id="next-page" class="btn btn--secondary btn--small" aria-label="Neste side">
                 Neste <i class="fas fa-chevron-right" aria-hidden="true"></i>
               </button>
@@ -185,6 +321,70 @@
         </div>
       </div>
     </section>
+
+    <!-- Mobil: Filters bottom sheet -->
+    <div class="filters-backdrop" id="filters-backdrop" aria-hidden="true"></div>
+    <aside class="filters-drawer" id="filters-drawer" role="dialog" aria-modal="true" aria-labelledby="filters-title" aria-hidden="true">
+      <div class="filters-drawer__header">
+        <div class="filters-drawer__title" id="filters-title">Filtre</div>
+        <button class="filters-drawer__close" id="close-filters" aria-label="Lukk filtre">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div style="padding: 1rem;">
+        <!-- Samme skjema som desktop (samme IDs for script.js) -->
+        <form id="filters-form" class="contact__form" style="grid-template-columns:1fr;">
+          <!-- Body -->
+          <div class="form__group">
+            <span class="form__label">Karosseri</span>
+            <label><input type="checkbox" name="body" value="sedan"> Sedan/Kombi</label>
+            <label><input type="checkbox" name="body" value="suv"> SUV</label>
+          </div>
+
+          <!-- Fuel -->
+          <div class="form__group">
+            <span class="form__label">Drivstoff</span>
+            <label><input type="checkbox" name="fuel" value="bensin"> Bensin</label>
+            <label><input type="checkbox" name="fuel" value="diesel"> Diesel</label>
+            <label><input type="checkbox" name="fuel" value="hybrid"> Hybrid</label>
+            <label><input type="checkbox" name="fuel" value="elektrisk"> Elektrisk</label>
+          </div>
+
+          <!-- Gear -->
+          <div class="form__group">
+            <span class="form__label">Girkasse</span>
+            <label><input type="checkbox" name="gear" value="automat"> Automat</label>
+            <label><input type="checkbox" name="gear" value="manuell"> Manuell</label>
+          </div>
+
+          <!-- Ranges -->
+          <div class="form__group">
+            <label for="year-min" class="form__label">Årsmodell (min)</label>
+            <input id="year-min" name="year-min" class="form__input" type="number" min="2005" max="2025" placeholder="f.eks. 2015">
+          </div>
+          <div class="form__group">
+            <label for="year-max" class="form__label">Årsmodell (max)</label>
+            <input id="year-max" name="year-max" class="form__input" type="number" min="2005" max="2025" placeholder="f.eks. 2024">
+          </div>
+          <div class="form__group">
+            <label for="price-min" class="form__label">Pris (min)</label>
+            <input id="price-min" name="price-min" class="form__input" type="number" step="1000" placeholder="kr">
+          </div>
+          <div class="form__group">
+            <label for="price-max" class="form__label">Pris (max)</label>
+            <input id="price-max" name="price-max" class="form__input" type="number" step="1000" placeholder="kr">
+          </div>
+
+          <div class="form__group" style="display:flex; gap:0.5rem; margin-top:0.5rem;">
+            <button type="button" id="apply-filters" class="btn btn--primary" aria-label="Bruk filtre">
+              <i class="fas fa-filter" aria-hidden="true"></i> Bruk filtre
+            </button>
+            <button type="button" id="reset-filters" class="btn btn--secondary" aria-label="Nullstill filtre">Nullstill</button>
+          </div>
+        </form>
+      </div>
+    </aside>
 
     <!-- Sticky mobil-CTA -->
     <div class="mobile-cta" role="region" aria-label="Hurtigvalg">
@@ -202,9 +402,9 @@
           <div class="footer__section">
             <div class="footer__logo">
               <i class="fas fa-car" aria-hidden="true"></i>
-              <span>SeBil AS</span>
+              <span>SEBIL AS</span>
             </div>
-            <p class="footer__description">Din pålitelige partner for kvalitetsbiler siden 2009.</p>
+            <p class="footer__description">Din pålitelige partner for kvalitetsbiler.</p>
             <div class="footer__social">
               <a href="#" class="footer__social-link" aria-label="Facebook" target="_blank" rel="noopener nofollow"><i class="fab fa-facebook-f"></i></a>
               <a href="#" class="footer__social-link" aria-label="Instagram" target="_blank" rel="noopener nofollow"><i class="fab fa-instagram"></i></a>
@@ -243,7 +443,7 @@
 
         <div class="footer__bottom">
           <div class="footer__bottom-content">
-            <p class="footer__copyright">© 2024 SeBil AS. Alle rettigheter reservert.</p>
+            <p class="footer__copyright">© 2024 SEBIL AS. Alle rettigheter reservert.</p>
             <div class="footer__legal">
               <a href="#" class="footer__legal-link">Personvern</a>
               <a href="#" class="footer__legal-link">Vilkår</a>
@@ -262,6 +462,61 @@
 
   <!-- JS -->
   <script src="https://unpkg.com/scrollreveal" defer></script>
+  <script>
+    // Minimal JS for mobil-filter drawer (uavhengig av script.js)
+    document.addEventListener('DOMContentLoaded', () => {
+      const openBtn    = document.getElementById('open-filters');
+      const drawer     = document.getElementById('filters-drawer');
+      const backdrop   = document.getElementById('filters-backdrop');
+      const closeBtn   = document.getElementById('close-filters');
+
+      // Finn desktop-container: vis den kun ≥769px
+      const mq = window.matchMedia('(min-width: 769px)');
+      const desktopAside = document.querySelector('.filters-desktop');
+      const toggleDesktopAside = () => {
+        if (!desktopAside) return;
+        desktopAside.style.display = mq.matches ? 'block' : 'none';
+      };
+      toggleDesktopAside();
+      mq.addEventListener?.('change', toggleDesktopAside);
+
+      function openDrawer() {
+        drawer.classList.add('show');
+        backdrop.classList.add('show');
+        drawer.setAttribute('aria-hidden', 'false');
+        backdrop.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeDrawer() {
+        drawer.classList.remove('show');
+        backdrop.classList.remove('show');
+        drawer.setAttribute('aria-hidden', 'true');
+        backdrop.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      openBtn?.addEventListener('click', openDrawer);
+      closeBtn?.addEventListener('click', closeDrawer);
+      backdrop?.addEventListener('click', closeDrawer);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && drawer.classList.contains('show')) closeDrawer();
+      });
+
+      // Når bruker trykker "Bruk filtre" inne i drawer, lukk drawer etter at script.js har trigget render
+      const applyBtn = document.getElementById('apply-filters');
+      applyBtn?.addEventListener('click', () => {
+        if (window.matchMedia('(max-width: 768px)').matches) {
+          setTimeout(closeDrawer, 50);
+        }
+      });
+      const resetBtn = document.getElementById('reset-filters');
+      resetBtn?.addEventListener('click', () => {
+        if (window.matchMedia('(max-width: 768px)').matches) {
+          setTimeout(closeDrawer, 50);
+        }
+      });
+    });
+  </script>
   <script src="js/script.js" defer></script>
 
   <noscript>For best mulig opplevelse, aktiver JavaScript (søk, filtrering og paginering krever JS).</noscript>
