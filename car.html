@@ -111,10 +111,25 @@
   <a class="skip-to-content" href="#content">Hopp til innhold</a>
 
   <!-- Header -->
-  <header class="header" id="header">
+
+<header class="header" id="header">
     <nav class="nav container" aria-label="Hovedmeny">
-      <div class="nav__logo"><i class="fas fa-car" aria-hidden="true"></i><span>SEBIL AS</span></div>
-      <div class="nav__menu" id="nav-menu" role="dialog" aria-modal="true" aria-label="Navigasjon">
+   <a class="nav__logo" href="index.html" aria-label="SEBIL AS – Hjem">
+  <!-- Velg SVG hvis du har (best), ellers PNG nedenfor -->
+  <img
+    class="nav__logo-img"
+    src="assets/images/hero/logo.png"
+    alt="SEBIL AS"
+    width="160" height="36"
+    loading="eager" decoding="async"
+  />
+  <!-- Hvis du bruker PNG, kan du heller bruke srcset for retina:
+  <img class="nav__logo-img"
+       src="assets/brand/sebil-logo.png"
+       srcset="assets/brand/sebil-logo.png 1x, assets/brand/sebil-logo@2x.png 2x"
+       alt="SEBIL AS" width="160" height="36" loading="eager" decoding="async" />
+  -->
+</a>      <div class="nav__menu" id="nav-menu" role="dialog" aria-modal="true" aria-label="Navigasjon">
         <ul class="nav__list">
           <li class="nav__item"><a href="index.html#hjem" class="nav__link">Hjem</a></li>
           <li class="nav__item"><a href="index.html#om-oss" class="nav__link">Om oss</a></li>
