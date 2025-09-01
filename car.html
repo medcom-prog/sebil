@@ -23,9 +23,7 @@
   <style>
     /* ===== Layout ===== */
     .page-wrap { display:grid; gap:2rem; }
-    @media (min-width: 1024px) {
-      .page-wrap { grid-template-columns: 1.3fr .7fr; align-items:start; }
-    }
+    @media (min-width: 1024px) { .page-wrap { grid-template-columns: 1.3fr .7fr; align-items:start; } }
 
     /* ===== Galleri ===== */
     .gallery { display:grid; gap:0.75rem; }
@@ -34,63 +32,38 @@
       background:#f4f6f8; box-shadow: var(--shadow-light); position:relative;
     }
     .gallery__main img { width:100%; height:100%; object-fit:cover; display:block; }
-    .gallery__nav {
-      position:absolute; inset:0; display:flex; align-items:center; justify-content:space-between;
-      pointer-events:none;
-    }
-    .gallery__btn {
-      pointer-events:auto; border:0; background:rgba(0,0,0,.45); color:#fff; width:40px; height:40px;
-      border-radius:999px; display:grid; place-items:center; margin:0 .5rem; backdrop-filter: blur(6px);
-    }
+    .gallery__nav { position:absolute; inset:0; display:flex; align-items:center; justify-content:space-between; pointer-events:none; }
+    .gallery__btn { pointer-events:auto; border:0; background:rgba(0,0,0,.45); color:#fff; width:40px; height:40px; border-radius:999px; display:grid; place-items:center; margin:0 .5rem; backdrop-filter: blur(6px); }
     .thumbs { display:grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap:0.5rem; }
     .thumbs button { border:0; padding:0; border-radius:10px; overflow:hidden; background:#fff; box-shadow: var(--shadow-light); cursor:pointer; position:relative; }
     .thumbs img { width:100%; height:70px; object-fit:cover; display:block; }
-    .thumbs .is-active::after {
-      content:""; position:absolute; inset:0; border:3px solid var(--first-color); border-radius:10px;
-    }
+    .thumbs .is-active::after { content:""; position:absolute; inset:0; border:3px solid var(--first-color); border-radius:10px; }
 
     /* Lysboks */
-    .lightbox {
-      position:fixed; inset:0; background:rgba(0,0,0,.9); display:none; align-items:center; justify-content:center;
-      z-index:9999; padding:4vmin;
-    }
+    .lightbox { position:fixed; inset:0; background:rgba(0,0,0,.9); display:none; align-items:center; justify-content:center; z-index:9999; padding:4vmin; }
     .lightbox.show { display:flex; }
-    .lightbox__imgwrap {
-      max-width: min(96vw, 1600px); max-height: 86vh; position:relative;
-    }
-    .lightbox__img {
-      max-width:100%; max-height:100%; object-fit:contain; display:block; transition: transform .2s ease-out;
-      cursor: zoom-in;
-    }
-    .lightbox__controls {
-      position:absolute; inset:0; display:flex; align-items:center; justify-content:space-between; pointer-events:none;
-    }
-    .lightbox__btn {
-      pointer-events:auto; border:0; background:rgba(255,255,255,.15); color:#fff; width:46px; height:46px; border-radius:999px; display:grid; place-items:center;
-    }
-    .lightbox__top {
-      position:absolute; top:10px; left:10px; right:10px; display:flex; justify-content:space-between; gap:.5rem;
-    }
-    .lightbox__close, .lightbox__zoom {
-      border:0; background:rgba(255,255,255,.15); color:#fff; padding:.6rem .8rem; border-radius:999px;
-    }
+    .lightbox__imgwrap { max-width: min(96vw, 1600px); max-height: 86vh; position:relative; }
+    .lightbox__img { max-width:100%; max-height:100%; object-fit:contain; display:block; transition: transform .2s ease-out; cursor: zoom-in; }
+    .lightbox__controls { position:absolute; inset:0; display:flex; align-items:center; justify-content:space-between; pointer-events:none; }
+    .lightbox__btn { pointer-events:auto; border:0; background:rgba(255,255,255,.15); color:#fff; width:46px; height:46px; border-radius:999px; display:grid; place-items:center; }
+    .lightbox__top { position:absolute; top:10px; left:10px; right:10px; display:flex; justify-content:space-between; gap:.5rem; }
+    .lightbox__close, .lightbox__zoom { border:0; background:rgba(255,255,255,.15); color:#fff; padding:.6rem .8rem; border-radius:999px; }
 
     /* ===== Info/CTA-kolonne ===== */
-    .summary-card {
-      border:1px solid #e9edf3; border-radius:14px; padding:1rem; box-shadow: var(--shadow-light); background:#fff;
-      position:sticky; top: calc(var(--header-height) + 1rem);
-    }
+    .summary-card { border:1px solid #e9edf3; border-radius:14px; padding:1rem; box-shadow: var(--shadow-light); background:#fff; position:sticky; top: calc(var(--header-height) + 1rem); }
     .price { font-size:2rem; font-weight:700; }
     .summary__meta { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:.5rem; margin: .75rem 0; }
-    .summary__meta .pill {
-      background:#f6f8fb; border-radius:999px; padding:.45rem .7rem; display:flex; align-items:center; gap:.5rem; font-size:.95rem;
-    }
+    .summary__meta .pill { background:#f6f8fb; border-radius:999px; padding:.45rem .7rem; display:flex; align-items:center; gap:.5rem; font-size:.95rem; }
     .summary__ctas { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.75rem; }
 
     /* Finans-kalkulator */
     .fin { margin-top:1rem; border-top:1px dashed #e9edf3; padding-top:1rem; }
     .fin__row { display:grid; grid-template-columns: 1fr auto; gap:.5rem; align-items:center; margin:.35rem 0; }
+    /* høyre-kolonne kontroller i en rad, ikke wrap */
+    .fin__row .inline-control { display:flex; align-items:center; gap:.4rem; white-space:nowrap; }
     .fin__row input[type="number"], .fin__row select { max-width: 140px; }
+    .fin__row input[type="number"] { text-align: right; }
+    .fin__row .suffix { font-weight:600; opacity:.85; }
 
     /* Specs & tekst */
     .badge { display:inline-flex; align-items:center; gap:.35rem; padding:.35rem .6rem; border-radius:999px; background:#eef2f6; font-size:.85rem; }
@@ -105,6 +78,12 @@
     .equip__grid li { break-inside: avoid; list-style: none; padding:.25rem 0; }
     .equip__toggle { margin-top:.5rem; }
 
+    /* Beskrivelse – vis mer/vis mindre */
+    .desc { position:relative; }
+    .desc--clamped { max-height: 220px; overflow: hidden; }
+    .desc--clamped::after { content:""; position:absolute; left:0; right:0; bottom:0; height:64px; background:linear-gradient(to bottom, rgba(255,255,255,0), #fff); pointer-events:none; }
+    .desc__toggle { margin-top:.5rem; }
+
     /* Lignende biler */
     .similar { margin-top:2rem; }
     .similar__grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap:1rem; }
@@ -115,11 +94,7 @@
     .similar__price { font-weight:700; }
 
     /* Mobil sticky buy bar */
-    .buybar {
-      position: fixed; left:0; right:0; bottom:0; z-index: 50;
-      background:#fff; border-top:1px solid #e9edf3; box-shadow: 0 -10px 30px rgba(0,0,0,.06);
-      padding:.5rem; display:none; gap:.5rem; align-items:center; justify-content:space-between;
-    }
+    .buybar { position: fixed; left:0; right:0; bottom:0; z-index: 50; background:#fff; border-top:1px solid #e9edf3; box-shadow: 0 -10px 30px rgba(0,0,0,.06); padding:.5rem; display:none; gap:.5rem; align-items:center; justify-content:space-between; }
     .buybar__price { font-weight:700; }
     .buybar .btn { flex:1 1 auto; }
     @media (max-width: 1023px) { .buybar { display:flex; } }
@@ -133,17 +108,12 @@
   </style>
 </head>
 <body>
-  <!-- Skip to content -->
   <a class="skip-to-content" href="#content">Hopp til innhold</a>
 
   <!-- Header -->
   <header class="header" id="header">
     <nav class="nav container" aria-label="Hovedmeny">
-      <div class="nav__logo">
-        <i class="fas fa-car" aria-hidden="true"></i>
-        <span>SEBIL AS</span>
-      </div>
-
+      <div class="nav__logo"><i class="fas fa-car" aria-hidden="true"></i><span>SEBIL AS</span></div>
       <div class="nav__menu" id="nav-menu" role="dialog" aria-modal="true" aria-label="Navigasjon">
         <ul class="nav__list">
           <li class="nav__item"><a href="index.html#hjem" class="nav__link">Hjem</a></li>
@@ -153,16 +123,11 @@
           <li class="nav__item"><a href="index.html#anbefalinger" class="nav__link">Anbefalinger</a></li>
           <li class="nav__item"><a href="index.html#kontakt" class="nav__link">Kontakt</a></li>
         </ul>
-        <button class="nav__close" id="nav-close" aria-label="Lukk meny">
-          <i class="fas fa-times" aria-hidden="true"></i>
-        </button>
+        <button class="nav__close" id="nav-close" aria-label="Lukk meny"><i class="fas fa-times" aria-hidden="true"></i></button>
       </div>
-
       <div class="nav__actions">
         <a href="index.html#kontakt" class="btn btn--primary">Kontakt oss</a>
-        <button class="nav__toggle" id="nav-toggle" aria-label="Åpne meny">
-          <i class="fas fa-bars" aria-hidden="true"></i>
-        </button>
+        <button class="nav__toggle" id="nav-toggle" aria-label="Åpne meny"><i class="fas fa-bars" aria-hidden="true"></i></button>
       </div>
     </nav>
   </header>
@@ -170,16 +135,14 @@
   <main id="content" class="main">
     <section class="section" style="padding-top: calc(var(--header-height) + 1.25rem);">
       <div class="container">
-        <!-- Brødsmuler -->
         <nav aria-label="Brødsmuler" class="section__description" style="margin-bottom:1rem;">
           <a href="bilutvalg.html" class="footer__link">&larr; Tilbake til bilutvalg</a>
         </nav>
 
-        <!-- Status / feilmeldinger -->
         <div id="status" class="section__description" style="margin-bottom:1rem;"></div>
 
         <div class="page-wrap" id="ad" hidden>
-          <!-- Venstre: Galleri + beskrivelser -->
+          <!-- Venstre -->
           <div>
             <!-- Galleri -->
             <div class="gallery">
@@ -202,32 +165,29 @@
             <!-- Specs -->
             <div class="specs" id="specs" style="margin:1rem 0;"></div>
 
-            <!-- Utstyr (kollaps) -->
+            <!-- Utstyr -->
             <section class="equip" id="equip-section" hidden>
               <h2 class="h3">Utstyr</h2>
               <ul class="equip__grid" id="equip-list"></ul>
-              <button class="btn btn--ghost equip__toggle" id="equip-toggle" type="button">
-                Vis mer
-              </button>
+              <button class="btn btn--ghost equip__toggle" id="equip-toggle" type="button">Vis mer</button>
             </section>
 
             <!-- Beskrivelse -->
             <section style="margin-top:1.25rem;">
               <h2 class="h3">Beskrivelse</h2>
-              <div id="description" class="section__description" style="white-space:pre-wrap;"></div>
-              <p class="section__description muted" style="margin-top:1rem;">
-                * Forbehold om skrivefeil. Kontakt oss for komplett informasjon.
-              </p>
+              <div id="description" class="section__description desc" style="white-space:pre-wrap;"></div>
+              <button id="desc-toggle" class="btn btn--ghost desc__toggle" type="button" hidden>Vis mer</button>
+              <p class="section__description muted" style="margin-top:1rem;">* Forbehold om skrivefeil. Kontakt oss for komplett informasjon.</p>
             </section>
 
-            <!-- Lignende biler -->
+            <!-- Lignende -->
             <section class="similar" id="similar" hidden>
               <h2 class="h3">Lignende biler</h2>
               <div class="similar__grid" id="similar-grid"></div>
             </section>
           </div>
 
-          <!-- Høyre: Oppsummering/CTA/Finans -->
+          <!-- Høyre -->
           <aside>
             <div class="summary-card" id="summary">
               <div class="price" id="car-price"></div>
@@ -248,6 +208,7 @@
               <!-- Finans -->
               <div class="fin">
                 <h3 class="h4" style="margin-bottom:.35rem;">Estimert månedsbeløp</h3>
+
                 <div class="fin__row">
                   <label for="fin-years">Nedbetaling</label>
                   <select id="fin-years">
@@ -257,14 +218,22 @@
                     <option value="10">10 år</option>
                   </select>
                 </div>
+
                 <div class="fin__row">
                   <label for="fin-rate">Nominell rente</label>
-                  <input id="fin-rate" type="number" step="0.1" value="7.0"> <span>%</span>
+                  <div class="inline-control">
+                    <input id="fin-rate" type="number" step="0.1" inputmode="decimal" value="7.0">
+                    <span class="suffix">%</span>
+                  </div>
                 </div>
+
                 <div class="fin__row">
                   <label for="fin-down">Egenkapital</label>
-                  <input id="fin-down" type="number" step="1000" value="0">
+                  <div class="inline-control">
+                    <input id="fin-down" type="number" step="1000" inputmode="numeric" value="0">
+                  </div>
                 </div>
+
                 <div class="fin__row">
                   <span class="muted">Beløp å finansiere</span>
                   <strong id="fin-amount">—</strong>
@@ -273,9 +242,8 @@
                   <span class="muted">Estimert pr. mnd</span>
                   <strong id="fin-monthly">—</strong>
                 </div>
-                <p class="section__description muted" style="margin:.35rem 0 0;">
-                  Uforpliktende estimat. Renter/avgifter kan variere.
-                </p>
+
+                <p class="section__description muted" style="margin:.35rem 0 0;">Uforpliktende estimat. Renter/avgifter kan variere.</p>
               </div>
             </div>
           </aside>
@@ -297,10 +265,7 @@
       <div class="footer__container">
         <div class="footer__content">
           <div class="footer__section">
-            <div class="footer__logo">
-              <i class="fas fa-car" aria-hidden="true"></i>
-              <span>SEBIL AS</span>
-            </div>
+            <div class="footer__logo"><i class="fas fa-car" aria-hidden="true"></i><span>SEBIL AS</span></div>
             <p class="footer__description">Din pålitelige partner for kvalitetsbiler.</p>
             <div class="footer__social">
               <a href="#" class="footer__social-link" aria-label="Facebook" target="_blank" rel="noopener nofollow"><i class="fab fa-facebook-f"></i></a>
@@ -308,7 +273,6 @@
               <a href="#" class="footer__social-link" aria-label="LinkedIn" target="_blank" rel="noopener nofollow"><i class="fab fa-linkedin-in"></i></a>
             </div>
           </div>
-
           <div class="footer__section">
             <h3 class="footer__title">Tjenester</h3>
             <ul class="footer__list">
@@ -318,7 +282,6 @@
               <li><a href="index.html#tjenester" class="footer__link">Forsikring</a></li>
             </ul>
           </div>
-
           <div class="footer__section">
             <h3 class="footer__title">Selskapet</h3>
             <ul class="footer__list">
@@ -327,7 +290,6 @@
               <li><a href="#" class="footer__link">Nyheter</a></li>
             </ul>
           </div>
-
           <div class="footer__section">
             <h3 class="footer__title">Kontakt</h3>
             <ul class="footer__list">
@@ -337,7 +299,6 @@
             </ul>
           </div>
         </div>
-
         <div class="footer__bottom">
           <div class="footer__bottom-content">
             <p class="footer__copyright">© 2024 SEBIL AS. Alle rettigheter reservert.</p>
@@ -352,10 +313,7 @@
     </div>
   </footer>
 
-  <!-- Scroll to top -->
-  <button class="scroll-top" id="scroll-top" aria-label="Til toppen">
-    <i class="fas fa-arrow-up" aria-hidden="true"></i>
-  </button>
+  <button class="scroll-top" id="scroll-top" aria-label="Til toppen"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
 
   <!-- Page JS -->
   <script>
@@ -375,35 +333,8 @@
     function setStatus(msg, color){ var box = $('#status'); box.textContent = msg||''; box.style.color = color || 'var(--text-light)'; }
     function tplBadge(icon, text){ return '<span class="badge"><i class="'+icon+'" aria-hidden="true"></i>'+text+'</span>'; }
 
-    // Plukk ut bilde-IDer uansett form på images
-    function pickImageIds(car){
-      var ids = [];
-      var arr = car.images;
-
-      if (Array.isArray(arr)) {
-        arr.forEach(function (it) {
-          if (!it) return;
-          if (it.directus_files_id) {
-            if (typeof it.directus_files_id === 'string') ids.push(it.directus_files_id);
-            else if (it.directus_files_id.id) ids.push(it.directus_files_id.id);
-          } else if (it.id) {
-            ids.push(it.id);
-          } else if (typeof it === 'string') {
-            ids.push(it);
-          }
-        });
-      }
-      if (ids.length === 0 && car.image) {
-        if (typeof car.image === 'string') ids.push(car.image);
-        else if (car.image.id) ids.push(car.image.id);
-      }
-      return Array.from(new Set(ids)).filter(Boolean);
-    }
-
-    // state for galleri
     var galleryState = { ids: [], idx: 0 };
 
-    /* ====== Render hovedbil ====== */
     function renderCar(car){
       $('#ad').hidden = false;
 
@@ -411,7 +342,6 @@
       $('#car-title').textContent = title;
       document.title = title + ' – SEBIL AS';
 
-      // Pris + meta
       var priceText = car.price ? nok(car.price) : 'Pris på forespørsel';
       $('#car-price').textContent = priceText;
       $('#buybar-price').textContent = priceText;
@@ -421,14 +351,12 @@
       $('#meta-fuel').textContent = car.fuel_type || '—';
       $('#meta-gear').textContent = car.transmission || '—';
 
-      // Badges
       var badges = [];
       if (car.category)     badges.push(tplBadge('fas fa-tag', car.category));
       if (car.fuel_type)    badges.push(tplBadge('fas fa-gas-pump', car.fuel_type));
       if (car.transmission) badges.push(tplBadge('fas fa-cog', car.transmission));
       $('#badges').innerHTML = badges.join('');
 
-      // Specs
       var specs = [];
       if (car.year)         specs.push('<div class="specs__item"><i class="fas fa-calendar"></i><strong>Årsmodell:</strong> '+car.year+'</div>');
       if (car.mileage)      specs.push('<div class="specs__item"><i class="fas fa-tachometer-alt"></i><strong>Kjørelengde:</strong> '+km(car.mileage)+'</div>');
@@ -436,30 +364,30 @@
       if (car.transmission) specs.push('<div class="specs__item"><i class="fas fa-cog"></i><strong>Girkasse:</strong> '+car.transmission+'</div>');
       $('#specs').innerHTML = specs.join('');
 
-      // Beskrivelse
+      // Beskrivelse + toggle
       $('#description').textContent = car.description || '—';
+      setupDescriptionToggle();
 
-      // Utstyr (valgfritt felt "equipment")
+      // Utstyr
       var equip = [];
       if (Array.isArray(car.equipment)) equip = car.equipment;
       else if (typeof car.equipment === 'string') equip = car.equipment.split(',').map(function(x){ return x.trim(); }).filter(Boolean);
       if (equip.length) {
-        var ul = $('#equip-list');
-        ul.innerHTML = equip.map(function(x){ return '<li><i class="fas fa-check"></i> '+x+'</li>'; }).join('');
+        $('#equip-list').innerHTML = equip.map(function(x){ return '<li><i class="fas fa-check"></i> '+x+'</li>'; }).join('');
         $('#equip-section').hidden = false;
         wireEquipToggle();
       }
 
-      // Bilder (nå via pickImageIds)
+      // Bilder
       var ids = pickImageIds(car);
       galleryState.ids = ids;
       galleryState.idx = 0;
       renderGallery(title);
 
-      // Finans startverdi
+      // Finans
       setupFinance(car.price || 0);
 
-      // Lignende biler
+      // Lignende
       fetchSimilar(car);
     }
 
@@ -490,7 +418,6 @@
         thumbs.innerHTML = '';
       }
 
-      // Piltaster og knapper
       $('#prev-img').addEventListener('click', prevImg);
       $('#next-img').addEventListener('click', nextImg);
       document.addEventListener('keydown', function(ev){
@@ -499,112 +426,58 @@
         if (ev.key === 'ArrowRight') nextImg();
       });
 
-      // Lysboks
       wireLightbox();
     }
 
-    function updateMain(){
-      var idx = galleryState.idx;
-      var ids = galleryState.ids;
-      var main = $('#main-img');
-      if (!ids.length) return;
-      main.src = imgUrl(ids[idx]);
-      markActiveThumb();
-    }
-    function markActiveThumb(){
-      $$('#thumbs button').forEach(function(b){ b.classList.remove('is-active'); });
-      var active = $('#thumbs button[data-idx="'+galleryState.idx+'"]');
-      if (active) active.classList.add('is-active');
-    }
-    function prevImg(){
-      if (!galleryState.ids.length) return;
-      galleryState.idx = (galleryState.idx - 1 + galleryState.ids.length) % galleryState.ids.length;
-      updateMain();
-    }
-    function nextImg(){
-      if (!galleryState.ids.length) return;
-      galleryState.idx = (galleryState.idx + 1) % galleryState.ids.length;
-      updateMain();
-    }
+    function updateMain(){ var main = $('#main-img'); if (!galleryState.ids.length) return; main.src = imgUrl(galleryState.ids[galleryState.idx]); markActiveThumb(); }
+    function markActiveThumb(){ $$('#thumbs button').forEach(function(b){ b.classList.remove('is-active'); }); var active=$('#thumbs button[data-idx="'+galleryState.idx+'"]'); if(active) active.classList.add('is-active'); }
+    function prevImg(){ if (!galleryState.ids.length) return; galleryState.idx = (galleryState.idx - 1 + galleryState.ids.length) % galleryState.ids.length; updateMain(); }
+    function nextImg(){ if (!galleryState.ids.length) return; galleryState.idx = (galleryState.idx + 1) % galleryState.ids.length; updateMain(); }
 
-    /* ====== Lysboks ====== */
     function wireLightbox(){
       var lb = document.createElement('div');
-      lb.className = 'lightbox';
-      lb.id = 'lightbox';
+      lb.className = 'lightbox'; lb.id = 'lightbox';
       lb.innerHTML =
-        '<div class="lightbox__top">' +
-          '<button class="lightbox__zoom" id="lb-zoom" type="button"><i class="fas fa-magnifying-glass-plus"></i></button>' +
-          '<button class="lightbox__close" id="lb-close" type="button"><i class="fas fa-times"></i> Lukk</button>' +
-        '</div>' +
-        '<div class="lightbox__imgwrap">' +
-          '<img class="lightbox__img" id="lb-img" alt="">' +
-          '<div class="lightbox__controls" aria-hidden="true">' +
-            '<button class="lightbox__btn" id="lb-prev" type="button"><i class="fas fa-chevron-left"></i></button>' +
-            '<button class="lightbox__btn" id="lb-next" type="button"><i class="fas fa-chevron-right"></i></button>' +
-          '</div>' +
+        '<div class="lightbox__top">'+
+          '<button class="lightbox__zoom" id="lb-zoom" type="button"><i class="fas fa-magnifying-glass-plus"></i></button>'+
+          '<button class="lightbox__close" id="lb-close" type="button"><i class="fas fa-times"></i> Lukk</button>'+
+        '</div>'+
+        '<div class="lightbox__imgwrap">'+
+          '<img class="lightbox__img" id="lb-img" alt="">'+
+          '<div class="lightbox__controls" aria-hidden="true">'+
+            '<button class="lightbox__btn" id="lb-prev" type="button"><i class="fas fa-chevron-left"></i></button>'+
+            '<button class="lightbox__btn" id="lb-next" type="button"><i class="fas fa-chevron-right"></i></button>'+
+          '</div>'+
         '</div>';
       document.body.appendChild(lb);
 
       var main = $('#main-img');
-      main.addEventListener('click', openLB);
-
-      function openLB(){
-        var img = $('#lb-img');
-        img.src = main.src;
-        img.style.transform = 'none';
-        lb.classList.add('show');
-      }
+      main.addEventListener('click', function(){ var img=$('#lb-img'); img.src=main.src; img.style.transform='none'; lb.classList.add('show'); });
       $('#lb-close').addEventListener('click', function(){ lb.classList.remove('show'); });
       $('#lb-prev').addEventListener('click', function(){ prevImg(); $('#lb-img').src = imgUrl(galleryState.ids[galleryState.idx]); });
       $('#lb-next').addEventListener('click', function(){ nextImg(); $('#lb-img').src = imgUrl(galleryState.ids[galleryState.idx]); });
 
-      // Zoom
-      var zoomed = false;
-      $('#lb-zoom').addEventListener('click', function(){
-        var img = $('#lb-img');
-        zoomed = !zoomed;
-        img.style.transform = zoomed ? 'scale(1.6)' : 'none';
-        img.style.cursor = zoomed ? 'zoom-out' : 'zoom-in';
-      });
+      var zoomed=false;
+      $('#lb-zoom').addEventListener('click', function(){ var img=$('#lb-img'); zoomed=!zoomed; img.style.transform=zoomed?'scale(1.6)':'none'; img.style.cursor=zoomed?'zoom-out':'zoom-in'; });
 
-      // ESC / klikk bakgrunn
-      lb.addEventListener('click', function(e){ if (e.target === lb) lb.classList.remove('show'); });
-      document.addEventListener('keydown', function(ev){ if (ev.key === 'Escape' && lb.classList.contains('show')) lb.classList.remove('show'); });
+      lb.addEventListener('click', function(e){ if (e.target===lb) lb.classList.remove('show'); });
+      document.addEventListener('keydown', function(ev){ if (ev.key==='Escape' && lb.classList.contains('show')) lb.classList.remove('show'); });
 
-      // Swipe (mobilt)
-      var startX = 0;
-      lb.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, { passive:true });
-      lb.addEventListener('touchend', function(e){
-        var dx = e.changedTouches[0].clientX - startX;
-        if (Math.abs(dx) > 40) {
-          if (dx > 0) $('#lb-prev').click(); else $('#lb-next').click();
-          $('#lb-img').src = imgUrl(galleryState.ids[galleryState.idx]);
-        }
-      }, { passive:true });
+      var startX=0;
+      lb.addEventListener('touchstart', function(e){ startX=e.touches[0].clientX; }, {passive:true});
+      lb.addEventListener('touchend', function(e){ var dx=e.changedTouches[0].clientX-startX; if (Math.abs(dx)>40){ if(dx>0) $('#lb-prev').click(); else $('#lb-next').click(); $('#lb-img').src=imgUrl(galleryState.ids[galleryState.idx]); } }, {passive:true});
     }
 
-    /* ====== Finans ====== */
     function setupFinance(price){
-      var years = $('#fin-years');
-      var rate  = $('#fin-rate');
-      var down  = $('#fin-down');
-      var outAmount = $('#fin-amount');
-      var outMonthly = $('#fin-monthly');
-
-      if (!down.value || Number(down.value) === 0) {
-        down.value = Math.round(price * 0.20);
-      }
-
+      var years=$('#fin-years'), rate=$('#fin-rate'), down=$('#fin-down'), outAmount=$('#fin-amount'), outMonthly=$('#fin-monthly');
+      if (!down.value || Number(down.value)===0) { down.value = Math.round(price*0.20); }
       function recalc(){
-        var p = Math.max(0, Number(price) - Number(down.value || 0));
-        var y = Math.max(1, Number(years.value || 5));
-        var r = Math.max(0, Number(rate.value || 7)) / 100 / 12;
-        var n = y * 12;
-
-        var m = (r === 0) ? (p / n) : (p * r * Math.pow(1+r, n)) / (Math.pow(1+r, n) - 1);
-
-        outAmount.textContent  = nok(p);
+        var p = Math.max(0, Number(price) - Number(down.value||0));
+        var y = Math.max(1, Number(years.value||5));
+        var r = Math.max(0, Number(rate.value||7))/100/12;
+        var n = y*12;
+        var m = (r===0) ? (p/n) : (p*r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+        outAmount.textContent = nok(p);
         outMonthly.textContent = isFinite(m) ? nok(m) : '—';
       }
       years.addEventListener('change', recalc);
@@ -613,117 +486,102 @@
       recalc();
     }
 
-    /* ====== Utstyr toggle ====== */
     function wireEquipToggle(){
-      var btn = $('#equip-toggle');
-      var list = $('#equip-list');
-      if (!btn || !list) return;
-      var expanded = false;
-      function apply(){
-        if (!expanded) {
-          var items = $$('#equip-list li');
-          items.forEach(function(li, i){ li.style.display = (i < 12) ? '' : 'none'; });
-          btn.textContent = 'Vis mer';
-        } else {
-          $$('#equip-list li').forEach(function(li){ li.style.display = ''; });
-          btn.textContent = 'Vis mindre';
-        }
-      }
-      apply();
-      btn.addEventListener('click', function(){ expanded = !expanded; apply(); });
+      var btn=$('#equip-toggle'); var list=$('#equip-list'); if(!btn||!list) return;
+      var expanded=false;
+      function apply(){ if(!expanded){ $$('#equip-list li').forEach(function(li,i){ li.style.display=(i<12)?'':'none'; }); btn.textContent='Vis mer'; } else { $$('#equip-list li').forEach(function(li){ li.style.display=''; }); btn.textContent='Vis mindre'; } }
+      apply(); btn.addEventListener('click', function(){ expanded=!expanded; apply(); });
     }
 
-    /* ====== Lignende biler ====== */
+    function setupDescriptionToggle(){
+      var box = $('#description'), btn = $('#desc-toggle'); if (!box || !btn) return;
+      // Reset
+      box.classList.remove('desc--clamped'); btn.hidden = true;
+      // Clamp hvis lang
+      requestAnimationFrame(function(){
+        var threshold = 240; // px
+        if (box.scrollHeight > threshold) {
+          box.classList.add('desc--clamped'); btn.hidden = false; btn.textContent = 'Vis mer';
+          btn.onclick = function(){
+            var clamped = box.classList.contains('desc--clamped');
+            box.classList.toggle('desc--clamped');
+            btn.textContent = clamped ? 'Vis mindre' : 'Vis mer';
+          };
+        }
+      });
+    }
+
     async function fetchSimilar(car){
       try{
         var params = new URLSearchParams();
-        var fields = [
-          'id','title','price','year','mileage','fuel_type','transmission','category','image'
-        ].join(',');
+        var fields = ['id','title','price','year','mileage','fuel_type','transmission','category','image'].join(',');
         params.set('fields', fields);
-        var filter = { _and: [ { status:{ _eq:'published' } }, { id:{ _neq: car.id } } ] };
-        if (car.category) filter._and.push({ category: { _eq: car.category } });
+        var filter = { _and:[ {status:{_eq:'published'}}, {id:{_neq:car.id}} ] };
+        if (car.category) filter._and.push({ category:{_eq:car.category} });
         params.set('filter', JSON.stringify(filter));
-        params.set('limit', '8');
-        params.set('sort', '-date_created');
-
-        var res = await fetch(DIRECTUS_URL + '/items/cars?' + params.toString(), { headers: { Accept:'application/json' } });
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        var json = await res.json();
-        var rows = (json && json.data) ? json.data : [];
+        params.set('limit','8'); params.set('sort','-date_created');
+        var res = await fetch(DIRECTUS_URL + '/items/cars?' + params.toString(), { headers:{Accept:'application/json'} });
+        if (!res.ok) throw new Error('HTTP '+res.status);
+        var json = await res.json(); var rows = (json&&json.data)?json.data:[];
         if (!rows.length) return;
-
         var grid = $('#similar-grid');
         grid.innerHTML = rows.map(function(c){
-          var fid = (typeof c.image === 'object' && c.image) ? c.image.id : c.image;
+          var fid = (typeof c.image==='object' && c.image)? c.image.id : c.image;
           var href = 'car.html?id=' + encodeURIComponent(c.id);
-          return '' +
-            '<a class="similar__card" href="'+href+'">' +
-              '<img src="'+imgUrl(fid)+'" alt="">' +
-              '<div class="similar__body">' +
-                (c.category ? '<span class="project__category">'+c.category+'</span>' : '') +
-                '<div class="similar__title">'+(c.title || 'Bil')+'</div>' +
-                '<div class="project__details" style="font-size:.9rem;color:var(--text-light)">' +
-                  (c.year ? '<span><i class="fas fa-calendar"></i> '+c.year+'</span> ' : '') +
-                  (c.mileage ? '<span><i class="fas fa-tachometer-alt"></i> '+km(c.mileage)+'</span>' : '') +
-                '</div>' +
-                '<div class="similar__price">'+(c.price ? nok(c.price) : '')+'</div>' +
-              '</div>' +
+          return ''+
+            '<a class="similar__card" href="'+href+'">'+
+              '<img src="'+imgUrl(fid)+'" alt="">'+
+              '<div class="similar__body">'+
+                (c.category ? '<span class="project__category">'+c.category+'</span>' : '')+
+                '<div class="similar__title">'+(c.title||'Bil')+'</div>'+
+                '<div class="project__details" style="font-size:.9rem;color:var(--text-light)">'+
+                  (c.year?'<span><i class="fas fa-calendar"></i> '+c.year+'</span> ':'')+
+                  (c.mileage?'<span><i class="fas fa-tachometer-alt"></i> '+km(c.mileage)+'</span>':'')+
+                '</div>'+
+                '<div class="similar__price">'+(c.price?nok(c.price):'')+'</div>'+
+              '</div>'+
             '</a>';
         }).join('');
         $('#similar').hidden = false;
-      } catch(e){ /* stille feil */ }
+      } catch(e){ /* no-op */ }
     }
 
-    /* ====== Hent bil ====== */
-   async function loadCar(){
-  try {
-    if (!id) { setStatus('Mangler parameter (?id=).', 'var(--error-color)'); return; }
-    setStatus('Laster annonse …');
+    async function loadCar(){
+      try {
+        if (!id) { setStatus('Mangler parameter (?id=).', 'var(--error-color)'); return; }
+        setStatus('Laster annonse …');
 
-    // Be om minimal, men tilstrekkelig struktur:
-    // - image: enkelt cover-bilde
-    // - images.directus_files_id: ID-er via junction-tabellen (Files (many))
-    const fields = [
-      'id','title','description','mileage','price','year',
-      'fuel_type','transmission','category','status',
-      'image',
-      'images.directus_files_id'
-    ].join(',');
+        const fields = [
+          'id','title','description','mileage','price','year','fuel_type','transmission','category','status',
+          'image',
+          'images.directus_files_id'
+        ].join(',');
 
-    const url = `${DIRECTUS_URL}/items/cars/${encodeURIComponent(id)}?fields=${encodeURIComponent(fields)}`;
-    const res = await fetch(url, { headers: { Accept: 'application/json' } });
+        const url = `${DIRECTUS_URL}/items/cars/${encodeURIComponent(id)}?fields=${encodeURIComponent(fields)}`;
+        const res = await fetch(url, { headers: { Accept: 'application/json' } });
 
-    if (!res.ok) {
-      // Logg serverens svar til konsollen så du ser om det er 403/permissions el.l.
-      const body = await res.text().catch(()=>'');
-      console.error('Directus error:', res.status, body);
-      throw new Error('HTTP ' + res.status);
+        if (!res.ok) {
+          const body = await res.text().catch(()=> '');
+          console.error('Directus error:', res.status, body);
+          throw new Error('HTTP ' + res.status);
+        }
+        const json = await res.json();
+        if (!json || !json.data) { setStatus('Fant ikke annonsen (404).', 'var(--error-color)'); return; }
+
+        setStatus('');
+        renderCar(json.data);
+      } catch (e) {
+        console.error(e);
+        setStatus('Kunne ikke hente annonsen. Prøv igjen senere.', 'var(--error-color)');
+      }
     }
 
-    const json = await res.json();
-    if (!json || !json.data) {
-      setStatus('Fant ikke annonsen (404).', 'var(--error-color)');
-      return;
-    }
-
-    setStatus('');
-    renderCar(json.data);
-  } catch (e) {
-    console.error(e);
-    setStatus('Kunne ikke hente annonsen. Prøv igjen senere.', 'var(--error-color)');
-  }
-}
-
-    /* ====== Del / Print ====== */
     function wireShareAndPrint(){
-      var shareBtn = $('#btn-share');
-      var printBtn = $('#btn-print');
+      var shareBtn=$('#btn-share'), printBtn=$('#btn-print');
       shareBtn && shareBtn.addEventListener('click', function(){
-        var url = location.href;
-        if (navigator.share) {
-          navigator.share({ title: document.title, url: url }).catch(function(){});
-        } else if (navigator.clipboard && navigator.clipboard.writeText) {
+        var url=location.href;
+        if (navigator.share){ navigator.share({ title: document.title, url }).catch(function(){}); }
+        else if (navigator.clipboard && navigator.clipboard.writeText){
           navigator.clipboard.writeText(url).then(function(){
             shareBtn.innerHTML = '<i class="fas fa-check"></i> Kopiert!';
             setTimeout(function(){ shareBtn.innerHTML = '<i class="fas fa-share-alt"></i> Del'; }, 1200);
@@ -733,13 +591,34 @@
       printBtn && printBtn.addEventListener('click', function(){ window.print(); });
     }
 
+    function pickImageIds(car){
+      var ids = []; var arr = car.images;
+      if (Array.isArray(arr)) {
+        arr.forEach(function (it) {
+          if (!it) return;
+          if (it.directus_files_id) {
+            if (typeof it.directus_files_id === 'string') ids.push(it.directus_files_id);
+            else if (it.directus_files_id.id) ids.push(it.directus_files_id.id);
+          } else if (it.id) {
+            ids.push(it.id);
+          } else if (typeof it === 'string') {
+            ids.push(it);
+          }
+        });
+      }
+      if (ids.length===0 && car.image) {
+        if (typeof car.image === 'string') ids.push(car.image);
+        else if (car.image.id) ids.push(car.image.id);
+      }
+      return Array.from(new Set(ids)).filter(Boolean);
+    }
+
     document.addEventListener('DOMContentLoaded', function(){
       loadCar();
       wireShareAndPrint();
     });
   </script>
 
-  <!-- Global JS -->
   <script src="https://unpkg.com/scrollreveal" defer></script>
   <script src="js/script.js" defer></script>
 </body>
