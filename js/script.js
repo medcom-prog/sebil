@@ -330,26 +330,33 @@ const debounce = (fn, ms = 300) => {
     v == null ? "" : Number(v).toLocaleString("nb-NO", { style: "currency", currency: "NOK", maximumFractionDigits: 0 });
   const km = (v) => (v == null ? "" : `${Number(v).toLocaleString("nb-NO")} km`);
 
-  function imageUrl(fileId, { w = 960, h = 540, fit = "cover", format = "webp" } = {}) {
+  function imageUrl(fileId) {
     if (!fileId) return "assets/images/projects/placeholder-car.jpg";
     // Bruk preset (raskt via CDN), fallback håndteres onerror i <img>
     return `${DIRECTUS_URL}/assets/${fileId}?key=${ASSET_KEY}`;
   }
   const escapeAttr = (str) => (str || "").replace(/"/g, "&quot;");
 
+  // Detalj-lenke (alltid via id – slug brukes ikke)
+  function getCarLink(car) {
+    return `car.html?id=${encodeURIComponent(car.id)}`;
+  }
+
   function cardTemplate(car) {
-    const {
-      title, description, mileage, price, year, fuel_type, transmission, category, image, listing_url
-    } = car;
+  const {
+    id, slug, title, /* description fjernet */ mileage, price, year,
+    fuel_type, transmission, category, image
+  } = car;
 
-    const imgId  = image && (image.id || image);
-    const imgSrc = imageUrl(imgId);
-    const cat    = (category || "").toString().trim();
-    const ext    = listing_url && listing_url.trim() ? listing_url.trim() : "#";
+  const imgId  = image && (image.id || image);
+  const imgSrc = imageUrl(imgId);
+  const cat    = (category || "").toString().trim();
+  const href   = getCarLink(car); // car.html?id=...
 
-    return `
-      <div class="project__card" data-category="${escapeAttr(cat)}">
-        <div class="project__image">
+  return `
+    <div class="project__card" data-category="${escapeAttr(cat)}">
+      <div class="project__image">
+        <a href="${escapeAttr(href)}" class="project__img-link" aria-label="Åpne detaljside for ${escapeAttr(title || "bilen")}">
           <img
             src="${imgSrc}"
             alt="${escapeAttr(title || "Bil")}"
@@ -358,102 +365,96 @@ const debounce = (fn, ms = 300) => {
             decoding="async"
             onerror="this.onerror=null;this.src='assets/images/projects/placeholder-car.jpg';"
           >
-          <div class="project__overlay" aria-hidden="true">
-            <div class="project__actions">
-              <a class="project__btn" href="${escapeAttr(ext)}" target="_blank" rel="noopener" aria-label="Åpne annonse i ny fane">
-                <i class="fas fa-external-link-alt" aria-hidden="true"></i>
-              </a>
-              <a class="project__btn" href="tel:+4732891234" aria-label="Ring oss om ${escapeAttr(title || "bilen")}">
-                <i class="fas fa-phone" aria-hidden="true"></i>
-              </a>
-            </div>
+        </a>
+        <div class="project__overlay" aria-hidden="true">
+          <div class="project__actions">
+            <a class="project__btn" href="${escapeAttr(href)}" aria-label="Se detaljer">
+              <i class="fas fa-eye" aria-hidden="true"></i>
+            </a>
+            <a class="project__btn" href="tel:+4732891234" aria-label="Ring oss om ${escapeAttr(title || "bilen")}">
+              <i class="fas fa-phone" aria-hidden="true"></i>
+            </a>
           </div>
         </div>
-        <div class="project__content">
-          ${cat ? `<span class="project__category">${escapeAttr(cat.charAt(0).toUpperCase() + cat.slice(1))}</span>` : ""}
-          <h3 class="project__title">${escapeAttr(title || "Uten tittel")}</h3>
-          ${description ? `<p class="project__description">${description}</p>` : ""}
-          <div class="project__details">
-            ${year ? `<span class="project__detail"><i class="fas fa-calendar" aria-hidden="true"></i>${year}</span>` : ""}
-            ${mileage ? `<span class="project__detail"><i class="fas fa-tachometer-alt" aria-hidden="true"></i>${km(mileage)}</span>` : ""}
-            ${fuel_type ? `<span class="project__detail"><i class="fas fa-gas-pump" aria-hidden="true"></i>${escapeAttr(fuel_type)}</span>` : ""}
-            ${transmission ? `<span class="project__detail"><i class="fas fa-cog" aria-hidden="true"></i>${escapeAttr(transmission)}</span>` : ""}
-          </div>
-          <div class="project__price">
-            ${price ? `<span class="project__price-amount">${nok(price)}</span>` : ""}
-          </div>
+      </div>
+      <div class="project__content">
+        ${cat ? `<span class="project__category">${escapeAttr(cat.charAt(0).toUpperCase() + cat.slice(1))}</span>` : ""}
+        <h3 class="project__title">
+          <a href="${escapeAttr(href)}" class="project__title-link">${escapeAttr(title || "Uten tittel")}</a>
+        </h3>
+        <!-- description er fjernet på kort -->
+        <div class="project__details">
+          ${year ? `<span class="project__detail"><i class="fas fa-calendar" aria-hidden="true"></i>${year}</span>` : ""}
+          ${mileage ? `<span class="project__detail"><i class="fas fa-tachometer-alt" aria-hidden="true"></i>${km(mileage)}</span>` : ""}
+          ${fuel_type ? `<span class="project__detail"><i class="fas fa-gas-pump" aria-hidden="true"></i>${escapeAttr(fuel_type)}</span>` : ""}
+          ${transmission ? `<span class="project__detail"><i class="fas fa-cog" aria-hidden="true"></i>${escapeAttr(transmission)}</span>` : ""}
+        </div>
+        <div class="project__price">
+          ${price ? `<span class="project__price-amount">${nok(price)}</span>` : ""}
+        </div>
+        <div class="project__cta-row" style="display:flex;gap:.5rem;flex-wrap:wrap;">
+          <a href="${escapeAttr(href)}" class="btn btn--primary btn--small">
+            <i class="fas fa-eye" aria-hidden="true"></i> Se detaljer
+          </a>
           <a href="index.html#kontakt" class="btn btn--secondary btn--small project__contact-btn">
             <i class="fas fa-paper-plane" aria-hidden="true"></i> Kontakt oss
           </a>
         </div>
       </div>
-    `;
-  }
+    </div>
+  `;
+}
 
   /* ---------- Directus spørring ---------- */
   function titleCase(v = "") {
-  v = String(v).trim();
-  if (!v) return v;
-  // spesial-case for norsk
-  if (v.toLowerCase() === "elektrisk") return "Elektrisk";
-  if (v.toLowerCase() === "hybrid") return "Hybrid";
-  if (v.toLowerCase() === "bensin") return "Bensin";
-  if (v.toLowerCase() === "diesel") return "Diesel";
-  if (v.toLowerCase() === "automat") return "Automat";
-  if (v.toLowerCase() === "manuell") return "Manuell";
-  // fallback: enkel Title Case
-  return v.charAt(0).toUpperCase() + v.slice(1).toLowerCase();
-}
-
-function buildDirectusFilter() {
-  const and = [];
-
-  // status = published
-  and.push({ status: { _eq: "published" } });
-
-  // kategori (fra top-chips)
-  if (state.category && state.category !== "all") {
-    and.push({ category: { _eq: state.category } });
+    v = String(v).trim();
+    if (!v) return v;
+    // norsk spesial
+    if (v.toLowerCase() === "elektrisk") return "Elektrisk";
+    if (v.toLowerCase() === "hybrid")   return "Hybrid";
+    if (v.toLowerCase() === "bensin")   return "Bensin";
+    if (v.toLowerCase() === "diesel")   return "Diesel";
+    if (v.toLowerCase() === "automat")  return "Automat";
+    if (v.toLowerCase() === "manuell")  return "Manuell";
+    return v.charAt(0).toUpperCase() + v.slice(1).toLowerCase();
   }
 
-  // søk (tittel, beskrivelse, fuel_type, transmission)
-  if (state.query) {
-    const q = state.query;
-    and.push({
-      _or: [
-        { title:        { _icontains: q } },
-        { description:  { _icontains: q } },
-        { fuel_type:    { _icontains: q } },
-        { transmission: { _icontains: q } }
-      ],
-    });
+  function buildDirectusFilter() {
+    const and = [];
+
+    // status = published
+    and.push({ status: { _eq: "published" } });
+
+    // kategori (fra top-chips)
+    if (state.category && state.category !== "all") {
+      and.push({ category: { _eq: state.category } });
+    }
+
+    // søk (tittel, beskrivelse, fuel_type, transmission)
+    if (state.query) {
+      const q = state.query;
+      and.push({
+        _or: [
+          { title:        { _icontains: q } },
+          { description:  { _icontains: q } },
+          { fuel_type:    { _icontains: q } },
+          { transmission: { _icontains: q } }
+        ],
+      });
+    }
+
+    // sidefiltre
+    const f = state.filters;
+    if (f.body?.length) and.push({ category: { _in: f.body } });
+    if (f.fuel?.length) and.push({ fuel_type: { _in: f.fuel.map(titleCase) } });
+    if (f.gear?.length) and.push({ transmission: { _in: f.gear.map(titleCase) } });
+    if (f["year-min"])  and.push({ year:  { _gte: Number(f["year-min"]) } });
+    if (f["year-max"])  and.push({ year:  { _lte: Number(f["year-max"]) } });
+    if (f["price-min"]) and.push({ price: { _gte: Number(f["price-min"]) } });
+    if (f["price-max"]) and.push({ price: { _lte: Number(f["price-max"]) } });
+
+    return { _and: and };
   }
-
-  // sidefiltre fra skjema
-  const f = state.filters;
-
-  if (f.body?.length) {
-    and.push({ category: { _in: f.body } }); // disse matcher allerede DB'en hos deg
-  }
-
-  if (f.fuel?.length) {
-    const fuels = f.fuel.map(titleCase); // f.eks. ["bensin","elektrisk"] -> ["Bensin","Elektrisk"]
-    and.push({ fuel_type: { _in: fuels } });
-  }
-
-  if (f.gear?.length) {
-    const gears = f.gear.map(titleCase);  // ["automat"] -> ["Automat"]
-    and.push({ transmission: { _in: gears } });
-  }
-
-  if (f["year-min"])  and.push({ year:  { _gte: Number(f["year-min"]) } });
-  if (f["year-max"])  and.push({ year:  { _lte: Number(f["year-max"]) } });
-  if (f["price-min"]) and.push({ price: { _gte: Number(f["price-min"]) } });
-  if (f["price-max"]) and.push({ price: { _lte: Number(f["price-max"]) } });
-
-  return { _and: and };
-}
-
 
   function sortToDirectus() {
     switch (state.sort) {
@@ -482,8 +483,9 @@ function buildDirectusFilter() {
     params.set(
       "fields",
       [
+        // NB: ikke slug – kun felter som finnes hos deg
         "id","title","description","mileage","price","year",
-        "fuel_type","transmission","category","image","listing_url","status"
+        "fuel_type","transmission","category","image","status"
       ].join(",")
     );
     params.set("filter", JSON.stringify(buildDirectusFilter()));
@@ -549,18 +551,16 @@ function buildDirectusFilter() {
         // Vis med en gang
         renderRows(cached.rows);
         updateMetaUI(cached.total);
-        // Revalider i bakgrunnen uten å forstyrre UI hvis alt er friskt
+        // Revalider i bakgrunnen uten å forstyrre UI
         try {
           const fresh = await fetchCarsActual(signal);
           if (myRequestId !== lastRequestId) return; // annen nyere request kom
           cache.set(key, { ...fresh, ts: Date.now() });
-          // Bare oppdater om det faktisk er forskjell (valgfritt, her oppdaterer vi uansett)
           renderRows(fresh.rows);
           updateMetaUI(fresh.total);
           return;
         } catch (e) {
           if (e.name === "AbortError") return;
-          // La cached stå – ikke overstyr med error
           console.error(e);
           return;
         }
