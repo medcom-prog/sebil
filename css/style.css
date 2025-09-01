@@ -263,7 +263,6 @@ input, textarea, select {
     z-index: var(--z-fixed);
     transition: var(--transition-fast);
 }
-
 .header.scroll-header {
     box-shadow: var(--shadow-medium);
     background: rgba(255, 255, 255, 0.98);
@@ -291,7 +290,8 @@ input, textarea, select {
     color: var(--secondary-color);
 }
 
-.nav__menu { display: flex; align-items: center; }
+/* Sørg for at menyen alltid ligger øverst når den er åpen */
+.nav__menu { display: flex; align-items: center; z-index: var(--z-modal); }
 
 .nav__list { display: flex; gap: 2rem; }
 
@@ -609,12 +609,45 @@ input, textarea, select {
 .service__card--featured .service__features i { color: var(--white-color); }
 
 /* ===== PROJECTS SECTION ===== */
+/* Ny, robust filterbar */
 .projects__filter {
+    position: sticky;
+    top: calc(var(--header-height) + 8px);
+    z-index: 10;                         /* under nav__menu (1000) */
+    background: var(--white-color);
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: var(--mb-1);
     margin-bottom: var(--mb-3);
-    flex-wrap: wrap;
+    padding: .5rem;
+    border-radius: .75rem;
+    box-shadow: var(--shadow-light);
+}
+.projects__filter > * { flex: 0 0 auto; }
+
+/* Når menyen er åpen: ikke sticky/overlegger ingenting */
+body.nav-open .projects__filter {
+    position: static;
+    z-index: 0;
+    box-shadow: none;
+}
+
+/* Horisontal scroll på små skjermer hvis det blir trangt */
+@media (max-width: 640px) {
+  .projects__filter {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .projects__filter::-webkit-scrollbar { display: none; }
+}
+
+/* Valgfri “actions”-container helt til høyre (hvis du har den) */
+.projects__filter .filter__actions {
+  margin-left: auto;
+  display: flex;
+  gap: .5rem;
 }
 
 .filter__btn {
@@ -1194,7 +1227,8 @@ input, textarea, select {
         grid-template-columns: 1fr;
     }
 
-    .projects__filter { flex-wrap: wrap; gap: var(--mb-0-5); }
+    /* (Beholdes – gap justeres på mobil) */
+    .projects__filter { gap: var(--mb-0-5); }
 
     .contact__form {
         grid-template-columns: 1fr;
@@ -1286,13 +1320,13 @@ input, textarea, select {
   min-height: 44px;
 }
 
-/* Scroll-lock når menyen er åpen (legg til/ta bort .nav-open på <body> i JS når du åpner/lukker menyen) */
+/* Scroll-lock når menyen er åpen (JS legger til .nav-open på <body>) */
 body.nav-open {
   overflow: hidden;
   touch-action: none;
 }
 
-/* Responsiv høyde på hero-bildet (mindre på mobil for bedre førsteinntrykk) */
+/* Responsiv høyde på hero-bildet */
 @media (max-width: 768px) {
   .hero__img { height: 360px; }
 }
@@ -1300,14 +1334,27 @@ body.nav-open {
   .hero__img { height: 280px; }
 }
 
-/* Filter-knapper: style også via aria-pressed (matcher JS-endringen) */
+/* Filter-knapper: også via aria-pressed */
 .filter__btn[aria-pressed="true"] {
   background: var(--secondary-color);
   color: var(--white-color);
   border-color: var(--secondary-color);
 }
+/* Skjul listing-toolbar når hamburger-menyen er åpen (mobil) */
+@media (max-width: 768px) {
+  body.nav-open .listing-toolbar {
+    display: none !important;
+  }
+}
 
-/* Liten “tap-bounce” følelse på CTA-knapper (mobil) */
+/* Sikkerhet: menyen skal alltid ligge over alt */
+@media (max-width: 768px) {
+  .nav__menu { z-index: var(--z-modal); }
+  .listing-toolbar { z-index: var(--z-fixed); } /* lavere enn menyen */
+}
+
+
+/* Liten “tap-bounce” på CTA-knapper (mobil) */
 @media (hover: none) {
   .btn:active,
   .mobile-cta__btn:active {
@@ -1401,7 +1448,7 @@ body.nav-open {
   box-shadow: 0 18px 50px rgba(28,46,141,0.22);
 }
 
-/* === Respekter redusert bevegelse (overstyrer animasjoner) === */
+/* === Respekter redusert bevegelse === */
 @media (prefers-reduced-motion: reduce) {
   .hero__title-accent,
   .section__title-accent,
@@ -1470,17 +1517,6 @@ html, body {
 
 /* Sørg for at panelet ikke blir bredere enn viewport */
 @media (max-width: 768px) {
-  .nav__menu {
-    right: -100%;
-    left: auto;
-    width: min(100vw, 420px); /* bruk vw for å matche faktisk viewport */
-    padding-left: 2rem;       /* bevar innholdsmargin uten å påvirke bredde */
-  }
-  .nav__menu.show-menu {
-    right: 0;
-  }
-
-  /* Gjør headerlayout mer robust så knapper ikke “presser” layouten ut */
   .nav {
     padding-inline: .5rem;
   }
@@ -1493,12 +1529,10 @@ html, body {
   .nav__logo span {
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;      /* lange navn/brand kuttes pent i stedet for overflow */
+    white-space: nowrap;
     max-width: 60vw;
   }
-  .nav__actions {
-    margin-left: auto;        /* skyv toggle til høyre uten å lage overflow */
-  }
+  .nav__actions { margin-left: auto; }
   .nav__toggle {
     width: 44px;
     height: 44px;
@@ -1506,9 +1540,16 @@ html, body {
     place-items: center;
     line-height: 1;
   }
+  .nav__menu {
+    right: -100%;
+    left: auto;
+    width: min(100vw, 420px);
+    padding-left: 2rem;
+  }
+  .nav__menu.show-menu { right: 0; }
 }
 
-/* iOS safe area: unngå at menyen “presses” utenfor pga. notch */
+/* iOS safe area */
 @supports(padding:max(0px)) {
   @media (max-width: 768px) {
     .nav__menu {
@@ -1517,6 +1558,7 @@ html, body {
     }
   }
 }
+
 /* ====== Bilutvalg: mobil-optimalisering ====== */
 
 /* Sticky verktøylinje (mobil) */
@@ -1597,7 +1639,6 @@ html, body {
   .btn--filters { display: none; }
   .filters-drawer,
   .filters-backdrop { display: none !important; }
-  /* Oppsett to kolonner (sidebar + grid) hvis ikke allerede satt via inline */
   .listing-layout {
     display: grid;
     grid-template-columns: 280px 1fr;
@@ -1630,6 +1671,7 @@ html, body {
   overflow: auto;
   padding-bottom: calc(1rem + env(safe-area-inset-bottom));
 }
+
 .filters-drawer.show {
   transform: translateY(0);
 }
@@ -1669,4 +1711,87 @@ html, body {
 }
 .listing-toolbar .form__select {
   background: var(--light-gray);
+}
+/* === Bilutvalg: hindre at "Filtre" havner utenfor === */
+@media (max-width: 768px) {
+  /* La 1. kolonne (søk) få lov til å krympe ordentlig */
+  .toolbar-row {
+    grid-template-columns: minmax(0, 1fr) minmax(140px, 33%) auto;
+    gap: 0.5rem;
+    align-items: end;
+  }
+  /* Viktig for at input/select ikke tvinger layouten utover */
+  .toolbar-row > * { min-width: 0; }
+  .toolbar-row select,
+  .toolbar-row .form__select { width: 100%; }
+  .btn--filters { white-space: nowrap; }
+}
+
+/* Når det er ekstra smalt: legg "Filtre" på egen rad til høyre */
+@media (max-width: 420px) {
+  .toolbar-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .btn--filters {
+    grid-column: 1 / -1;
+    justify-self: end;
+  }
+}
+/* Logo-bilde i header */
+/* Logo-lenke */
+.nav__logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 10px;                /* for pen fokusring */
+  padding: 2px 4px;                   /* liten “hit area” rundt logo */
+  transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+}
+
+/* Selve logo-bildet */
+.nav__logo-img {
+  height: 45px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  transition: transform .25s ease, filter .25s ease;
+}
+
+/* Hover/focus: lett løft + myk glød */
+.nav__logo:hover,
+.nav__logo:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(28,46,141,.10);
+}
+.nav__logo:hover .nav__logo-img,
+.nav__logo:focus-visible .nav__logo-img {
+  transform: scale(1.04);
+  filter: drop-shadow(0 4px 10px rgba(28,46,141,.22));
+}
+
+/* Aktiv klikk: liten “press” */
+.nav__logo:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(0,0,0,.08);
+}
+.nav__logo:active .nav__logo-img {
+  transform: scale(0.99);
+  filter: none;
+}
+
+/* Tastatur-fokus (tilgjengelighet) */
+.nav__logo:focus-visible {
+  outline: 3px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* Litt lavere logo på mobil */
+@media (max-width: 768px) {
+  .nav__logo-img { height: 30px; }
+}
+
+/* Respekter redusert bevegelse */
+@media (prefers-reduced-motion: reduce) {
+  .nav__logo,
+  .nav__logo-img { transition: none !important; }
 }

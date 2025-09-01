@@ -17,6 +17,8 @@ const debounce = (fn, ms = 300) => {
 /* =========================
    NAV/MENY (tilgjengelig)
    ========================= */
+
+  // Lenke-klikk (mobil)
 (() => {
   const navMenu   = $("#nav-menu");
   const navToggle = $("#nav-toggle");
@@ -28,6 +30,7 @@ const debounce = (fn, ms = 300) => {
     if (!navMenu) return;
     navMenu.classList.add("show-menu");
     body.style.overflow = "hidden";
+    body.classList.add("nav-open");              // <— NY
     lastFocusedBeforeMenu = document.activeElement;
     const firstLink = navMenu.querySelector(".nav__link");
     firstLink && firstLink.focus();
@@ -37,29 +40,17 @@ const debounce = (fn, ms = 300) => {
     if (!navMenu) return;
     navMenu.classList.remove("show-menu");
     body.style.overflow = "";
+    body.classList.remove("nav-open");           // <— NY
     if (navToggle && lastFocusedBeforeMenu === navToggle) navToggle.focus();
   }
 
   navToggle?.addEventListener("click", openMenu);
   navClose?.addEventListener("click", closeMenu);
-
-  // ESC for å lukke
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && navMenu?.classList.contains("show-menu")) closeMenu();
   });
-
-  // Klikk på backdrop
-  navMenu?.addEventListener("click", (e) => {
-    if (e.target === navMenu) closeMenu();
-  });
-
-  // Lenke-klikk (mobil)
-  $$(".nav__link").forEach((link) =>
-    link.addEventListener("click", () => {
-      navMenu?.classList.remove("show-menu");
-      body.style.overflow = "";
-    })
-  );
+  navMenu?.addEventListener("click", (e) => { if (e.target === navMenu) closeMenu(); });
+  $$(".nav__link").forEach((link) => link.addEventListener("click", closeMenu));
 })();
 
 /* =========================
@@ -143,14 +134,20 @@ const debounce = (fn, ms = 300) => {
       filterButtons.forEach((b) => {
         b.classList.remove("filter__btn--active");
         b.setAttribute("aria-selected", "false");
+        b.setAttribute("aria-pressed", "false");
       });
       button.classList.add("filter__btn--active");
       button.setAttribute("aria-selected", "true");
+      button.setAttribute("aria-pressed", "true");
       setFilter(button.getAttribute("data-filter") || "all");
     });
   });
 
   const active = document.querySelector(".projects .filter__btn--active");
+  if (active) {
+    active.setAttribute("aria-selected", "true");
+    active.setAttribute("aria-pressed", "true");
+  }
   setFilter(active?.getAttribute("data-filter") || "all");
 })();
 
@@ -177,7 +174,7 @@ const debounce = (fn, ms = 300) => {
     if (!name || !email || !message) return showAlert("Vennligst fyll ut alle obligatoriske felt (*).");
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-    if (!emailPattern.test(email)) return (showAlert("Vennligst oppgi en gyldig e‑postadresse."), emailEl?.focus());
+    if (!emailPattern.test(email)) return (showAlert("Vennligst oppgi en gyldig e-postadresse."), emailEl?.focus());
 
     if (phone && !/^[0-9 +()\-]{5,}$/.test(phone))
       return (showAlert("Vennligst oppgi et gyldig telefonnummer."), phoneEl?.focus());
@@ -284,7 +281,7 @@ const debounce = (fn, ms = 300) => {
   const carsGrid = $("#cars-grid");
   if (!carsGrid) return; // ikke på bilutvalg-siden
 
-  // UI‑refs
+  // UI-refs
   const resultCount   = $("#result-count");
   const searchEl      = $("#search");
   const sortEl        = $("#sort");
@@ -295,6 +292,42 @@ const debounce = (fn, ms = 300) => {
   const prevBtn       = $("#prev-page");
   const nextBtn       = $("#next-page");
   const pageIndicator = $("#page-indicator");
+
+  // Mobil filter sheet
+  const filtersBtn      = $(".btn--filters");
+  const filtersDrawer   = $(".filters-drawer");
+  const filtersBackdrop = $(".filters-backdrop");
+  const filtersClose    = $(".filters-drawer__close");
+  let lastFocusBeforeDrawer = null;
+
+  function openFilters() {
+    if (!filtersDrawer) return;
+    lastFocusBeforeDrawer = document.activeElement;
+    filtersDrawer.classList.add("show");
+    filtersBackdrop?.classList.add("show");
+    document.body.classList.add("nav-open");
+    document.body.style.overflow = "hidden";
+    filtersBtn?.setAttribute("aria-expanded", "true");
+    // fokus første interaktive
+    const first = filtersDrawer.querySelector("input, select, button");
+    first && first.focus();
+  }
+  function closeFilters() {
+    if (!filtersDrawer) return;
+    filtersDrawer.classList.remove("show");
+    filtersBackdrop?.classList.remove("show");
+    document.body.classList.remove("nav-open");
+    document.body.style.overflow = "";
+    filtersBtn?.setAttribute("aria-expanded", "false");
+    lastFocusBeforeDrawer && lastFocusBeforeDrawer.focus?.();
+  }
+
+  filtersBtn?.addEventListener("click", openFilters);
+  filtersClose?.addEventListener("click", closeFilters);
+  filtersBackdrop?.addEventListener("click", closeFilters);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && filtersDrawer?.classList.contains("show")) closeFilters();
+  });
 
   // Directus config
   const DIRECTUS_URL  = "https://lasse-bil.directus.app";
@@ -316,8 +349,7 @@ const debounce = (fn, ms = 300) => {
     total: 0,
   };
 
-  // In‑memory cache (SWR)
-  // key -> { ts, rows, total }
+  // In-memory cache (SWR)
   const cache = new Map();
   const CACHE_TTL_MS = 60_000; // 60s
 
@@ -332,84 +364,80 @@ const debounce = (fn, ms = 300) => {
 
   function imageUrl(fileId) {
     if (!fileId) return "assets/images/projects/placeholder-car.jpg";
-    // Bruk preset (raskt via CDN), fallback håndteres onerror i <img>
     return `${DIRECTUS_URL}/assets/${fileId}?key=${ASSET_KEY}`;
   }
   const escapeAttr = (str) => (str || "").replace(/"/g, "&quot;");
 
-  // Detalj-lenke (alltid via id – slug brukes ikke)
   function getCarLink(car) {
     return `car.html?id=${encodeURIComponent(car.id)}`;
   }
 
   function cardTemplate(car) {
-  const {
-    id, slug, title, /* description fjernet */ mileage, price, year,
-    fuel_type, transmission, category, image
-  } = car;
+    const {
+      id, title, mileage, price, year,
+      fuel_type, transmission, category, image
+    } = car;
 
-  const imgId  = image && (image.id || image);
-  const imgSrc = imageUrl(imgId);
-  const cat    = (category || "").toString().trim();
-  const href   = getCarLink(car); // car.html?id=...
+    const imgId  = image && (image.id || image);
+    const imgSrc = imageUrl(imgId);
+    const cat    = (category || "").toString().trim();
+    const href   = getCarLink(car);
 
-  return `
-    <div class="project__card" data-category="${escapeAttr(cat)}">
-      <div class="project__image">
-        <a href="${escapeAttr(href)}" class="project__img-link" aria-label="Åpne detaljside for ${escapeAttr(title || "bilen")}">
-          <img
-            src="${imgSrc}"
-            alt="${escapeAttr(title || "Bil")}"
-            class="project__img"
-            loading="lazy"
-            decoding="async"
-            onerror="this.onerror=null;this.src='assets/images/projects/placeholder-car.jpg';"
-          >
-        </a>
-        <div class="project__overlay" aria-hidden="true">
-          <div class="project__actions">
-            <a class="project__btn" href="${escapeAttr(href)}" aria-label="Se detaljer">
-              <i class="fas fa-eye" aria-hidden="true"></i>
+    return `
+      <div class="project__card" data-category="${escapeAttr(cat)}">
+        <div class="project__image">
+          <a href="${escapeAttr(href)}" class="project__img-link" aria-label="Åpne detaljside for ${escapeAttr(title || "bilen")}">
+            <img
+              src="${imgSrc}"
+              alt="${escapeAttr(title || "Bil")}"
+              class="project__img"
+              loading="lazy"
+              decoding="async"
+              onerror="this.onerror=null;this.src='assets/images/projects/placeholder-car.jpg';"
+            >
+          </a>
+          <div class="project__overlay" aria-hidden="true">
+            <div class="project__actions">
+              <a class="project__btn" href="${escapeAttr(href)}" aria-label="Se detaljer">
+                <i class="fas fa-eye" aria-hidden="true"></i>
+              </a>
+              <a class="project__btn" href="tel:+4732891234" aria-label="Ring oss om ${escapeAttr(title || "bilen")}">
+                <i class="fas fa-phone" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="project__content">
+          ${cat ? `<span class="project__category">${escapeAttr(cat.charAt(0).toUpperCase() + cat.slice(1))}</span>` : ""}
+          <h3 class="project__title">
+            <a href="${escapeAttr(href)}" class="project__title-link">${escapeAttr(title || "Uten tittel")}</a>
+          </h3>
+          <div class="project__details">
+            ${year ? `<span class="project__detail"><i class="fas fa-calendar" aria-hidden="true"></i>${year}</span>` : ""}
+            ${mileage ? `<span class="project__detail"><i class="fas fa-tachometer-alt" aria-hidden="true"></i>${km(mileage)}</span>` : ""}
+            ${fuel_type ? `<span class="project__detail"><i class="fas fa-gas-pump" aria-hidden="true"></i>${escapeAttr(fuel_type)}</span>` : ""}
+            ${transmission ? `<span class="project__detail"><i class="fas fa-cog" aria-hidden="true"></i>${escapeAttr(transmission)}</span>` : ""}
+          </div>
+          <div class="project__price">
+            ${price ? `<span class="project__price-amount">${nok(price)}</span>` : ""}
+          </div>
+          <div class="project__cta-row" style="display:flex;gap:.5rem;flex-wrap:wrap;">
+            <a href="${escapeAttr(href)}" class="btn btn--primary btn--small">
+              <i class="fas fa-eye" aria-hidden="true"></i> Se detaljer
             </a>
-            <a class="project__btn" href="tel:+4732891234" aria-label="Ring oss om ${escapeAttr(title || "bilen")}">
-              <i class="fas fa-phone" aria-hidden="true"></i>
+            <a href="index.html#kontakt" class="btn btn--secondary btn--small project__contact-btn">
+              <i class="fas fa-paper-plane" aria-hidden="true"></i> Kontakt oss
             </a>
           </div>
         </div>
       </div>
-      <div class="project__content">
-        ${cat ? `<span class="project__category">${escapeAttr(cat.charAt(0).toUpperCase() + cat.slice(1))}</span>` : ""}
-        <h3 class="project__title">
-          <a href="${escapeAttr(href)}" class="project__title-link">${escapeAttr(title || "Uten tittel")}</a>
-        </h3>
-        <!-- description er fjernet på kort -->
-        <div class="project__details">
-          ${year ? `<span class="project__detail"><i class="fas fa-calendar" aria-hidden="true"></i>${year}</span>` : ""}
-          ${mileage ? `<span class="project__detail"><i class="fas fa-tachometer-alt" aria-hidden="true"></i>${km(mileage)}</span>` : ""}
-          ${fuel_type ? `<span class="project__detail"><i class="fas fa-gas-pump" aria-hidden="true"></i>${escapeAttr(fuel_type)}</span>` : ""}
-          ${transmission ? `<span class="project__detail"><i class="fas fa-cog" aria-hidden="true"></i>${escapeAttr(transmission)}</span>` : ""}
-        </div>
-        <div class="project__price">
-          ${price ? `<span class="project__price-amount">${nok(price)}</span>` : ""}
-        </div>
-        <div class="project__cta-row" style="display:flex;gap:.5rem;flex-wrap:wrap;">
-          <a href="${escapeAttr(href)}" class="btn btn--primary btn--small">
-            <i class="fas fa-eye" aria-hidden="true"></i> Se detaljer
-          </a>
-          <a href="index.html#kontakt" class="btn btn--secondary btn--small project__contact-btn">
-            <i class="fas fa-paper-plane" aria-hidden="true"></i> Kontakt oss
-          </a>
-        </div>
-      </div>
-    </div>
-  `;
-}
+    `;
+  }
 
   /* ---------- Directus spørring ---------- */
   function titleCase(v = "") {
     v = String(v).trim();
     if (!v) return v;
-    // norsk spesial
     if (v.toLowerCase() === "elektrisk") return "Elektrisk";
     if (v.toLowerCase() === "hybrid")   return "Hybrid";
     if (v.toLowerCase() === "bensin")   return "Bensin";
@@ -421,16 +449,12 @@ const debounce = (fn, ms = 300) => {
 
   function buildDirectusFilter() {
     const and = [];
-
-    // status = published
     and.push({ status: { _eq: "published" } });
 
-    // kategori (fra top-chips)
     if (state.category && state.category !== "all") {
       and.push({ category: { _eq: state.category } });
     }
 
-    // søk (tittel, beskrivelse, fuel_type, transmission)
     if (state.query) {
       const q = state.query;
       and.push({
@@ -443,7 +467,6 @@ const debounce = (fn, ms = 300) => {
       });
     }
 
-    // sidefiltre
     const f = state.filters;
     if (f.body?.length) and.push({ category: { _in: f.body } });
     if (f.fuel?.length) and.push({ fuel_type: { _in: f.fuel.map(titleCase) } });
@@ -467,7 +490,6 @@ const debounce = (fn, ms = 300) => {
   }
 
   function buildKey() {
-    // cache-key som reflekterer hele spørringa
     return JSON.stringify({
       page: state.page,
       category: state.category,
@@ -483,7 +505,6 @@ const debounce = (fn, ms = 300) => {
     params.set(
       "fields",
       [
-        // NB: ikke slug – kun felter som finnes hos deg
         "id","title","description","mileage","price","year",
         "fuel_type","transmission","category","image","status"
       ].join(",")
@@ -537,41 +558,33 @@ const debounce = (fn, ms = 300) => {
     const key = buildKey();
     const now = Date.now();
 
-    // Avbryt pågående request
     if (currentController) currentController.abort();
     currentController = new AbortController();
     const { signal } = currentController;
 
     const myRequestId = ++lastRequestId;
 
-    // Cache-first visning (SWR)
+    // Cache-first (SWR)
     if (useCacheFirst && cache.has(key)) {
       const cached = cache.get(key);
       if (now - cached.ts < CACHE_TTL_MS) {
-        // Vis med en gang
         renderRows(cached.rows);
         updateMetaUI(cached.total);
-        // Revalider i bakgrunnen uten å forstyrre UI
         try {
           const fresh = await fetchCarsActual(signal);
-          if (myRequestId !== lastRequestId) return; // annen nyere request kom
+          if (myRequestId !== lastRequestId) return;
           cache.set(key, { ...fresh, ts: Date.now() });
           renderRows(fresh.rows);
           updateMetaUI(fresh.total);
           return;
-        } catch (e) {
-          if (e.name === "AbortError") return;
-          console.error(e);
-          return;
-        }
+        } catch (_) { return; }
       }
     }
 
-    // Ingen gyldig cache → full last
     setLoading();
     try {
       const data = await fetchCarsActual(signal);
-      if (myRequestId !== lastRequestId) return; // eldre svar, ignorer
+      if (myRequestId !== lastRequestId) return;
       cache.set(key, { ...data, ts: Date.now() });
 
       if (!data.rows.length) setEmpty();
@@ -579,7 +592,7 @@ const debounce = (fn, ms = 300) => {
 
       updateMetaUI(data.total);
     } catch (e) {
-      if (e.name === "AbortError") return; // forventet
+      if (e.name === "AbortError") return;
       console.error(e);
       setError(e.message);
     }
@@ -599,9 +612,11 @@ const debounce = (fn, ms = 300) => {
     filterButtons.forEach((b) => {
       b.classList.remove("filter__btn--active");
       b.setAttribute("aria-selected", "false");
+      b.setAttribute("aria-pressed", "false");
     });
     btn.classList.add("filter__btn--active");
     btn.setAttribute("aria-selected", "true");
+    btn.setAttribute("aria-pressed", "true");
     state.category = btn.getAttribute("data-filter") || "all";
     state.page = 1;
     render();
@@ -627,7 +642,7 @@ const debounce = (fn, ms = 300) => {
   }, 150);
   sortEl?.addEventListener("change", onSortChange);
 
-  // Sidefiltre (debounce på "Bruk filtre")
+  // Sidefiltre – Bruk/Nullstill
   const applyFilters = debounce(() => {
     const form    = new FormData(filtersForm);
     const entries = Object.fromEntries(form.entries());
@@ -642,6 +657,8 @@ const debounce = (fn, ms = 300) => {
     };
     state.page = 1;
     render();
+    // lukk mobil-sheet hvis åpen
+    closeFilters();
   }, 200);
 
   applyBtn?.addEventListener("click", applyFilters);
@@ -651,6 +668,7 @@ const debounce = (fn, ms = 300) => {
     state.filters = { body: [], fuel: [], gear: [], "year-min": "", "year-max": "", "price-min": "", "price-max": "" };
     state.page = 1;
     render();
+    closeFilters();
   });
 
   // Paginering
