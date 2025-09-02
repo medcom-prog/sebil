@@ -68,37 +68,112 @@ const debounce = (fn, ms = 300) => {
 })();
 
 /* =========================
-   AKTIV LENKE I MENYEN
+   AKTIV LENKE I MENYEN (side + ev. seksjon på index)
    ========================= */
 (() => {
-  const sections = $$("section[id]");
-  if (!sections.length) return;
+  const navLinks = Array.from(document.querySelectorAll(".nav__menu .nav__link"));
+  if (!navLinks.length) return;
+
+  // Hjelper: rens URL til {pathname, hash} uten domene
+  function parse(url) {
+    const a = document.createElement("a");
+    a.href = url;
+    return { path: a.pathname.replace(/\/+$/, ""), hash: a.hash };
+  }
+
+  const here   = parse(location.href);
+  const isHome = /(?:^|\/)(index\.html)?$/.test(here.path) || here.path === "";
+
+  // 1) Sidespesifikk highlighting (undersider + også på index)
+  function setPageActive() {
+    // nullstill
+    navLinks.forEach(l => {
+      l.classList.remove("active-link");
+      l.removeAttribute("aria-current");
+    });
+
+    // finn beste match (samme pathname)
+    let best = null;
+    navLinks.forEach(l => {
+      const { path, hash } = parse(l.href);
+
+      // hvis lenken peker til samme fil/sti som nåværende side, marker som aktiv
+      const samePage = (path || "/") === (here.path || "/");
+      // ekstra: hvis vi er på index og lenken er et #anker, lar vi scroll‑logikk ta over senere
+      const isSamePageAnchor = isHome && samePage && hash;
+
+      if (samePage && !isSamePageAnchor) {
+        best = l;
+      }
+    });
+
+    if (best) {
+      best.classList.add("active-link");
+      best.setAttribute("aria-current", "page");
+    }
+  }
+
+  setPageActive();
+
+  // 2) Seksjons‑highlight kun på forsiden for ankerlenker som peker til samme side
+  if (!isHome) return;
+
+  const sectionTargets = navLinks
+    .map(l => parse(l.href))
+    .filter(p => (p.path === here.path || (p.path === "" && here.path === "")) && p.hash)
+    .map(p => document.getElementById(p.hash.slice(1)))
+    .filter(Boolean);
+
+  if (!sectionTargets.length) return;
 
   let ticking = false;
-  function setActiveLink() {
+  function updateSectionActive() {
     const scrollY = window.pageYOffset;
-    sections.forEach((current) => {
-      const sectionHeight = current.offsetHeight;
-      const sectionTop    = current.offsetTop - 80;
-      const sectionId     = current.getAttribute("id");
-      const link = document.querySelector(`.nav__menu a[href="#${sectionId}"]`);
-      if (!link) return;
-      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) link.classList.add("active-link");
-      else link.classList.remove("active-link");
+
+    // hvis en seksjon er synlig, marker tilhørende nav‑lenke som aktiv
+    let currentId = null;
+    sectionTargets.forEach(sec => {
+      const h = sec.offsetHeight;
+      const t = sec.offsetTop - 80; // offset for header
+      if (scrollY > t && scrollY <= t + h) currentId = sec.id;
     });
+
+    if (currentId) {
+      navLinks.forEach(l => {
+        const { path, hash } = parse(l.href);
+        const samePage = (path || "/") === (here.path || "/");
+        const isAnchor = samePage && hash === `#${currentId}`;
+        if (isAnchor) {
+          l.classList.add("active-link");
+          l.setAttribute("aria-current", "location");
+        } else {
+          l.classList.remove("active-link");
+          // behold aria-current="page" på den side‑aktive hvis satt
+          if (l.getAttribute("aria-current") === "location") {
+            l.removeAttribute("aria-current");
+          }
+        }
+      });
+    } else {
+      // dersom ingen seksjon “eier” view, fall tilbake til side‑aktiv
+      setPageActive();
+    }
   }
+
   function onScroll() {
     if (!ticking) {
       window.requestAnimationFrame(() => {
-        setActiveLink();
+        updateSectionActive();
         ticking = false;
       });
       ticking = true;
     }
   }
+
   window.addEventListener("scroll", onScroll, { passive: true });
-  setActiveLink();
+  updateSectionActive();
 })();
+
 
 /* =========================
    SCROLL-TOP KNAPP
