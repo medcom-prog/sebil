@@ -248,17 +248,91 @@ const debounce = (fn, ms = 300) => {
 /* =========================
    SCROLL REVEAL (defensiv)
    ========================= */
+/* =========================
+   SCROLL REVEAL – konsistent på alle sider
+   ========================= */
+/* =========================
+   SCROLL REVEAL – konsistent på alle sider
+   ========================= */
 (() => {
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   document.addEventListener("DOMContentLoaded", () => {
     if (typeof ScrollReveal === "undefined" || prefersReducedMotion) return;
-    const sr = ScrollReveal({ origin: "top", distance: "60px", duration: 2500, delay: 400 });
-    sr.reveal(`.hero__content, .about__image, .contact__info`, { origin: "left" });
-    sr.reveal(`.hero__image, .about__content, .contact__form`, { origin: "right" });
-    sr.reveal(`.section__header, .footer__content`, { interval: 100 });
-    sr.reveal(`.hero__stats, .service__card, .project__card, .testimonial__card`, { interval: 100 });
+
+    const sr = ScrollReveal({
+      origin: "bottom",
+      distance: "24px",
+      duration: 800,
+      delay: 120,
+      easing: "cubic-bezier(.2,.6,.2,1)",
+      mobile: true,
+      cleanup: true,
+      reset: false
+    });
+
+    // Globale blokker (forside + undersider)
+    sr.reveal([
+      ".section__header",
+      ".section__title",
+      ".section__description",
+      ".page-hero__content",
+      ".page-hero__image",
+      ".about__feature",
+      ".about__content",
+      ".about__image",
+      ".about__stats .hero__stat",
+      ".timeline__item",
+      ".team__card",
+      ".badge__item",
+      ".cta__container > *",
+      ".faq__item",
+      ".service__card",
+      ".project__card",
+      ".testimonial__card",
+      ".contact__card",
+      ".contact__form",
+      ".footer__section"
+    ].join(", "), { interval: 100, viewFactor: 0.12 });
+
+    // Nytt: Header/nav – subtil “drop‑in” ved første last
+    sr.reveal(".header", {
+      origin: "top",
+      distance: "8px",
+      duration: 600,
+      delay: 80,
+      viewFactor: 1
+    });
+
+    // Nytt: “Etablert 2009”-badgen i Om oss
+    sr.reveal(".about__experience", {
+      origin: "right",
+      distance: "20px",
+      duration: 700,
+      delay: 160,
+      viewFactor: 0.2
+    });
+
+    // Nytt: Kontaktkart (container, ikke iframe direkte)
+    sr.reveal(".contact__map", {
+      origin: "bottom",
+      distance: "20px",
+      duration: 700,
+      delay: 120,
+      viewFactor: 0.12
+    });
+
+    // Nytt: Footer nederste rad
+    sr.reveal(".footer__bottom", {
+      origin: "bottom",
+      distance: "12px",
+      duration: 600,
+      delay: 100,
+      viewFactor: 0.2
+    });
   });
 })();
+
+
 
 /* =========================
    HASH OFFSET (fallback)
