@@ -1159,3 +1159,13 @@ html, body { max-width: 100%; overflow-x: hidden; }
   .toolbar-row { grid-template-columns: minmax(0, 1fr) auto; }
   .btn--filters { grid-column: 1 / -1; justify-self: end; }
 }
+/* Match forsiden sitt hero-utseende på undersider */
+.page-hero {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+/* (valgfritt) Fjern “hard” overgang fra breadcrumbs til hero */
+.breadcrumbs {
+  background: transparent;
+  border-bottom: 1px solid rgba(0,0,0,0.04); /* subtil linje */
+}
