@@ -8,17 +8,17 @@
 /* ===== CSS VARIABLES ===== */
 :root {
     /* Colors */
-    --primary-color: #1a2332;
-    --secondary-color: #1c2e8d;
-    --accent-color: #4a90e2;
-    --text-color: #2c3e50;
-    --text-light: #6c757d;
-    --white-color: #FFFFFF;
-    --light-gray: #f8f9fa;
-    --dark-gray: #6c757d;
-    --success-color: #28a745;
-    --warning-color: #ffc107;
-    --error-color: #dc3545;
+    --primary-color: #3a0a0a;        /* Mørk rød-brun, for bakgrunn */
+  --secondary-color: #7b1e1e;      /* Dyp rød, for sekundære elementer */
+  --accent-color: #e63946;         /* Klar rød aksent, for knapper og highlights */
+  --text-color: #2c3e50;
+  --text-light: #6c757d;
+  --white-color: #FFFFFF;
+  --light-gray: #f8f9fa;
+  --dark-gray: #6c757d;
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --error-color: #dc3545;
 
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
