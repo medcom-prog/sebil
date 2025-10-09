@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bil – SEBIL AS</title>
+  <meta name="description" content="Detaljer, galleri og spesifikasjoner for valgt bil." />
+  <meta name="theme-color" content="#1a2332" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Preconnects -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* ===== Layout ===== */
+    .page-wrap { display:grid; gap:2rem; }
+    @media (min-width: 1024px) { .page-wrap { grid-template-columns: 1.3fr .7fr; align-items:start; } }
+
+    /* ===== Galleri ===== */
+    .gallery { display:grid; gap:0.75rem; }
+    .gallery__main {
+      width:100%; aspect-ratio:16/9; border-radius:14px; overflow:hidden;
+      background:#f4f6f8; box-shadow: var(--shadow-light); position:relative;
+    }
+    .gallery__main img { width:100%; height:100%; object-fit:cover; display:block; }
+    .gallery__nav { position:absolute; inset:0; display:flex; align-items:center; justify-content:space-between; pointer-events:none; }
+    .gallery__btn { pointer-events:auto; border:0; background:rgba(0,0,0,.45); color:#fff; width:40px; height:40px; border-radius:999px; display:grid; place-items:center; margin:0 .5rem; backdrop-filter: blur(6px); }
+    .thumbs { display:grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap:0.5rem; }
+    .thumbs button { border:0; padding:0; border-radius:10px; overflow:hidden; background:#fff; box-shadow: var(--shadow-light); cursor:pointer; position:relative; }
+    .thumbs img { width:100%; height:70px; object-fit:cover; display:block; }
+    .thumbs .is-active::after { content:""; position:absolute; inset:0; border:3px solid var(--first-color); border-radius:10px; }
+
+    /* Lysboks */
+    .lightbox { position:fixed; inset:0; background:rgba(0,0,0,.9); display:none; align-items:center; justify-content:center; z-index:9999; padding:4vmin; }
+    .lightbox.show { display:flex; }
+    .lightbox__imgwrap { max-width: min(96vw, 1600px); max-height: 86vh; position:relative; }
+    .lightbox__img { max-width:100%; max-height:100%; object-fit:contain; display:block; transition: transform .2s ease-out; cursor: zoom-in; }
+    .lightbox__controls { position:absolute; inset:0; display:flex; align-items:center; justify-content:space-between; pointer-events:none; }
+    .lightbox__btn { pointer-events:auto; border:0; background:rgba(255,255,255,.15); color:#fff; width:46px; height:46px; border-radius:999px; display:grid; place-items:center; }
+    .lightbox__top { position:absolute; top:10px; left:10px; right:10px; display:flex; justify-content:space-between; gap:.5rem; }
+    .lightbox__close, .lightbox__zoom { border:0; background:rgba(255,255,255,.15); color:#fff; padding:.6rem .8rem; border-radius:999px; }
+
+    /* ===== Info/CTA-kolonne ===== */
+    .summary-card { border:1px solid #e9edf3; border-radius:14px; padding:1rem; box-shadow: var(--shadow-light); background:#fff; position:sticky; top: calc(var(--header-height) + 1rem); }
+    .price { font-size:2rem; font-weight:700; }
+    .summary__meta { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:.5rem; margin: .75rem 0; }
+    .summary__meta .pill { background:#f6f8fb; border-radius:999px; padding:.45rem .7rem; display:flex; align-items:center; gap:.5rem; font-size:.95rem; }
+    .summary__ctas { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.75rem; }
+
+    /* Finans-kalkulator */
+    .fin { margin-top:1rem; border-top:1px dashed #e9edf3; padding-top:1rem; }
+    .fin__row { display:grid; grid-template-columns: 1fr auto; gap:.5rem; align-items:center; margin:.35rem 0; }
+    /* høyre-kolonne kontroller i en rad, ikke wrap */
+    .fin__row .inline-control { display:flex; align-items:center; gap:.4rem; white-space:nowrap; }
+    .fin__row input[type="number"], .fin__row select { max-width: 140px; }
+    .fin__row input[type="number"] { text-align: right; }
+    .fin__row .suffix { font-weight:600; opacity:.85; }
+
+    /* Specs & tekst */
+    .badge { display:inline-flex; align-items:center; gap:.35rem; padding:.35rem .6rem; border-radius:999px; background:#eef2f6; font-size:.85rem; }
+    .badges { display:flex; gap:.5rem; flex-wrap:wrap; }
+    .specs { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:.75rem; }
+    .specs__item{ display:flex; gap:.5rem; align-items:center; padding:.6rem .75rem; border:1px solid #e9edf3; border-radius:10px; background:#fff; }
+    .muted { color:var(--text-light); }
+
+    /* Utstyrsliste (kollaps) */
+    .equip { margin-top:1.25rem; }
+    .equip__grid { columns: 2 280px; column-gap: 1rem; }
+    .equip__grid li { break-inside: avoid; list-style: none; padding:.25rem 0; }
+    .equip__toggle { margin-top:.5rem; }
+
+    /* Beskrivelse – vis mer/vis mindre */
+    .desc { position:relative; }
+    .desc--clamped { max-height: 220px; overflow: hidden; }
+    .desc--clamped::after { content:""; position:absolute; left:0; right:0; bottom:0; height:64px; background:linear-gradient(to bottom, rgba(255,255,255,0), #fff); pointer-events:none; }
+    .desc__toggle { margin-top:.5rem; }
+
+    /* Lignende biler */
+    .similar { margin-top:2rem; }
+    .similar__grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap:1rem; }
+    .similar__card { border:1px solid #e9edf3; border-radius:12px; overflow:hidden; background:#fff; display:flex; flex-direction:column; }
+    .similar__card img { width:100%; height:140px; object-fit:cover; display:block; }
+    .similar__body { padding:.75rem; display:grid; gap:.35rem; }
+    .similar__title { font-weight:600; line-height:1.25; }
+    .similar__price { font-weight:700; }
+
+    /* Mobil sticky buy bar */
+    .buybar { position: fixed; left:0; right:0; bottom:0; z-index: 50; background:#fff; border-top:1px solid #e9edf3; box-shadow: 0 -10px 30px rgba(0,0,0,.06); padding:.5rem; display:none; gap:.5rem; align-items:center; justify-content:space-between; }
+    .buybar__price { font-weight:700; }
+    .buybar .btn { flex:1 1 auto; }
+    @media (max-width: 1023px) { .buybar { display:flex; } }
+
+    /* Print */
+    @media print {
+      .header, .footer, .mobile-cta, .buybar, .summary__ctas button, .summary__ctas a.btn--ghost { display:none !important; }
+      .summary-card { position: static; box-shadow:none; border:0; }
+      .gallery__main { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-to-content" href="#content">Hopp til innhold</a>
+
+  <!-- Header -->
+
+<header class="header" id="header">
+    <nav class="nav container" aria-label="Hovedmeny">
+   <a class="nav__logo" href="index.html" aria-label="SEBIL AS – Hjem">
+  <!-- Velg SVG hvis du har (best), ellers PNG nedenfor -->
+  <img
+    class="nav__logo-img"
+    src="assets/images/hero/logo.png"
+    alt="SEBIL AS"
+    width="160" height="36"
+    loading="eager" decoding="async"
+  />
+  <!-- Hvis du bruker PNG, kan du heller bruke srcset for retina:
+  <img class="nav__logo-img"
+       src="assets/brand/sebil-logo.png"
+       srcset="assets/brand/sebil-logo.png 1x, assets/brand/sebil-logo@2x.png 2x"
+       alt="SEBIL AS" width="160" height="36" loading="eager" decoding="async" />
+  -->
+</a>      <div class="nav__menu" id="nav-menu" role="dialog" aria-modal="true" aria-label="Navigasjon">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="index.html#hjem" class="nav__link">Hjem</a></li>
+          <li class="nav__item"><a href="index.html#om-oss" class="nav__link">Om oss</a></li>
+          <li class="nav__item"><a href="index.html#tjenester" class="nav__link">Tjenester</a></li>
+          <li class="nav__item"><a href="bilutvalg.html" class="nav__link active-link">Bilutvalg</a></li>
+          <li class="nav__item"><a href="index.html#anbefalinger" class="nav__link">Anbefalinger</a></li>
+          <li class="nav__item"><a href="index.html#kontakt" class="nav__link">Kontakt</a></li>
+        </ul>
+        <button class="nav__close" id="nav-close" aria-label="Lukk meny"><i class="fas fa-times" aria-hidden="true"></i></button>
+      </div>
+      <div class="nav__actions">
+        <a href="index.html#kontakt" class="btn btn--primary">Kontakt oss</a>
+        <button class="nav__toggle" id="nav-toggle" aria-label="Åpne meny"><i class="fas fa-bars" aria-hidden="true"></i></button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="content" class="main">
+    <section class="section" style="padding-top: calc(var(--header-height) + 1.25rem);">
+      <div class="container">
+        <nav aria-label="Brødsmuler" class="section__description" style="margin-bottom:1rem;">
+          <a href="bilutvalg.html" class="footer__link">&larr; Tilbake til bilutvalg</a>
+        </nav>
+
+        <div id="status" class="section__description" style="margin-bottom:1rem;"></div>
+
+        <div class="page-wrap" id="ad" hidden>
+          <!-- Venstre -->
+          <div>
+            <!-- Galleri -->
+            <div class="gallery">
+              <div class="gallery__main">
+                <img id="main-img" alt="Bilde av bil" loading="eager" decoding="async">
+                <div class="gallery__nav" aria-hidden="true">
+                  <button class="gallery__btn" id="prev-img" type="button"><i class="fas fa-chevron-left"></i></button>
+                  <button class="gallery__btn" id="next-img" type="button"><i class="fas fa-chevron-right"></i></button>
+                </div>
+              </div>
+              <div class="thumbs" id="thumbs" hidden></div>
+            </div>
+
+            <!-- Tittel + badges -->
+            <div class="section__header" style="margin:1rem 0 .5rem;">
+              <h1 class="section__title" id="car-title">Bil</h1>
+              <div id="badges" class="badges"></div>
+            </div>
+
+            <!-- Specs -->
+            <div class="specs" id="specs" style="margin:1rem 0;"></div>
+
+            <!-- Utstyr -->
+            <section class="equip" id="equip-section" hidden>
+              <h2 class="h3">Utstyr</h2>
+              <ul class="equip__grid" id="equip-list"></ul>
+              <button class="btn btn--ghost equip__toggle" id="equip-toggle" type="button">Vis mer</button>
+            </section>
+
+            <!-- Beskrivelse -->
+            <section style="margin-top:1.25rem;">
+              <h2 class="h3">Beskrivelse</h2>
+              <div id="description" class="section__description desc" style="white-space:pre-wrap;"></div>
+              <button id="desc-toggle" class="btn btn--ghost desc__toggle" type="button" hidden>Vis mer</button>
+              <p class="section__description muted" style="margin-top:1rem;">* Forbehold om skrivefeil. Kontakt oss for komplett informasjon.</p>
+            </section>
+
+            <!-- Lignende -->
+            <section class="similar" id="similar" hidden>
+              <h2 class="h3">Lignende biler</h2>
+              <div class="similar__grid" id="similar-grid"></div>
+            </section>
+          </div>
+
+          <!-- Høyre -->
+          <aside>
+            <div class="summary-card" id="summary">
+              <div class="price" id="car-price"></div>
+              <div class="summary__meta">
+                <div class="pill"><i class="fas fa-calendar"></i><span id="meta-year">—</span></div>
+                <div class="pill"><i class="fas fa-tachometer-alt"></i><span id="meta-km">—</span></div>
+                <div class="pill"><i class="fas fa-gas-pump"></i><span id="meta-fuel">—</span></div>
+                <div class="pill"><i class="fas fa-cog"></i><span id="meta-gear">—</span></div>
+              </div>
+
+              <div class="summary__ctas">
+                <a href="tel:+4732891234" class="btn btn--primary" style="flex:1 1 auto;"><i class="fas fa-phone"></i> Ring</a>
+                <a href="index.html#kontakt" class="btn btn--secondary" style="flex:1 1 auto;"><i class="fas fa-paper-plane"></i> Melding</a>
+                <button id="btn-share" class="btn btn--ghost" type="button"><i class="fas fa-share-alt"></i> Del</button>
+                <button id="btn-print" class="btn btn--ghost" type="button"><i class="fas fa-print"></i> Skriv ut</button>
+              </div>
+
+              <!-- Finans -->
+              <div class="fin">
+                <h3 class="h4" style="margin-bottom:.35rem;">Estimert månedsbeløp</h3>
+
+                <div class="fin__row">
+                  <label for="fin-years">Nedbetaling</label>
+                  <select id="fin-years">
+                    <option value="3">3 år</option>
+                    <option value="5" selected>5 år</option>
+                    <option value="7">7 år</option>
+                    <option value="10">10 år</option>
+                  </select>
+                </div>
+
+                <div class="fin__row">
+                  <label for="fin-rate">Nominell rente</label>
+                  <div class="inline-control">
+                    <input id="fin-rate" type="number" step="0.1" inputmode="decimal" value="7.0">
+                    <span class="suffix">%</span>
+                  </div>
+                </div>
+
+                <div class="fin__row">
+                  <label for="fin-down">Egenkapital</label>
+                  <div class="inline-control">
+                    <input id="fin-down" type="number" step="1000" inputmode="numeric" value="0">
+                  </div>
+                </div>
+
+                <div class="fin__row">
+                  <span class="muted">Beløp å finansiere</span>
+                  <strong id="fin-amount">—</strong>
+                </div>
+                <div class="fin__row">
+                  <span class="muted">Estimert pr. mnd</span>
+                  <strong id="fin-monthly">—</strong>
+                </div>
+
+                <p class="section__description muted" style="margin:.35rem 0 0;">Uforpliktende estimat. Renter/avgifter kan variere.</p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mobil sticky CTA bar -->
+    <div class="buybar" id="buybar" role="region" aria-label="Hurtigvalg">
+      <div class="buybar__price" id="buybar-price">—</div>
+      <a href="tel:+4732891234" class="btn btn--primary btn--small"><i class="fas fa-phone"></i> Ring</a>
+      <a href="index.html#kontakt" class="btn btn--secondary btn--small"><i class="fas fa-paper-plane"></i> Melding</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__container">
+        <div class="footer__content">
+          <div class="footer__section">
+            <div class="footer__logo"><i class="fas fa-car" aria-hidden="true"></i><span>SEBIL AS</span></div>
+            <p class="footer__description">Din pålitelige partner for kvalitetsbiler.</p>
+            <div class="footer__social">
+              <a href="#" class="footer__social-link" aria-label="Facebook" target="_blank" rel="noopener nofollow"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="footer__social-link" aria-label="Instagram" target="_blank" rel="noopener nofollow"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="footer__social-link" aria-label="LinkedIn" target="_blank" rel="noopener nofollow"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+          <div class="footer__section">
+            <h3 class="footer__title">Tjenester</h3>
+            <ul class="footer__list">
+              <li><a href="index.html#tjenester" class="footer__link">Bilsalg</a></li>
+              <li><a href="index.html#tjenester" class="footer__link">Innbytte</a></li>
+              <li><a href="index.html#tjenester" class="footer__link">Finansiering</a></li>
+              <li><a href="index.html#tjenester" class="footer__link">Forsikring</a></li>
+            </ul>
+          </div>
+          <div class="footer__section">
+            <h3 class="footer__title">Selskapet</h3>
+            <ul class="footer__list">
+              <li><a href="index.html#om-oss" class="footer__link">Om oss</a></li>
+              <li><a href="#" class="footer__link">Karriere</a></li>
+              <li><a href="#" class="footer__link">Nyheter</a></li>
+            </ul>
+          </div>
+          <div class="footer__section">
+            <h3 class="footer__title">Kontakt</h3>
+            <ul class="footer__list">
+              <li class="footer__contact"><i class="fas fa-phone"></i><a href="tel:+4732891234" class="footer__link">+47 32 89 12 34</a></li>
+              <li class="footer__contact"><i class="fas fa-envelope"></i><a href="mailto:post@sebil.no" class="footer__link">post@sebil.no</a></li>
+              <li class="footer__contact"><i class="fas fa-map-marker-alt"></i><a href="https://maps.google.com/?q=Bilveien+45,+3045+Drammen" target="_blank" rel="noopener" class="footer__link">Bilveien 45, 3045 Drammen</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <div class="footer__bottom-content">
+            <p class="footer__copyright">© 2024 SEBIL AS. Alle rettigheter reservert.</p>
+            <div class="footer__legal">
+              <a href="#" class="footer__legal-link">Personvern</a>
+              <a href="#" class="footer__legal-link">Vilkår</a>
+              <a href="#" class="footer__legal-link">Cookies</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scroll-top" aria-label="Til toppen"><i class="fas fa-arrow-up" aria-hidden="true"></i></button>
+
+  <!-- Page JS -->
+  <script>
+    /* ====== Konfig ====== */
+    var DIRECTUS_URL = 'https://lasse-bil.directus.app';
+    var ASSET_KEY    = 'optimized';
+
+    /* ====== Helpers ====== */
+    var $  = function(s, r){ return (r||document).querySelector(s); };
+    var $$ = function(s, r){ return Array.from((r||document).querySelectorAll(s)); };
+    var qs = new URLSearchParams(location.search);
+    var id = qs.get('id');
+
+    function nok(v){ return v==null ? '' : Number(v).toLocaleString('nb-NO',{style:'currency',currency:'NOK',maximumFractionDigits:0}); }
+    function km(v){ return v==null ? '' : (Number(v).toLocaleString('nb-NO') + ' km'); }
+    function imgUrl(fid){ return fid ? (DIRECTUS_URL + '/assets/' + fid + '?key=' + ASSET_KEY) : 'assets/images/projects/placeholder-car.jpg'; }
+    function setStatus(msg, color){ var box = $('#status'); box.textContent = msg||''; box.style.color = color || 'var(--text-light)'; }
+    function tplBadge(icon, text){ return '<span class="badge"><i class="'+icon+'" aria-hidden="true"></i>'+text+'</span>'; }
+
+    var galleryState = { ids: [], idx: 0 };
+
+    function renderCar(car){
+      $('#ad').hidden = false;
+
+      var title = car.title || [car.make, car.model].filter(Boolean).join(' ') || 'Bil';
+      $('#car-title').textContent = title;
+      document.title = title + ' – SEBIL AS';
+
+      var priceText = car.price ? nok(car.price) : 'Pris på forespørsel';
+      $('#car-price').textContent = priceText;
+      $('#buybar-price').textContent = priceText;
+
+      $('#meta-year').textContent = car.year || '—';
+      $('#meta-km').textContent   = car.mileage ? km(car.mileage) : '—';
+      $('#meta-fuel').textContent = car.fuel_type || '—';
+      $('#meta-gear').textContent = car.transmission || '—';
+
+      var badges = [];
+      if (car.category)     badges.push(tplBadge('fas fa-tag', car.category));
+      if (car.fuel_type)    badges.push(tplBadge('fas fa-gas-pump', car.fuel_type));
+      if (car.transmission) badges.push(tplBadge('fas fa-cog', car.transmission));
+      $('#badges').innerHTML = badges.join('');
+
+      var specs = [];
+      if (car.year)         specs.push('<div class="specs__item"><i class="fas fa-calendar"></i><strong>Årsmodell:</strong> '+car.year+'</div>');
+      if (car.mileage)      specs.push('<div class="specs__item"><i class="fas fa-tachometer-alt"></i><strong>Kjørelengde:</strong> '+km(car.mileage)+'</div>');
+      if (car.fuel_type)    specs.push('<div class="specs__item"><i class="fas fa-gas-pump"></i><strong>Drivstoff:</strong> '+car.fuel_type+'</div>');
+      if (car.transmission) specs.push('<div class="specs__item"><i class="fas fa-cog"></i><strong>Girkasse:</strong> '+car.transmission+'</div>');
+      $('#specs').innerHTML = specs.join('');
+
+      // Beskrivelse + toggle
+      $('#description').textContent = car.description || '—';
+      setupDescriptionToggle();
+
+      // Utstyr
+      var equip = [];
+      if (Array.isArray(car.equipment)) equip = car.equipment;
+      else if (typeof car.equipment === 'string') equip = car.equipment.split(',').map(function(x){ return x.trim(); }).filter(Boolean);
+      if (equip.length) {
+        $('#equip-list').innerHTML = equip.map(function(x){ return '<li><i class="fas fa-check"></i> '+x+'</li>'; }).join('');
+        $('#equip-section').hidden = false;
+        wireEquipToggle();
+      }
+
+      // Bilder
+      var ids = pickImageIds(car);
+      galleryState.ids = ids;
+      galleryState.idx = 0;
+      renderGallery(title);
+
+      // Finans
+      setupFinance(car.price || 0);
+
+      // Lignende
+      fetchSimilar(car);
+    }
+
+    function renderGallery(title){
+      var main = $('#main-img');
+      var thumbs = $('#thumbs');
+
+      if (galleryState.ids.length) {
+        main.src = imgUrl(galleryState.ids[0]);
+        main.alt = title;
+        main.onerror = function(){ main.onerror = null; main.src = 'assets/images/projects/placeholder-car.jpg'; };
+
+        thumbs.hidden = galleryState.ids.length <= 1;
+        thumbs.innerHTML = galleryState.ids.map(function(fid, i){
+          return '<button type="button" data-idx="'+i+'" aria-label="Vis bilde '+(i+1)+'"><img src="'+imgUrl(fid)+'" alt=""></button>';
+        }).join('');
+        markActiveThumb();
+
+        thumbs.addEventListener('click', function(e){
+          var btn = e.target.closest('button[data-idx]');
+          if (!btn) return;
+          galleryState.idx = Number(btn.getAttribute('data-idx')) || 0;
+          updateMain();
+        });
+      } else {
+        main.src = imgUrl(null);
+        thumbs.hidden = true;
+        thumbs.innerHTML = '';
+      }
+
+      $('#prev-img').addEventListener('click', prevImg);
+      $('#next-img').addEventListener('click', nextImg);
+      document.addEventListener('keydown', function(ev){
+        if ($('.lightbox.show')) return;
+        if (ev.key === 'ArrowLeft') prevImg();
+        if (ev.key === 'ArrowRight') nextImg();
+      });
+
+      wireLightbox();
+    }
+
+    function updateMain(){ var main = $('#main-img'); if (!galleryState.ids.length) return; main.src = imgUrl(galleryState.ids[galleryState.idx]); markActiveThumb(); }
+    function markActiveThumb(){ $$('#thumbs button').forEach(function(b){ b.classList.remove('is-active'); }); var active=$('#thumbs button[data-idx="'+galleryState.idx+'"]'); if(active) active.classList.add('is-active'); }
+    function prevImg(){ if (!galleryState.ids.length) return; galleryState.idx = (galleryState.idx - 1 + galleryState.ids.length) % galleryState.ids.length; updateMain(); }
+    function nextImg(){ if (!galleryState.ids.length) return; galleryState.idx = (galleryState.idx + 1) % galleryState.ids.length; updateMain(); }
+
+    function wireLightbox(){
+      var lb = document.createElement('div');
+      lb.className = 'lightbox'; lb.id = 'lightbox';
+      lb.innerHTML =
+        '<div class="lightbox__top">'+
+          '<button class="lightbox__zoom" id="lb-zoom" type="button"><i class="fas fa-magnifying-glass-plus"></i></button>'+
+          '<button class="lightbox__close" id="lb-close" type="button"><i class="fas fa-times"></i> Lukk</button>'+
+        '</div>'+
+        '<div class="lightbox__imgwrap">'+
+          '<img class="lightbox__img" id="lb-img" alt="">'+
+          '<div class="lightbox__controls" aria-hidden="true">'+
+            '<button class="lightbox__btn" id="lb-prev" type="button"><i class="fas fa-chevron-left"></i></button>'+
+            '<button class="lightbox__btn" id="lb-next" type="button"><i class="fas fa-chevron-right"></i></button>'+
+          '</div>'+
+        '</div>';
+      document.body.appendChild(lb);
+
+      var main = $('#main-img');
+      main.addEventListener('click', function(){ var img=$('#lb-img'); img.src=main.src; img.style.transform='none'; lb.classList.add('show'); });
+      $('#lb-close').addEventListener('click', function(){ lb.classList.remove('show'); });
+      $('#lb-prev').addEventListener('click', function(){ prevImg(); $('#lb-img').src = imgUrl(galleryState.ids[galleryState.idx]); });
+      $('#lb-next').addEventListener('click', function(){ nextImg(); $('#lb-img').src = imgUrl(galleryState.ids[galleryState.idx]); });
+
+      var zoomed=false;
+      $('#lb-zoom').addEventListener('click', function(){ var img=$('#lb-img'); zoomed=!zoomed; img.style.transform=zoomed?'scale(1.6)':'none'; img.style.cursor=zoomed?'zoom-out':'zoom-in'; });
+
+      lb.addEventListener('click', function(e){ if (e.target===lb) lb.classList.remove('show'); });
+      document.addEventListener('keydown', function(ev){ if (ev.key==='Escape' && lb.classList.contains('show')) lb.classList.remove('show'); });
+
+      var startX=0;
+      lb.addEventListener('touchstart', function(e){ startX=e.touches[0].clientX; }, {passive:true});
+      lb.addEventListener('touchend', function(e){ var dx=e.changedTouches[0].clientX-startX; if (Math.abs(dx)>40){ if(dx>0) $('#lb-prev').click(); else $('#lb-next').click(); $('#lb-img').src=imgUrl(galleryState.ids[galleryState.idx]); } }, {passive:true});
+    }
+
+    function setupFinance(price){
+      var years=$('#fin-years'), rate=$('#fin-rate'), down=$('#fin-down'), outAmount=$('#fin-amount'), outMonthly=$('#fin-monthly');
+      if (!down.value || Number(down.value)===0) { down.value = Math.round(price*0.20); }
+      function recalc(){
+        var p = Math.max(0, Number(price) - Number(down.value||0));
+        var y = Math.max(1, Number(years.value||5));
+        var r = Math.max(0, Number(rate.value||7))/100/12;
+        var n = y*12;
+        var m = (r===0) ? (p/n) : (p*r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+        outAmount.textContent = nok(p);
+        outMonthly.textContent = isFinite(m) ? nok(m) : '—';
+      }
+      years.addEventListener('change', recalc);
+      rate.addEventListener('input', recalc);
+      down.addEventListener('input', recalc);
+      recalc();
+    }
+
+    function wireEquipToggle(){
+      var btn=$('#equip-toggle'); var list=$('#equip-list'); if(!btn||!list) return;
+      var expanded=false;
+      function apply(){ if(!expanded){ $$('#equip-list li').forEach(function(li,i){ li.style.display=(i<12)?'':'none'; }); btn.textContent='Vis mer'; } else { $$('#equip-list li').forEach(function(li){ li.style.display=''; }); btn.textContent='Vis mindre'; } }
+      apply(); btn.addEventListener('click', function(){ expanded=!expanded; apply(); });
+    }
+
+    function setupDescriptionToggle(){
+      var box = $('#description'), btn = $('#desc-toggle'); if (!box || !btn) return;
+      // Reset
+      box.classList.remove('desc--clamped'); btn.hidden = true;
+      // Clamp hvis lang
+      requestAnimationFrame(function(){
+        var threshold = 240; // px
+        if (box.scrollHeight > threshold) {
+          box.classList.add('desc--clamped'); btn.hidden = false; btn.textContent = 'Vis mer';
+          btn.onclick = function(){
+            var clamped = box.classList.contains('desc--clamped');
+            box.classList.toggle('desc--clamped');
+            btn.textContent = clamped ? 'Vis mindre' : 'Vis mer';
+          };
+        }
+      });
+    }
+
+    async function fetchSimilar(car){
+      try{
+        var params = new URLSearchParams();
+        var fields = ['id','title','price','year','mileage','fuel_type','transmission','category','image'].join(',');
+        params.set('fields', fields);
+        var filter = { _and:[ {status:{_eq:'published'}}, {id:{_neq:car.id}} ] };
+        if (car.category) filter._and.push({ category:{_eq:car.category} });
+        params.set('filter', JSON.stringify(filter));
+        params.set('limit','8'); params.set('sort','-date_created');
+        var res = await fetch(DIRECTUS_URL + '/items/cars?' + params.toString(), { headers:{Accept:'application/json'} });
+        if (!res.ok) throw new Error('HTTP '+res.status);
+        var json = await res.json(); var rows = (json&&json.data)?json.data:[];
+        if (!rows.length) return;
+        var grid = $('#similar-grid');
+        grid.innerHTML = rows.map(function(c){
+          var fid = (typeof c.image==='object' && c.image)? c.image.id : c.image;
+          var href = 'car.html?id=' + encodeURIComponent(c.id);
+          return ''+
+            '<a class="similar__card" href="'+href+'">'+
+              '<img src="'+imgUrl(fid)+'" alt="">'+
+              '<div class="similar__body">'+
+                (c.category ? '<span class="project__category">'+c.category+'</span>' : '')+
+                '<div class="similar__title">'+(c.title||'Bil')+'</div>'+
+                '<div class="project__details" style="font-size:.9rem;color:var(--text-light)">'+
+                  (c.year?'<span><i class="fas fa-calendar"></i> '+c.year+'</span> ':'')+
+                  (c.mileage?'<span><i class="fas fa-tachometer-alt"></i> '+km(c.mileage)+'</span>':'')+
+                '</div>'+
+                '<div class="similar__price">'+(c.price?nok(c.price):'')+'</div>'+
+              '</div>'+
+            '</a>';
+        }).join('');
+        $('#similar').hidden = false;
+      } catch(e){ /* no-op */ }
+    }
+
+    async function loadCar(){
+      try {
+        if (!id) { setStatus('Mangler parameter (?id=).', 'var(--error-color)'); return; }
+        setStatus('Laster annonse …');
+
+        const fields = [
+          'id','title','description','mileage','price','year','fuel_type','transmission','category','status',
+          'image',
+          'images.directus_files_id'
+        ].join(',');
+
+        const url = `${DIRECTUS_URL}/items/cars/${encodeURIComponent(id)}?fields=${encodeURIComponent(fields)}`;
+        const res = await fetch(url, { headers: { Accept: 'application/json' } });
+
+        if (!res.ok) {
+          const body = await res.text().catch(()=> '');
+          console.error('Directus error:', res.status, body);
+          throw new Error('HTTP ' + res.status);
+        }
+        const json = await res.json();
+        if (!json || !json.data) { setStatus('Fant ikke annonsen (404).', 'var(--error-color)'); return; }
+
+        setStatus('');
+        renderCar(json.data);
+      } catch (e) {
+        console.error(e);
+        setStatus('Kunne ikke hente annonsen. Prøv igjen senere.', 'var(--error-color)');
+      }
+    }
+
+    function wireShareAndPrint(){
+      var shareBtn=$('#btn-share'), printBtn=$('#btn-print');
+      shareBtn && shareBtn.addEventListener('click', function(){
+        var url=location.href;
+        if (navigator.share){ navigator.share({ title: document.title, url }).catch(function(){}); }
+        else if (navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(url).then(function(){
+            shareBtn.innerHTML = '<i class="fas fa-check"></i> Kopiert!';
+            setTimeout(function(){ shareBtn.innerHTML = '<i class="fas fa-share-alt"></i> Del'; }, 1200);
+          });
+        }
+      });
+      printBtn && printBtn.addEventListener('click', function(){ window.print(); });
+    }
+
+    function pickImageIds(car){
+      var ids = []; var arr = car.images;
+      if (Array.isArray(arr)) {
+        arr.forEach(function (it) {
+          if (!it) return;
+          if (it.directus_files_id) {
+            if (typeof it.directus_files_id === 'string') ids.push(it.directus_files_id);
+            else if (it.directus_files_id.id) ids.push(it.directus_files_id.id);
+          } else if (it.id) {
+            ids.push(it.id);
+          } else if (typeof it === 'string') {
+            ids.push(it);
+          }
+        });
+      }
+      if (ids.length===0 && car.image) {
+        if (typeof car.image === 'string') ids.push(car.image);
+        else if (car.image.id) ids.push(car.image.id);
+      }
+      return Array.from(new Set(ids)).filter(Boolean);
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      loadCar();
+      wireShareAndPrint();
+    });
+  </script>
+
+  <script src="https://unpkg.com/scrollreveal" defer></script>
+  <script src="js/script.js" defer></script>
+</body>
+</html>
