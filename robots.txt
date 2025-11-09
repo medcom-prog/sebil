@@ -1,0 +1,11 @@
+User-agent: *
+# Prevent indexing of hidden/staging pages
+Disallow: /car.html
+Disallow: /bilutvalg.html
+Disallow: /anbefalinger.html
+
+# Allow everything else
+Allow: /
+
+# Sitemap
+Sitemap: https://sebilas.no/sitemap.xml

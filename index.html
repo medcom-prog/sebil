@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEBIL AS – Kvalitetsbiler i Drammen</title>
+  <meta name="description" content="SEBIL AS i Drammen tilbyr kvalitetsbrukte biler fra 2015 og nyere. Lav km-stand, dokumentert servicehistorikk – ærlig rådgivning og trygg handel.">
+  <link rel="canonical" href="https://sebilas.no/">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="SEBIL AS – Kvalitetsbiler i Drammen">
+  <meta property="og:description" content="Brukte biler fra 2015+ med lav km og dokumentert historikk. Ærlig rådgivning og trygg handel.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sebilas.no/">
+  <meta property="og:image" content="https://sebilas.no/assets/images/og-cover.jpg">
+  <meta property="og:locale" content="nb_NO">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SEBIL AS – Kvalitetsbiler i Drammen">
+  <meta name="twitter:description" content="Brukte biler fra 2015+ med lav km og dokumentert historikk. Ærlig rådgivning og trygg handel.">
+  <meta name="twitter:image" content="https://sebilas.no/assets/images/og-cover.jpg">
+
+  <!-- PWA / Icons -->
+  <link rel="icon" href="assets/images/favicon.ico">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Preconnects -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Små tillegg for skjema-status/honeypot (kan fjernes om du har dette i style.css) */
+    .form__status{margin-top:1rem;font-size:.95rem}
+    .form__status--ok{color:#38a169}
+    .form__status--err{color:#e53e3e}
+    .visually-hidden{position:absolute!important;left:-9999px!important;top:auto!important;width:1px!important;height:1px!important;overflow:hidden!important}
+    .is-loading{opacity:.7;pointer-events:none}
+  </style>
+</head>
+<body>
+  <!-- Skip to content -->
+  <a class="skip-to-content" href="#hjem">Hopp til innhold</a>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <nav class="nav container" aria-label="Hovedmeny">
+      <a class="nav__logo" href="index.html" aria-label="SEBIL AS – Hjem">
+        <img
+          class="nav__logo-img"
+          src="assets/images/hero/logo.png"
+          alt="SEBIL AS"
+          width="160" height="36"
+          loading="eager" decoding="async"
+        />
+      </a>
+
+      <div class="nav__menu" id="nav-menu" role="dialog" aria-modal="true" aria-label="Navigasjon">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="#hjem" class="nav__link active-link" aria-current="page">Hjem</a></li>
+          <li class="nav__item"><a href="om-oss.html" class="nav__link">Om oss</a></li>
+          <li class="nav__item"><a href="tjenester.html" class="nav__link">Tjenester</a></li>
+          <!-- <li class="nav__item"><a href="bilutvalg.html" class="nav__link">Bilutvalg</a></li> 
+          <li class="nav__item"><a href="anbefalinger.html" class="nav__link">Anbefalinger</a></li>
+          -->
+          <li class="nav__item"><a href="kontakt.html" class="nav__link">Kontakt</a></li>
+        </ul>
+
+        <button class="nav__close" id="nav-close" aria-label="Lukk meny">
+          <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="nav__actions">
+        <a href="#kontakt" class="btn btn--primary">Kontakt oss</a>
+        <button class="nav__toggle" id="nav-toggle" aria-label="Åpne meny">
+          <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main -->
+  <main class="main">
+    <!-- Hero -->
+    <section class="hero section" id="hjem" aria-labelledby="hero-title">
+      <div class="hero__container container">
+        <div class="hero__content">
+          <h1 class="hero__title" id="hero-title">
+            Kvalitetsbiler du kan <span class="hero__title-accent">stole på</span>
+          </h1>
+          <p class="hero__description">
+            SEBIL AS i Drammen. Vi fokuserer på brukte biler fra 2015 og nyere – biler vi selv kunne tenkt oss å eie.
+            Alle biler har lav km-stand og dokumentert servicehistorikk.
+          </p>
+          <div class="hero__actions">
+            <a href="#kontakt" class="btn btn--primary btn--large">
+              <i class="fas fa-phone" aria-hidden="true"></i>
+              Kontakt oss
+            </a>
+            <a href="https://www.finn.no/mobility/search/car?orgId=6352085" class="btn btn--secondary btn--large" target="_blank" rel="noopener">
+              <i class="fas fa-car" aria-hidden="true"></i>
+              Se vårt bilutvalg
+            </a>
+          </div>
+          <div class="hero__stats">
+            <div class="hero__stat">
+              <span class="hero__stat-number" data-countup data-count-to="24" data-suffix="t" data-duration="2500">0</span>
+              <span class="hero__stat-text">Maks responstid</span>
+            </div>
+            <div class="hero__stat">
+              <span class="hero__stat-number" data-countup data-count-to="6" data-suffix=" dager" data-duration="1500">0</span>
+              <span class="hero__stat-text">Åpent i uken</span>
+            </div>
+            <div class="hero__stat">
+              <span class="hero__stat-number" data-countup data-count-to="100" data-suffix="%" data-duration="2500">0</span>
+              <span class="hero__stat-text">Kvalitetsgaranti</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero__image">
+          <picture>
+            <source srcset="assets/images/hero/rode-biler.jpg" type="image/avif">
+            <source srcset="assets/images/hero/rode-biler.jpg" type="image/webp">
+            <img
+              src="assets/images/hero/rode-biler.jpg"
+              alt="Moderne bilforhandler"
+              class="hero__img"
+              fetchpriority="high"
+              decoding="async"
+              sizes="(max-width: 1024px) 100vw, 50vw">
+          </picture>
+        </div>
+      </div>
+    </section>
+
+    <!-- Om oss -->
+    <section class="about section" id="om-oss" aria-labelledby="about-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__subtitle">Om SEBIL AS</span>
+          <h2 class="section__title" id="about-title">
+            Din pålitelige partner for <span class="section__title-accent">kvalitetsbiler</span>
+          </h2>
+        </div>
+
+        <div class="about__container">
+          <div class="about__content">
+            <div class="about__text">
+              <p class="about__description">
+                Vi tar med oss solid bransjeerfaring: Lasse startet i bilbransjen som 19-åring og brenner for ærlig rådgivning og gode kundeopplevelser.
+              </p>
+
+              <p class="about__description">
+                Vi selger kun biler vi selv kunne tenkt oss å eie. Alle våre biler har lav km-stand og
+                dokumentert servicehistorikk. Vi hjelper også med finansiering, garanti og forsikring.
+              </p>
+            </div>
+
+            <div class="about__features">
+              <div class="about__feature">
+                <div class="about__feature-icon">
+                  <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                </div>
+                <div class="about__feature-content">
+                  <h3 class="about__feature-title">Trygt kjøp</h3>
+                  <p class="about__feature-description">Gjennomgang og garanti på alle biler</p>
+                </div>
+              </div>
+
+              <div class="about__feature">
+                <div class="about__feature-icon">
+                  <i class="fas fa-handshake" aria-hidden="true"></i>
+                </div>
+                <div class="about__feature-content">
+                  <h3 class="about__feature-title">Ærlig rådgivning</h3>
+                  <p class="about__feature-description">Vi gir deg tydelige og ryddige råd</p>
+                </div>
+              </div>
+
+              <div class="about__feature">
+                <div class="about__feature-icon">
+                  <i class="fas fa-clipboard-check" aria-hidden="true"></i>
+                </div>
+                <div class="about__feature-content">
+                  <h3 class="about__feature-title">Dokumentert historikk</h3>
+                  <p class="about__feature-description">Full servicehistorikk på hver bil</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="about__image">
+            <picture>
+              <source srcset="assets/images/team/lasse.jpg" type="image/avif">
+              <source srcset="assets/images/team/lasse.jpg" type="image/webp">
+              <img src="assets/images/team/lasse.jpg" alt="SEBIL AS – butikk og team" class="about__img" loading="lazy" decoding="async">
+            </picture>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tjenester -->
+    <section class="services section" id="tjenester" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__subtitle">Våre tjenester</span>
+          <h2 class="section__title" id="services-title">
+            Komplette løsninger for <span class="section__title-accent">alle bilbehov</span>
+          </h2>
+          <p class="section__description">
+            Fra bilsalg til finansiering – vi hjelper deg hele veien. Vi tilbyr også kommisjonssalg, innbytte og innkjøp.
+          </p>
+        </div>
+
+        <div class="services__container" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));">
+          <!-- Bilsalg -->
+          <div class="service__card">
+            <div class="service__icon">
+              <i class="fas fa-car" aria-hidden="true"></i>
+            </div>
+            <h3 class="service__title">Bilsalg</h3>
+            <p class="service__description">
+              Brukte biler fra 2015 og nyere med lav km-stand. Vi selger kun biler vi selv kunne tenkt oss å eie.
+            </p>
+            <ul class="service__features">
+              <li><i class="fas fa-check" aria-hidden="true"></i> Biler fra 2015 og nyere</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Lav km-stand</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Dokumentert servicehistorikk</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Grundig gjennomgang</li>
+            </ul>
+          </div>
+
+          <!-- Kommisjonssalg (mest populær) -->
+          <div class="service__card service__card--featured">
+            <div class="service__badge">Mest populær</div>
+            <div class="service__icon">
+              <i class="fas fa-exchange-alt" aria-hidden="true"></i>
+            </div>
+            <h3 class="service__title">Kommisjonssalg</h3>
+            <p class="service__description">
+              Vår mest etterspurte tjeneste: Vi selger bilen for deg – fra klargjøring og annonsering til visning og oppgjør.
+            </p>
+            <ul class="service__features">
+              <li><i class="fas fa-check" aria-hidden="true"></i> Maksimal synlighet og proff markedsføring</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Gjennomsiktig avtale og pris</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Vi håndterer visning, papirarbeid og oppgjør</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Rask og trygg prosess</li>
+            </ul>
+          </div>
+
+          <!-- Finansiering & Forsikring -->
+          <div class="service__card">
+            <div class="service__icon">
+              <i class="fas fa-credit-card" aria-hidden="true"></i>
+            </div>
+            <h3 class="service__title">Finansiering & Forsikring</h3>
+            <p class="service__description">
+              Fleksible finansieringsløsninger og forsikringsrådgivning – vi hjelper deg med komplett pakke for ditt bilkjøp.
+            </p>
+            <ul class="service__features">
+              <li><i class="fas fa-check" aria-hidden="true"></i> Fleksible finansieringsløsninger</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Konkurransedyktige renter</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Forsikringsrådgivning</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Komplett service</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Anbefalinger -->
+    <section class="testimonials section" id="anbefalinger" aria-labelledby="testimonials-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__subtitle">Kundeuttalelser</span>
+          <h2 class="section__title" id="testimonials-title">Noen flotte ord <span class="section__title-accent">fra en fornøyd kunde</span></h2>
+          <p class="section__description">
+            Her er noen ord fra kundene våre.
+          </p>
+        </div>
+
+        <div class="testimonial__card testimonial__card--featured" aria-label="Kundeuttalelse">
+          <div class="testimonial__rating" aria-label="Vurdering 5 av 5">
+            <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
+          </div>
+          <p class="testimonial__text">
+            "Jeg anbefaler SeBil AS på Gullskogen på det
+sterkeste! Her får man god service, veiledning, råd og alt er
+upåklagelig fra start til slutt. Lasse er utrolig profesjonell, seriøs
+og ordentlig, en man virkelig kan stole på. Anbefales virkelig dersom du
+er ute etter en bilforhandler som setter kunden først!"
+          </p>
+          <div class="testimonial__author">
+            <div class="testimonial__author-info">
+              <h4 class="testimonial__author-name">Nils Tommy
+Larsen</h4>
+              <span class="testimonial__author-title">23 år fra Elverum</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kontakt -->
+    <section class="contact section" id="kontakt" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__subtitle">Kontakt oss</span>
+          <h2 class="section__title" id="contact-title">
+            La oss hjelpe deg med <span class="section__title-accent">ditt bilkjøp</span>
+          </h2>
+          <p class="section__description">
+            <strong>Butikkens åpningstider:</strong> Man–fre 10–18 · Lør 10–15 · Søn etter avtale.<br>
+            <strong>Telefontid:</strong> Man–fre 08–21 · Lør–søn 10–18.
+          </p>
+        </div>
+
+        <div class="contact__container">
+          <div class="contact__info">
+            <!-- Telefon -->
+            <div class="contact__card">
+              <div class="contact__card-icon"><i class="fas fa-phone" aria-hidden="true"></i></div>
+              <div class="contact__card-content">
+                <h3 class="contact__card-title">Ring oss</h3>
+                <p class="contact__card-text">
+                  <a href="tel:+4791799191">+47 917 99 191</a><br>
+                  <a href="tel:+4795871020">+47 958 71 020</a>
+                </p>
+                <span class="contact__card-note">Telefontid man–fre 08:00–21:00 · lør–søn 10:00–18:00</span>
+              </div>
+            </div>
+
+            <!-- E-post -->
+            <div class="contact__card">
+              <div class="contact__card-icon"><i class="fas fa-envelope" aria-hidden="true"></i></div>
+              <div class="contact__card-content">
+                <h3 class="contact__card-title">Send e-post</h3>
+                <p class="contact__card-text"><a href="mailto:post@sebil.as">post@sebil.as</a></p>
+                <span class="contact__card-note">Vi svarer normalt innen 24 timer</span>
+              </div>
+            </div>
+
+            <!-- Adresse -->
+            <div class="contact__card">
+              <div class="contact__card-icon"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></div>
+              <div class="contact__card-content">
+                <h3 class="contact__card-title">Besøk oss</h3>
+                <p class="contact__card-text">
+                  <a href="https://maps.google.com/?q=Syret%C3%A5rnet+21,+3048+Drammen" target="_blank" rel="noopener">
+                    Syretårnet 21<br>3048 Drammen
+                  </a>
+                </p>
+                <span class="contact__card-note">Gulskogen, ca. 40 min fra Oslo</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Skjema (Formspree implementert) -->
+          <form class="contact__form" id="contact-form" action="https://formspree.io/f/mandvrrb" method="POST" novalidate>
+            <!-- Emne + kontekst som følger innsendingen -->
+            <input type="hidden" name="_subject" value="Ny henvendelse fra SEBIL AS – Forside">
+            <input type="hidden" name="source-page" value="Forside – SEBIL AS">
+
+            <!-- Honeypot mot spam -->
+            <label class="visually-hidden" for="website">Ikke fyll ut dette feltet</label>
+            <input class="visually-hidden" type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+
+            <div class="form__group">
+              <label for="name" class="form__label">Navn *</label>
+              <input type="text" id="name" name="name" class="form__input" required autocomplete="name">
+            </div>
+
+            <div class="form__group">
+              <label for="email" class="form__label">E-post *</label>
+              <input type="email" id="email" name="email" class="form__input" required autocomplete="email" inputmode="email">
+            </div>
+
+            <div class="form__group">
+              <label for="phone" class="form__label">Telefon</label>
+              <input type="tel" id="phone" name="phone" class="form__input" autocomplete="tel" inputmode="tel" pattern="^[0-9 +()\\-]{5,}$">
+            </div>
+
+            <div class="form__group">
+              <label for="project-type" class="form__label">Type henvendelse</label>
+              <select id="project-type" name="project-type" class="form__select">
+                <option value="">Velg type henvendelse</option>
+                <option value="bilkjop">Bilkjøp</option>
+                <option value="innbytte">Innbytte</option>
+                <option value="kommisjon">Kommisjon (vi selger for deg)</option>
+                <option value="finansiering">Finansiering</option>
+                <option value="annet">Annet</option>
+              </select>
+            </div>
+
+            <div class="form__group form__group--full">
+              <label for="message" class="form__label">Melding *</label>
+              <textarea id="message" name="message" class="form__textarea" rows="5" placeholder="Fortell oss om dine bilbehov..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--large form__submit" aria-label="Send melding">
+              <i class="fas fa-paper-plane" aria-hidden="true"></i>
+              <span class="btn__text">Send melding</span>
+            </button>
+
+            <!-- Statusmelding -->
+            <div id="form-status" class="form__status" role="status" aria-live="polite" hidden></div>
+          </form>
+        </div>
+
+        <div class="contact__map" aria-label="Kart">
+          <iframe
+            src="https://www.google.com/maps?q=Syret%C3%A5rnet+21,+3048+Drammen&output=embed"
+            class="contact__map-iframe"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__container">
+        <div class="footer__content">
+          <div class="footer__section">
+            <div class="footer__logo">
+              <i class="fas fa-car" aria-hidden="true"></i>
+              <span>SEBIL AS</span>
+            </div>
+            <p class="footer__description">
+              Vi selger kun biler vi selv kunne tenkt oss å eie.
+            </p>
+            <div class="footer__social">
+              <a href="#" class="footer__social-link" aria-label="Facebook" target="_blank" rel="noopener nofollow"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+              <a href="#" class="footer__social-link" aria-label="Instagram" target="_blank" rel="noopener nofollow"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+              <a href="#" class="footer__social-link" aria-label="LinkedIn" target="_blank" rel="noopener nofollow"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+            </div>
+          </div>
+
+          <div class="footer__section">
+            <h3 class="footer__title">Tjenester</h3>
+            <ul class="footer__list">
+              <li><a href="#tjenester" class="footer__link">Bilsalg</a></li>
+              <li><a href="#tjenester" class="footer__link">Innbytte</a></li>
+              <li><a href="#tjenester" class="footer__link">Kommisjon</a></li>
+              <li><a href="#tjenester" class="footer__link">Finansiering</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__section">
+            <h3 class="footer__title">Selskapet</h3>
+            <ul class="footer__list">
+              <li><a href="om-oss.html" class="footer__link">Om oss</a></li>
+              <li><a href="om-oss.html#team" class="footer__link">Vårt team</a></li>
+              
+            </ul>
+          </div>
+
+          <div class="footer__section">
+            <h3 class="footer__title">Kontakt</h3>
+            <ul class="footer__list">
+              <li class="footer__contact"><i class="fas fa-phone"></i>
+                <a href="tel:+4791799191" class="footer__link">+47 917 99 191</a> &middot;
+                <a href="tel:+4795871020" class="footer__link">+47 958 71 020</a>
+              </li>
+              <li class="footer__contact"><i class="fas fa-envelope"></i>
+                <a href="mailto:post@sebil.as" class="footer__link">post@sebil.as</a>
+              </li>
+              <li class="footer__contact"><i class="fas fa-map-marker-alt"></i>
+                <a href="https://maps.google.com/?q=Syret%C3%A5rnet+21,+3048+Drammen" target="_blank" rel="noopener" class="footer__link">
+                  Syretårnet 21, 3048 Drammen
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+          <p class="footer-credit">Denne nettsiden er utviklet i samarbeid med <a href="https://medcom.no" target="_blank" rel="noopener">Medcom</a>.</p>
+
+        <div class="footer__bottom">
+          <div class="footer__bottom-content">
+            <p class="footer__copyright">© 2025 SEBIL AS. Alle rettigheter reservert.</p>
+            <div class="footer__legal">
+              <a href="#" class="footer__legal-link">Personvern</a>
+              <a href="#" class="footer__legal-link">Vilkår</a>
+              <a href="#" class="footer__legal-link">Cookies</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to top -->
+  <button class="scroll-top" id="scroll-top" aria-label="Til toppen">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <!-- Schema.org (AutoDealer) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"AutoDealer",
+    "name":"SEBIL AS",
+      "url":"https://sebilas.no",
+      "telephone":["+47 91799191","+47 95871020"],
+      "sameAs":["https://www.facebook.com/","https://www.instagram.com/","https://www.linkedin.com/"],
+    "foundingDate":"2025-07",
+    "founder":"Lasse W. Nilsen",
+    "address":{
+      "@type":"PostalAddress",
+      "streetAddress":"Syretårnet 21",
+      "postalCode":"3048",
+      "addressLocality":"Drammen",
+      "addressCountry":"NO"
+    },
+    "openingHoursSpecification":[
+      {
+        "@type":"OpeningHoursSpecification",
+        "dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens":"10:00",
+        "closes":"18:00"
+      },
+      {
+        "@type":"OpeningHoursSpecification",
+        "dayOfWeek":["Saturday"],
+        "opens":"10:00",
+        "closes":"15:00"
+      },
+      {
+        "@type":"OpeningHoursSpecification",
+        "dayOfWeek":["Sunday"],
+        "description":"Etter avtale"
+      }
+    ],
+    "contactPoint":[
+      {
+        "@type":"ContactPoint",
+        "telephone":"+47 95871020",
+        "contactType":"sales",
+        "availableLanguage":"nb",
+        "areaServed":"NO",
+        "hoursAvailable":[
+          { "@type":"OpeningHoursSpecification", "dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens":"08:00","closes":"21:00" },
+          { "@type":"OpeningHoursSpecification", "dayOfWeek":["Saturday","Sunday"], "opens":"10:00","closes":"18:00" }
+        ]
+      },
+      {
+        "@type":"ContactPoint",
+        "telephone":"+47 91799191",
+        "contactType":"sales",
+        "availableLanguage":"nb",
+        "areaServed":"NO",
+        "hoursAvailable":[
+          { "@type":"OpeningHoursSpecification", "dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens":"08:00","closes":"21:00" },
+          { "@type":"OpeningHoursSpecification", "dayOfWeek":["Saturday","Sunday"], "opens":"10:00","closes":"18:00" }
+        ]
+      }
+    ],
+    "image":"https://sebilas.no/assets/images/hero/hero-1.jpg",
+    "areaServed":"NO"
+  }
+  </script>
+
+  <!-- ScrollReveal + felles script -->
+  <script src="https://unpkg.com/scrollreveal" defer></script>
+  <script src="js/script.js" defer></script>
+
+  <!-- Formspree – AJAX innsending for bedre UX -->
+  <script>
+  (function () {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+
+    const statusEl = document.getElementById('form-status');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const btnText = submitBtn?.querySelector('.btn__text');
+
+    function setStatus(msg, ok = true) {
+      if (!statusEl) return;
+      statusEl.hidden = false;
+      statusEl.className = 'form__status ' + (ok ? 'form__status--ok' : 'form__status--err');
+      statusEl.textContent = msg;
+    }
+
+    function setLoading(isLoading) {
+      if (!submitBtn) return;
+      submitBtn.classList.toggle('is-loading', isLoading);
+      submitBtn.disabled = isLoading;
+      if (btnText) btnText.textContent = isLoading ? 'Sender …' : 'Send melding';
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Honeypot: hvis "website" har innhold, avbryt
+      const honey = form.querySelector('input[name="website"]');
+      if (honey && honey.value.trim() !== '') {
+        setStatus('Innsending avbrutt.', false);
+        return;
+      }
+
+      // Frontend-validering
+      if (!form.checkValidity()) {
+        setStatus('Vennligst fyll ut alle obligatoriske felter korrekt.', false);
+        form.reportValidity?.();
+        return;
+      }
+
+      const data = new FormData(form);
+      setLoading(true);
+      try {
+        const response = await fetch(form.action, {
+          method: form.method || 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          form.reset();
+          setStatus('Takk! Meldingen din er sendt. Vi tar kontakt så snart vi kan.');
+        } else {
+          let errMsg = 'Oops! Noe gikk galt. Prøv igjen senere.';
+          try {
+            const result = await response.json();
+            if (result && result.errors && result.errors.length) {
+              errMsg = result.errors.map(e => e.message).join(' ');
+            }
+          } catch (_) {}
+          setStatus(errMsg, false);
+        }
+      } catch (err) {
+        setStatus('Nettverksfeil. Sjekk tilkoblingen og prøv igjen.', false);
+      } finally {
+        setLoading(false);
+      }
+    });
+  })();
+  </script>
+
+  <!-- Forside: hent utvalgte biler fra Directus (valgfritt å aktivere seksjonen over) -->
+  <script>
+  (function(){
+    const DIRECTUS_URL = "https://lasse-bil.directus.app";
+    const ASSET_KEY    = "optimized";
+    const LIMIT        = 3;
+
+    const grid  = document.getElementById("home-cars");
+    const chips = Array.from(document.querySelectorAll(".projects__filter .filter__btn"));
+
+    const nok = (v) => v == null ? "" : Number(v).toLocaleString("nb-NO", { style:"currency", currency:"NOK", maximumFractionDigits:0 });
+    const km  = (v) => v == null ? "" : `${Number(v).toLocaleString("nb-NO")} km`;
+    const esc = (s="") => String(s).replace(/"/g,"&quot;");
+    const imgUrl = (fid) => fid ? `${DIRECTUS_URL}/assets/${fid}?key=${ASSET_KEY}` : "assets/images/projects/placeholder-car.jpg";
+    const carHref = (car) => `car.html?id=${encodeURIComponent(car.id)}`;
+
+    function cardTemplate(car){
+      const { id, title, mileage, price, year, fuel_type, transmission, category, image } = car;
+      const imgId = image && (image.id || image);
+      const cat   = (category || "").toString().trim().toLowerCase();
+
+      return `
+        <div class="project__card" data-category="${esc(cat)}">
+          <div class="project__image">
+            <a href="${carHref(car)}" class="project__img-link" aria-label="Åpne detaljside for ${esc(title || "bilen")}">
+              <img
+                src="${imgUrl(imgId)}"
+                alt="${esc(title || "Bil")}"
+                class="project__img"
+                loading="lazy"
+                decoding="async"
+                onerror="this.onerror=null;this.src='assets/images/projects/placeholder-car.jpg';"
+              >
+            </a>
+            <div class="project__overlay" aria-hidden="true">
+              <div class="project__actions">
+                <a class="project__btn" href="${carHref(car)}" aria-label="Se detaljer">
+                  <i class="fas fa-eye" aria-hidden="true"></i>
+                </a>
+                <a class="project__btn" href="tel:+4791799191" aria-label="Ring oss om ${esc(title || "bilen")}">
+                  <i class="fas fa-phone" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="project__content">
+            ${cat ? `<span class="project__category">${cat.charAt(0).toUpperCase() + cat.slice(1)}</span>` : ""}
+            <h3 class="project__title"><a href="${carHref(car)}" class="project__title-link">${esc(title || "Uten tittel")}</a></h3>
+            <div class="project__details">
+              ${year ? `<span class="project__detail"><i class="fas fa-calendar" aria-hidden="true"></i>${year}</span>` : ""}
+              ${mileage ? `<span class="project__detail"><i class="fas fa-tachometer-alt" aria-hidden="true"></i>${km(mileage)}</span>` : ""}
+              ${fuel_type ? `<span class="project__detail"><i class="fas fa-gas-pump" aria-hidden="true"></i>${esc(fuel_type)}</span>` : ""}
+              ${transmission ? `<span class="project__detail"><i class="fas fa-cog" aria-hidden="true"></i>${esc(transmission)}</span>` : ""}
+            </div>
+            <div class="project__price">
+              ${price ? `<span class="project__price-amount">${nok(price)}</span>` : ""}
+            </div>
+            <a href="index.html#kontakt" class="btn btn--secondary btn--small project__contact-btn">
+              <i class="fas fa-paper-plane" aria-hidden="true"></i> Kontakt oss
+            </a>
+          </div>
+        </div>
+      `;
+    }
+
+    async function loadFeatured(){
+      const gridExists = !!grid;
+      if (!gridExists) return;
+
+      try {
+        const params = new URLSearchParams();
+        params.set("fields", [
+          "id","title","mileage","price","year",
+          "fuel_type","transmission","category","image","status"
+        ].join(","));
+        params.set("filter", JSON.stringify({ _and:[ { status:{ _eq:"published" } } ] }));
+        params.set("sort", "-date_created");
+        params.set("limit", String(LIMIT));
+
+        const res = await fetch(`${DIRECTUS_URL}/items/cars?${params.toString()}`, { headers: { Accept:"application/json" } });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const json = await res.json();
+        const rows = json?.data || [];
+
+        if (!rows.length) {
+          grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text-light)">Ingen biler tilgjengelig akkurat nå.</div>`;
+          return;
+        }
+
+        grid.innerHTML = rows.map(cardTemplate).join("");
+
+        if (typeof ScrollReveal !== "undefined") {
+          const sr = ScrollReveal();
+          sr.reveal(".project__card", { interval: 100, distance: "30px", origin: "bottom", duration: 800 });
+        }
+
+        const cards = () => Array.from(grid.querySelectorAll(".project__card"));
+        const chips = Array.from(document.querySelectorAll(".projects__filter .filter__btn"));
+        chips.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            chips.forEach((b) => { b.classList.remove("filter__btn--active"); b.setAttribute("aria-selected","false"); });
+            btn.classList.add("filter__btn--active");
+            btn.setAttribute("aria-selected","true");
+
+            const val = btn.getAttribute("data-filter") || "all";
+            cards().forEach((card) => {
+              const match = (val === "all") || (card.getAttribute("data-category") === val);
+              card.classList.toggle("is-hidden", !match);
+              card.setAttribute("aria-hidden", String(!match));
+              Array.from(card.querySelectorAll("a,button")).forEach((el)=> el.tabIndex = match ? 0 : -1);
+            });
+          });
+        });
+      } catch (e) {
+        console.error(e);
+        grid.innerHTML = `
+          <div style="grid-column:1/-1;text-align:center;padding:2rem;">
+            <p style="color:var(--error-color);font-weight:600)">Kunne ikke hente biler.</p>
+            <p class="section__description" style="color:var(--text-light)">Prøv igjen senere.</p>
+          </div>`;
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", loadFeatured);
+  })();
+  </script>
+
+  <noscript>For best mulig opplevelse, aktiver JavaScript (animasjoner, filtrering og henting av biler krever JS).</noscript>
+</body>
+</html>

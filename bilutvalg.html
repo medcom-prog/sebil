@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bilutvalg – SEBIL AS</title>
+  <meta name="description" content="Se hele bilutvalget vårt: søk, filtrer og sorter brukte kvalitetsbiler." />
+  <link rel="canonical" href="https://sebilas.no/bilutvalg.html" />
+  <meta name="theme-color" content="#1a2332" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Bilutvalg – SEBIL AS">
+  <meta property="og:description" content="Søk og filtrer blant våre brukte kvalitetsbiler.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sebilas.no/bilutvalg.html">
+  <meta property="og:image" content="https://sebilas.no/assets/images/og-cover.jpg">
+  <meta property="og:locale" content="nb_NO">
+
+  <!-- Icons / PWA -->
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Preconnects -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Page-scoped tweaks (kan bli stående, matcher style.css endringene) -->
+  <style>
+    /* Sticky verktøylinje (mobil) + mobil drawer er allerede i style.css,
+       men det er OK å ha her også hvis du vil holde det side-spesifikt. */
+  </style>
+</head>
+<body>
+  <a class="skip-to-content" href="#content">Hopp til innhold</a>
+
+  <!-- Header -->
+
+<header class="header" id="header">
+    <nav class="nav container" aria-label="Hovedmeny">
+   <a class="nav__logo" href="index.html" aria-label="SEBIL AS – Hjem">
+  <!-- Velg SVG hvis du har (best), ellers PNG nedenfor -->
+  <img
+    class="nav__logo-img"
+    src="assets/images/hero/logo.png"
+    alt="SEBIL AS"
+    width="160" height="36"
+    loading="eager" decoding="async"
+  />
+  <!-- Hvis du bruker PNG, kan du heller bruke srcset for retina:
+  <img class="nav__logo-img"
+       src="assets/brand/sebil-logo.png"
+       srcset="assets/brand/sebil-logo.png 1x, assets/brand/sebil-logo@2x.png 2x"
+       alt="SEBIL AS" width="160" height="36" loading="eager" decoding="async" />
+  -->
+</a>  
+      </div>
+
+      <div class="nav__menu" id="nav-menu" role="dialog" aria-modal="true" aria-label="Navigasjon">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="index.html#hjem" class="nav__link">Hjem</a></li>
+          <li class="nav__item"><a href="index.html#om-oss" class="nav__link">Om oss</a></li>
+          <li class="nav__item"><a href="index.html#tjenester" class="nav__link">Tjenester</a></li>
+          <li class="nav__item"><a href="bilutvalg.html" class="nav__link active-link">Bilutvalg</a></li>
+          <li class="nav__item"><a href="index.html#anbefalinger" class="nav__link">Anbefalinger</a></li>
+          <li class="nav__item"><a href="index.html#kontakt" class="nav__link">Kontakt</a></li>
+        </ul>
+        <button class="nav__close" id="nav-close" aria-label="Lukk meny">
+          <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="nav__actions">
+        <a href="index.html#kontakt" class="btn btn--primary">Kontakt oss</a>
+        <button class="nav__toggle" id="nav-toggle" aria-label="Åpne meny" aria-expanded="false">
+          <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="content" class="main">
+    <section class="section" style="padding-top: calc(var(--header-height) + 2rem);" aria-labelledby="list-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__subtitle">Bilutvalg</span>
+          <h1 class="section__title" id="list-title">Finn din neste <span class="section__title-accent">kvalitetsbil</span></h1>
+          <p class="section__description">Søk, filtrer og sorter utvalget. Alle biler har lav km-stand og dokumentert servicehistorikk.</p>
+        </div>
+
+        <!-- Sticky verktøylinje (mobil) -->
+        <div class="listing-toolbar">
+          <div class="projects__filter chips-scroll" role="tablist" aria-label="Hurtigfilter karosseri">
+            <button class="filter__btn filter__btn--active" data-filter="all" role="tab" aria-selected="true" aria-pressed="true">Alle</button>
+            <button class="filter__btn" data-filter="sedan" role="tab" aria-selected="false" aria-pressed="false">Sedan/Kombi</button>
+            <button class="filter__btn" data-filter="suv" role="tab" aria-selected="false" aria-pressed="false">SUV/Crossover</button>
+          </div>
+
+          <div class="toolbar-row">
+            <div>
+              <label for="search" class="form__label" style="display:none;">Søk</label>
+              <input id="search" type="search" class="form__input" placeholder="Søk modell, drivstoff, gir …" aria-label="Søk i biler" />
+            </div>
+
+            <div>
+              <label for="sort" class="form__label" style="display:none;">Sorter</label>
+              <select id="sort" class="form__select" aria-label="Sorter resultater">
+                <option value="relevance">Relevans</option>
+                <option value="price-asc">Pris (lav → høy)</option>
+                <option value="price-desc">Pris (høy → lav)</option>
+                <option value="year-desc">Nyeste år</option>
+                <option value="km-asc">Lavest km</option>
+              </select>
+            </div>
+
+            <div>
+              <button type="button" class="btn--filters" aria-haspopup="dialog" aria-controls="filters-drawer" aria-expanded="false">
+                <i class="fas fa-sliders"></i> Filtre
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Desktop layout -->
+        <div class="listing-layout" style="margin-top:1rem;">
+          <!-- Sidebar (tom beholder – vi flytter samme form hit på desktop) -->
+          <aside aria-label="Filtre" class="filters-desktop" style="display:block;">
+            <div id="filters-form-slot"></div>
+          </aside>
+
+          <!-- Resultater -->
+          <section aria-live="polite" aria-busy="false">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;gap:1rem;">
+              <p id="result-count" class="section__description" style="margin:0;">Viser 0 biler</p>
+            </div>
+
+            <div id="cars-grid" class="projects__container" aria-label="Bilresultater"></div>
+
+            <nav aria-label="Paginering" class="pagination-mobile-full" style="margin-top:1.5rem; display:flex; gap:0.75rem; align-items:center;">
+              <button id="prev-page" class="btn btn--secondary btn--small" aria-label="Forrige side">
+                <i class="fas fa-chevron-left" aria-hidden="true"></i> Forrige
+              </button>
+              <span id="page-indicator" class="section__description" aria-live="polite" style="min-width:110px; text-align:center;">Side 1 / 1</span>
+              <button id="next-page" class="btn btn--secondary btn--small" aria-label="Neste side">
+                Neste <i class="fas fa-chevron-right" aria-hidden="true"></i>
+              </button>
+            </nav>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mobil: Filters bottom sheet (HER ligger den ENESTE <form id="filters-form">) -->
+    <div class="filters-backdrop" id="filters-backdrop" aria-hidden="true"></div>
+    <aside class="filters-drawer" id="filters-drawer" role="dialog" aria-modal="true" aria-labelledby="filters-title" aria-hidden="true">
+      <div class="filters-drawer__header">
+        <div class="filters-drawer__title" id="filters-title">Filtre</div>
+        <button class="filters-drawer__close" aria-label="Lukk filtre">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div id="filters-drawer-body" style="padding: 1rem;">
+        <form id="filters-form" class="contact__form" style="grid-template-columns:1fr;">
+          <!-- Body -->
+          <div class="form__group">
+            <span class="form__label">Karosseri</span>
+            <label><input type="checkbox" name="body" value="sedan"> Sedan/Kombi</label>
+            <label><input type="checkbox" name="body" value="suv"> SUV</label>
+          </div>
+
+          <!-- Fuel -->
+          <div class="form__group">
+            <span class="form__label">Drivstoff</span>
+            <label><input type="checkbox" name="fuel" value="bensin"> Bensin</label>
+            <label><input type="checkbox" name="fuel" value="diesel"> Diesel</label>
+            <label><input type="checkbox" name="fuel" value="hybrid"> Hybrid</label>
+            <label><input type="checkbox" name="fuel" value="elektrisk"> Elektrisk</label>
+          </div>
+
+          <!-- Gear -->
+          <div class="form__group">
+            <span class="form__label">Girkasse</span>
+            <label><input type="checkbox" name="gear" value="automat"> Automat</label>
+            <label><input type="checkbox" name="gear" value="manuell"> Manuell</label>
+          </div>
+
+          <!-- Ranges -->
+          <div class="form__group">
+            <label for="year-min" class="form__label">Årsmodell (min)</label>
+            <input id="year-min" name="year-min" class="form__input" type="number" min="2005" max="2025" placeholder="f.eks. 2015">
+          </div>
+          <div class="form__group">
+            <label for="year-max" class="form__label">Årsmodell (max)</label>
+            <input id="year-max" name="year-max" class="form__input" type="number" min="2005" max="2025" placeholder="f.eks. 2024">
+          </div>
+          <div class="form__group">
+            <label for="price-min" class="form__label">Pris (min)</label>
+            <input id="price-min" name="price-min" class="form__input" type="number" step="1000" placeholder="kr">
+          </div>
+          <div class="form__group">
+            <label for="price-max" class="form__label">Pris (max)</label>
+            <input id="price-max" name="price-max" class="form__input" type="number" step="1000" placeholder="kr">
+          </div>
+
+          <div class="form__group" style="display:flex; gap:0.5rem; margin-top:0.5rem;">
+            <button type="button" id="apply-filters" class="btn btn--primary" aria-label="Bruk filtre">
+              <i class="fas fa-filter" aria-hidden="true"></i> Bruk filtre
+            </button>
+            <button type="button" id="reset-filters" class="btn btn--secondary" aria-label="Nullstill filtre">Nullstill</button>
+          </div>
+        </form>
+      </div>
+    </aside>
+
+    <!-- Sticky mobil-CTA -->
+    <div class="mobile-cta" role="region" aria-label="Hurtigvalg">
+      <a href="tel:+4732891234" class="mobile-cta__btn"><i class="fas fa-phone"></i> Ring</a>
+      <a href="mailto:post@sebil.no" class="mobile-cta__btn"><i class="fas fa-envelope"></i> E-post</a>
+      <a href="index.html#kontakt" class="mobile-cta__btn"><i class="fas fa-paper-plane"></i> Kontakt</a>
+    </div>
+  </main>
+
+  <footer class="footer">…(samme som din)…</footer>
+
+  <button class="scroll-top" id="scroll-top" aria-label="Til toppen">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <!-- Flytt samme form mellom drawer (mobil) og sidebar (desktop) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const mq = window.matchMedia('(min-width: 769px)');
+      const drawer = document.getElementById('filters-drawer');
+      const drawerBody = document.getElementById('filters-drawer-body');
+      const sidebarSlot = document.getElementById('filters-form-slot');
+      const form = document.getElementById('filters-form');
+      const openBtn = document.querySelector('.btn--filters');
+      const closeBtn = drawer.querySelector('.filters-drawer__close');
+      const backdrop = document.getElementById('filters-backdrop');
+
+      function relocate() {
+        if (mq.matches) {
+          // Desktop: skjul drawer, flytt form til sidebar
+          drawer.classList.remove('show');
+          backdrop.classList.remove('show');
+          drawer.setAttribute('aria-hidden','true');
+          sidebarSlot.appendChild(form);
+        } else {
+          // Mobil: flytt form tilbake til drawer
+          drawerBody.appendChild(form);
+        }
+      }
+      relocate();
+      mq.addEventListener?.('change', relocate);
+
+      // Åpne/lukk drawer (mobil)
+      function openDrawer() {
+        if (mq.matches) return;
+        drawer.classList.add('show');
+        backdrop.classList.add('show');
+        drawer.setAttribute('aria-hidden','false');
+        document.body.classList.add('nav-open');
+        document.body.style.overflow = 'hidden';
+        openBtn?.setAttribute('aria-expanded','true');
+        // Fokus første felt
+        const first = form.querySelector('input,select,button');
+        first && first.focus();
+      }
+      function closeDrawer() {
+        drawer.classList.remove('show');
+        backdrop.classList.remove('show');
+        drawer.setAttribute('aria-hidden','true');
+        document.body.classList.remove('nav-open');
+        document.body.style.overflow = '';
+        openBtn?.setAttribute('aria-expanded','false');
+      }
+      openBtn?.addEventListener('click', openDrawer);
+      closeBtn?.addEventListener('click', closeDrawer);
+      backdrop?.addEventListener('click', closeDrawer);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && drawer.classList.contains('show')) closeDrawer();
+      });
+    });
+  </script>
+
+  <!-- Global js (inkluderer søk/filtrering/paginering + meny osv.) -->
+  <script src="https://unpkg.com/scrollreveal" defer></script>
+  <script src="js/script.js" defer></script>
+
+  <noscript>For best mulig opplevelse, aktiver JavaScript (søk, filtrering og paginering krever JS).</noscript>
+</body>
+</html>
