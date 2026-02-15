@@ -4,19 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SEBIL AS – Kvalitetsbiler i Drammen</title>
-  <meta name="description" content="SEBIL AS i Drammen tilbyr kvalitetsbiler med lav km-stand og dokumentert servicehistorikk. Ærlig rådgivning og trygg handel.">
+
+  <!-- ✅ Oppdatert: mindre “løfte”-tekst -->
+  <meta name="description" content="SEBIL AS i Drammen tilbyr kvalitetsbiler med fokus på trygg handel og åpen informasjon om tilstand og historikk. Ærlig rådgivning og god oppfølging.">
   <link rel="canonical" href="https://sebilas.no/">
 
   <!-- Open Graph / Twitter -->
   <meta property="og:title" content="SEBIL AS – Kvalitetsbiler i Drammen">
-  <meta property="og:description" content="Kvalitetsbiler med lav km og dokumentert historikk. Ærlig rådgivning og trygg handel.">
+  <!-- ✅ Oppdatert: mindre “løfte”-tekst -->
+  <meta property="og:description" content="Kvalitetsbiler med fokus på trygg handel og tydelig informasjon om tilstand og historikk. Ærlig rådgivning og god oppfølging.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://sebilas.no/">
   <meta property="og:image" content="https://sebilas.no/assets/images/og-cover.jpg">
   <meta property="og:locale" content="nb_NO">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="SEBIL AS – Kvalitetsbiler i Drammen">
-  <meta name="twitter:description" content="Kvalitetsbiler med lav km og dokumentert historikk. Ærlig rådgivning og trygg handel.">
+  <!-- ✅ Oppdatert: mindre “løfte”-tekst -->
+  <meta name="twitter:description" content="Kvalitetsbiler med fokus på trygg handel og tydelig informasjon om tilstand og historikk. Ærlig rådgivning og god oppfølging.">
   <meta name="twitter:image" content="https://sebilas.no/assets/images/og-cover.jpg">
 
   <!-- PWA / Icons -->
@@ -42,6 +46,13 @@
     .form__status--err{color:#e53e3e}
     .visually-hidden{position:absolute!important;left:-9999px!important;top:auto!important;width:1px!important;height:1px!important;overflow:hidden!important}
     .is-loading{opacity:.7;pointer-events:none}
+
+    /* ✅ Mini-tillegg for team-kort (kan flyttes til style.css om ønskelig) */
+    .team__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem}
+    .team__card{background:var(--card-bg, rgba(255,255,255,0.04));border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.25rem;text-align:center}
+    .team__avatar{width:120px;height:120px;border-radius:999px;object-fit:cover;margin:0 auto .75rem;display:block}
+    .team__name{margin:.25rem 0 0;font-size:1.05rem}
+    .team__role{margin:.25rem 0 0;color:var(--text-light)}
   </style>
 </head>
 <body>
@@ -66,7 +77,7 @@
           <li class="nav__item"><a href="#hjem" class="nav__link active-link" aria-current="page">Hjem</a></li>
           <li class="nav__item"><a href="om-oss.html" class="nav__link">Om oss</a></li>
           <li class="nav__item"><a href="tjenester.html" class="nav__link">Tjenester</a></li>
-          <!-- <li class="nav__item"><a href="bilutvalg.html" class="nav__link">Bilutvalg</a></li> 
+          <!-- <li class="nav__item"><a href="bilutvalg.html" class="nav__link">Bilutvalg</a></li>
           <li class="nav__item"><a href="anbefalinger.html" class="nav__link">Anbefalinger</a></li>
           -->
           <li class="nav__item"><a href="kontakt.html" class="nav__link">Kontakt</a></li>
@@ -95,10 +106,13 @@
           <h1 class="hero__title" id="hero-title">
             Kvalitetsbiler du kan <span class="hero__title-accent">stole på</span>
           </h1>
+
+          <!-- ✅ Oppdatert: mindre “løfte”-tekst -->
           <p class="hero__description">
             SEBIL AS i Drammen. Vi fokuserer på kvalitetsbiler – biler vi selv kunne tenkt oss å eie.
-            Alle biler har lav km-stand og dokumentert servicehistorikk.
+            Vi gir deg tydelig informasjon om bilens tilstand og historikk, slik at du kan ta et trygt valg.
           </p>
+
           <div class="hero__actions">
             <a href="#kontakt" class="btn btn--primary btn--large">
               <i class="fas fa-phone" aria-hidden="true"></i>
@@ -157,9 +171,10 @@
                 Vi tar med oss solid bransjeerfaring fra bilbransjen og brenner for ærlig rådgivning og gode kundeopplevelser.
               </p>
 
+              <!-- ✅ Oppdatert: mindre “løfte”-tekst -->
               <p class="about__description">
-                Vi selger kun biler vi selv kunne tenkt oss å eie. Alle våre biler har lav km-stand og
-                dokumentert servicehistorikk. Vi hjelper også med finansiering, garanti og forsikring.
+                Vi selger kun biler vi selv kunne tenkt oss å eie. Vi er åpne om tilstand og tilgjengelig historikk, og gir deg informasjonen du trenger for et trygt bilkjøp.
+                Vi hjelper også med finansiering, garanti og forsikring.
               </p>
             </div>
 
@@ -184,13 +199,14 @@
                 </div>
               </div>
 
+              <!-- ✅ Oppdatert: ikke “full servicehistorikk”-løfte -->
               <div class="about__feature">
                 <div class="about__feature-icon">
                   <i class="fas fa-clipboard-check" aria-hidden="true"></i>
                 </div>
                 <div class="about__feature-content">
-                  <h3 class="about__feature-title">Dokumentert historikk</h3>
-                  <p class="about__feature-description">Full servicehistorikk på hver bil</p>
+                  <h3 class="about__feature-title">Tydelig historikk</h3>
+                  <p class="about__feature-description">Vi deler tilgjengelig info om vedlikehold og historikk</p>
                 </div>
               </div>
             </div>
@@ -203,6 +219,35 @@
               <img src="assets/images/hero/rode-biler.jpg" alt="SEBIL AS – butikk" class="about__img" loading="lazy" decoding="async">
             </picture>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ✅ NY: Team-seksjon på forsiden (matcher footer-link om-oss.html#team, men nå finnes også #team her) -->
+    <section class="team section" id="team" aria-labelledby="team-title">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__subtitle">Team</span>
+          <h2 class="section__title" id="team-title">
+            Møt <span class="section__title-accent">vårt team</span>
+          </h2>
+          <p class="section__description">
+            Ta kontakt, så hjelper vi deg hele veien.
+          </p>
+        </div>
+
+        <div class="team__grid">
+          <article class="team__card" aria-label="Teammedlem">
+            <img
+              class="team__avatar"
+              src="assets/images/team/salgssjef.jpg"
+              alt="Salgssjef hos SEBIL AS"
+              loading="lazy"
+              decoding="async"
+            >
+            <h3 class="team__name">Salgssjef</h3>
+            <p class="team__role">Salgssjef</p>
+          </article>
         </div>
       </div>
     </section>
@@ -228,13 +273,17 @@
               <i class="fas fa-car" aria-hidden="true"></i>
             </div>
             <h3 class="service__title">Bilsalg</h3>
+
+            <!-- (valgfritt) Denne teksten er OK, men om du vil tone den mer ned også: -->
             <p class="service__description">
-              Kvalitetsbiler med lav km-stand. Vi selger kun biler vi selv kunne tenkt oss å eie.
+              Kvalitetsbiler i ulike prisklasser. Vi selger kun biler vi selv kunne tenkt oss å eie.
             </p>
+
             <ul class="service__features">
               <li><i class="fas fa-check" aria-hidden="true"></i> Kvalitetskontrollerte biler</li>
-              <li><i class="fas fa-check" aria-hidden="true"></i> Lav km-stand</li>
-              <li><i class="fas fa-check" aria-hidden="true"></i> Dokumentert servicehistorikk</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i> Variert utvalg</li>
+              <!-- ✅ Oppdatert: ikke “dokumentert” som garanti -->
+              <li><i class="fas fa-check" aria-hidden="true"></i> Tydelig informasjon om historikk og vedlikehold</li>
               <li><i class="fas fa-check" aria-hidden="true"></i> Grundig gjennomgang</li>
             </ul>
           </div>
@@ -276,39 +325,12 @@
       </div>
     </section>
 
-    <!-- Anbefalinger 
+    <!-- Anbefalinger
     <section class="testimonials section" id="anbefalinger" aria-labelledby="testimonials-title">
-      <div class="container">
-        <div class="section__header">
-          <span class="section__subtitle">Kundeuttalelser</span>
-          <h2 class="section__title" id="testimonials-title">Noen flotte ord <span class="section__title-accent">fra en fornøyd kunde</span></h2>
-          <p class="section__description">
-            Her er noen ord fra kundene våre.
-          </p>
-        </div>
-
-        <div class="testimonial__card testimonial__card--featured" aria-label="Kundeuttalelse">
-          <div class="testimonial__rating" aria-label="Vurdering 5 av 5">
-            <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
-          </div>
-          <p class="testimonial__text">
-            "Jeg anbefaler SEBIL AS på Gullskogen på det
-sterkeste! Her får man god service, veiledning, råd og alt er
-upaklagelig fra start til slutt. Teamet er utrolig profesjonell, seriøs
-og ordentlig, mennesker man virkelig kan stole på. Anbefales virkelig dersom du
-er ute etter en bilforhandler som setter kunden først!"
-          </p>
-          <div class="testimonial__author">
-            <div class="testimonial__author-info">
-              <h4 class="testimonial__author-name">Nils Tommy
-Larsen</h4>
-              <span class="testimonial__author-title">23 år fra Elverum</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      ...
     </section>
--->
+    -->
+
     <!-- Kontakt -->
     <section class="contact section" id="kontakt" aria-labelledby="contact-title">
       <div class="container">
@@ -434,6 +456,18 @@ Larsen</h4>
       <div class="footer__container">
         <div class="footer__content">
           <div class="footer__section">
+            <div class="footer__logo">
+              <i class="fas fa-car" aria-hidden="true"></i>
+              <span>SEBIL AS</span>
+            </div>
+            <p class="footer__description">
+              Vi selger kun biler vi selv kunne tenkt oss å eie.
+            </p>
+            <div class="footer__social">
+              <a href="#" class="footer__social-link" aria-label="Facebook" target="_blank" rel="noopener nofollow"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+              <a href="#" class="footer__social-link" aria-label="Instagram" target="_blank" rel="noopener nofollow"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+              <a href="#" class="footer__social-link" aria-label="LinkedIn" target="_blank" rel="noopener no_
+
             <div class="footer__logo">
               <i class="fas fa-car" aria-hidden="true"></i>
               <span>SEBIL AS</span>
